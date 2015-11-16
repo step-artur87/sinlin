@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 public class Main {
 
     public static void main(String[] args) {
-        String version = "sinlin 0.10\n" +
+        String version = "sinlin 0.1.0\n" +
                 "License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>.\n" +
                 "This is free software: you are free to change and redistribute it.\n" +
                 "There is NO WARRANTY, to the extent permitted by law.\n\n" +
