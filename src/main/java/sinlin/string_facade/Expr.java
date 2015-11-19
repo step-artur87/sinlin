@@ -18,7 +18,9 @@ public class Expr extends StringFacadeAbstract
     private Expression expression;
 
     public Expr(String string) {
+        int n = 0;
         name = string;
+        String exprString = "";
         ArrayList<String> tokens = new ArrayList<>();
         StringTokenizer stringTokenizer
                 = new StringTokenizer(string, "[]", true);
@@ -26,15 +28,19 @@ public class Expr extends StringFacadeAbstract
             tokens.add(stringTokenizer.nextToken());
         }
         for (int i = 0; i < tokens.size(); i++) {
-            if (tokens.get(i).equals("]")) {
-                map.put(tokens.get(i - 1),
+            if (tokens.size() > i + 1
+                    && tokens.get(i + 1).equals("]")) {
+                exprString = exprString.concat("var" + n);
+                map.put("var" + n,
                         StringFacadeBuilder.createVCEF(
-                                tokens.get(i - 1)));
+                                tokens.get(i)));
+                n++;
+            } else if (!tokens.get(i).equals("[") && !tokens.get(i).equals("]")) {
+                exprString = exprString.concat(tokens.get(i));
             }
         }
-        expression = (new ExpressionBuilder(
-                string.replace("[", "").replace("]", "")
-        ).variables(map.keySet())).build();
+        expression = (new ExpressionBuilder(exprString)
+                .variables(map.keySet())).build();
     }
 
     @Override
