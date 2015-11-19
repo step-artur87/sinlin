@@ -24,16 +24,16 @@ public class StringFacadeBuilder {
 
     public static StringFacadeIF createVCEF(String string) {
         assert !string.contains(StringFacadeIF.DELIM);
+
+        if (string.matches(OPERATORS)) {
+            return new Expr(string);
+        }
         if (string.contains(StringFacadeIF.S)) {
             return new VarString(string);
         }
         if (string.contains(StringFacadeIF.DELIM_CYCLE)) {
             return new CycleString(string);
         }
-        if (string.matches(OPERATORS)) {
-            return new Expr(string);
-        }
-
         return new Fn(string);
     }
 
