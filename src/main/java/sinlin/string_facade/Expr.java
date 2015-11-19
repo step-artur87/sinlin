@@ -14,8 +14,8 @@ import java.util.*;
  */
 public class Expr extends StringFacadeAbstract
         implements StringFacadeIF {
-    private ExpressionBuilder expressionBuilder;
     private Map<String, StringFacadeIF> map = new HashMap<>();
+    private Expression expression;
 
     public Expr(String string) {
         name = string;
@@ -32,9 +32,9 @@ public class Expr extends StringFacadeAbstract
                                 tokens.get(i - 1)));
             }
         }
-        expressionBuilder = new ExpressionBuilder(
+        expression = (new ExpressionBuilder(
                 string.replace("[", "").replace("]", "")
-        ).variables(map.keySet());
+        ).variables(map.keySet())).build();
     }
 
     @Override
@@ -73,11 +73,9 @@ public class Expr extends StringFacadeAbstract
 
     @Override
     public String getValue(Map<String, String> keyMap, int n) {
-        Expression expression;
         StringFacadeIF stringFacadeIF = null;
         String value = null;
         try {
-            expression = expressionBuilder.build();
             for (String s : map.keySet()) {
                 stringFacadeIF = map.get(s);
                 value = stringFacadeIF.getValue(keyMap, n);
