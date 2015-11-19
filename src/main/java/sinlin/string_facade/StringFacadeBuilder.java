@@ -13,9 +13,7 @@ public class StringFacadeBuilder {
         string = replaceAll(string);
         if (!string.contains(StringFacadeIF.DELIM)) {
             return new FlatString(string);
-        }
-        if (!string.startsWith(StringFacadeIF.DELIM) ||
-                string.split(StringFacadeIF.DELIM).length != 1) {
+        } else if (string.split("\\$").length != 1) {
             return new SplitedString(string);
         }
         string = string.replace("$", "");
