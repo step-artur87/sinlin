@@ -39,7 +39,6 @@ public class Exporter {
     private static final int y = 121;
     public static int limit = -1;
     private XMLStreamWriter last = null;
-    private XMLStreamWriter current = null;
 
     /**
      * Writes all exemplar of this tag
@@ -50,7 +49,11 @@ public class Exporter {
      *
      * @param tag - written tag
      */
-    public void writeAllXml(Tag tag, String prefix, boolean toOutStream) {
+    public void writeAllXml(
+            Tag tag,
+            String prefix,
+            boolean toOutStream) {
+        XMLStreamWriter current = null;
         int n = tag.sizes();
         if (limit >= 0 && limit < n) {
             n = limit;
@@ -78,6 +81,7 @@ public class Exporter {
                 writeExemplarXML(
                         current,
                         tag, 0, 0);
+                writeVersion(current);
             }
         } else {
             if (toOutStream) {
@@ -95,13 +99,16 @@ public class Exporter {
                     writeExemplarXML(
                             current,
                             tag, i, 0);
+                    writeVersion(current);
                 }
             }
         }
     }
 
-    private void writeAllXml(XMLStreamWriter xmlStreamWriter,
-                             Tag tag, int tabs) {
+    private void writeAllXml(
+            XMLStreamWriter xmlStreamWriter,
+            Tag tag,
+            int tabs) {
         int n = tag.sizes();
         if (limit >= 0 && limit < n) {
             n = limit;
@@ -159,7 +166,9 @@ public class Exporter {
         }
     }
 
-    private static void tabs(XMLStreamWriter xmlStreamWriter, int tabs) throws XMLStreamException {
+    private static void tabs(
+            XMLStreamWriter xmlStreamWriter,
+            int tabs) throws XMLStreamException {
         for (int i = 0; i < tabs; i++) {
             xmlStreamWriter.writeCharacters("\t");
         }
@@ -173,6 +182,14 @@ public class Exporter {
         } catch (XMLStreamException e) {
             e.printStackTrace();
             System.exit(1);
+        }
+    }
+
+    private void writeVersion(XMLStreamWriter current) {
+        try {
+            current.writeComment(Main.version);
+        } catch (XMLStreamException e) {
+            e.printStackTrace();
         }
     }
 
