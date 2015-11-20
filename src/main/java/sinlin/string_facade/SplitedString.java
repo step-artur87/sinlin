@@ -31,11 +31,7 @@ public class SplitedString extends StringFacadeAbstract
         while (stringTokenizer.hasMoreElements()) {
             s = stringTokenizer.nextToken();
             if (toFs) {
-                if (s.contains(",")) {
-                    ifs.add(new VarString(s));
-                } else {
-                    ifs.add(StringFacadeBuilder.createVCEF(s));
-                }
+                ifs.add(StringFacadeBuilder.createVCEF(s));
             } else {
                 strings.add(s);
             }
