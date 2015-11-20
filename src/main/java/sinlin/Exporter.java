@@ -39,6 +39,7 @@ public class Exporter {
     private static final int y = 121;
     public static int limit = -1;
     private XMLStreamWriter last = null;
+    private XMLStreamWriter current = null;
 
     /**
      * Writes all exemplar of this tag
@@ -72,10 +73,10 @@ public class Exporter {
                         getXmlStreamWriter(null),
                         tag, 0, 0);
             } else {
+                current = getXmlStreamWriter(
+                        prefix + ".svg");
                 writeExemplarXML(
-                        getXmlStreamWriter(
-                                prefix
-                                        + ".svg"),
+                        current,
                         tag, 0, 0);
             }
         } else {
@@ -87,11 +88,12 @@ public class Exporter {
                 }
             } else {
                 for (int i = 0; i < n; i++) {
+                    current = getXmlStreamWriter(
+                            prefix
+                                    + " "
+                                    + Integer.toString(i) + ".svg");
                     writeExemplarXML(
-                            getXmlStreamWriter(
-                                    prefix
-                                            + " "
-                                            + Integer.toString(i) + ".svg"),
+                            current,
                             tag, i, 0);
                 }
             }
