@@ -16,7 +16,6 @@ public class SplitedString extends StringFacadeAbstract
         implements StringFacadeIF {
     private ArrayList<StringFacadeIF> ifs
             = new ArrayList<>();
-    private ArrayList<String> strings = new ArrayList<>();
 
     public SplitedString(String string) {
         name = string;
@@ -31,7 +30,7 @@ public class SplitedString extends StringFacadeAbstract
                 if (toFs) {
                     ifs.add(StringFacadeBuilder.createVCEF(s));
                 } else {
-                    strings.add(s);
+                    ifs.add(new FlatString(s));
                 }
             } else {
                 toFs = !toFs;
@@ -72,13 +71,9 @@ public class SplitedString extends StringFacadeAbstract
     @Override
     public String getValue(Map<String, String> keyMap, int n) {
         String result = new String();
-        for (int i = 0; i < ifs.size(); i++) {
-            result = result.concat(strings.get(i));
+        for (StringFacadeIF anIf : ifs) {
             result = result.concat(
-                    ifs.get(i).getValue(keyMap, n));
-        }
-        if (strings.size() > ifs.size()) {
-            result = result.concat(strings.get(strings.size() - 1));
+                    anIf.getValue(keyMap, n));
         }
         return result;
     }
