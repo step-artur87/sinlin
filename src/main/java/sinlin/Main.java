@@ -55,17 +55,15 @@ public class Main {
         Options options = new Options();
         options.addOption("s", true, "source");
         options.addOption("d", true, "data");
-        options.addOption("p", true, "prefix"); //(can x/y/z)
-        options.addOption("c", false, "compile");
-        options.addOption("x", false, "copy source");
-        options.addOption("o", false, "copy data");
-        options.addOption("V", false, "versionWithLicense");
-        options.addOption("v", false, "verbose");
-        options.addOption("f", false, "fact data");
-        options.addOption("b", false, "debug");
-        options.addOption("m", false, "debug");
-
-        options.getOption("s").setRequired(true);
+        options.addOption("p", true, "prefix");
+//        options.addOption("c", false, "compile");
+//        options.addOption("x", false, "copy source");
+//        options.addOption("o", false, "copy data");
+        options.addOption("V", false, "version");
+//        options.addOption("v", false, "verbose");
+//        options.addOption("f", false, "fact data");
+//        options.addOption("b", false, "debug");
+        options.addOption("m", false, "fast and uncompleted");
 
         try {
             commandLine = (new DefaultParser()).parse(options, args);
