@@ -32,10 +32,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Time: 12:45 AM
  */
 public class Main {
+    public static String version = "sinlin 0.1.0";
 
     public static void main(String[] args) {
-        String version = "sinlin 0.1.0\n" +
-                "License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>.\n" +
+        String versionWithLicense = version + "\n" +
+                "License GPLv3: GNU GPL versionWithLicense 3 <http://gnu.org/licenses/gpl.html>.\n" +
                 "This is free software: you are free to change and redistribute it.\n" +
                 "There is NO WARRANTY, to the extent permitted by law.\n\n" +
                 "Written by Artur Stepankevich.";
@@ -58,7 +59,7 @@ public class Main {
         options.addOption("c", false, "compile");
         options.addOption("x", false, "copy source");
         options.addOption("o", false, "copy data");
-        options.addOption("V", false, "version");
+        options.addOption("V", false, "versionWithLicense");
         options.addOption("v", false, "verbose");
         options.addOption("f", false, "fact data");
         options.addOption("b", false, "debug");
@@ -70,7 +71,7 @@ public class Main {
             commandLine = (new DefaultParser()).parse(options, args);
 
             if (commandLine.hasOption("V")) {
-                System.out.println(version);
+                System.out.println(versionWithLicense);
                 System.exit(0);
             }
 
