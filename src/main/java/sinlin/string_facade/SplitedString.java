@@ -22,20 +22,20 @@ public class SplitedString extends StringFacadeAbstract
         name = string;
         string = StringFacadeBuilder.replaceAll(string);
         StringTokenizer stringTokenizer
-                = new StringTokenizer(string, StringFacadeIF.DELIM);
+                = new StringTokenizer(string, StringFacadeIF.DELIM, true);
         String s;
-        boolean toFs = string.startsWith(StringFacadeIF.DELIM);
-        if (toFs) {
-            strings.add("");
-        }
+        boolean toFs = false;
         while (stringTokenizer.hasMoreElements()) {
             s = stringTokenizer.nextToken();
-            if (toFs) {
-                ifs.add(StringFacadeBuilder.createVCEF(s));
+            if (!s.equals(StringFacadeIF.DELIM)) {
+                if (toFs) {
+                    ifs.add(StringFacadeBuilder.createVCEF(s));
+                } else {
+                    strings.add(s);
+                }
             } else {
-                strings.add(s);
+                toFs = !toFs;
             }
-            toFs = !toFs;
         }
     }
 
