@@ -88,7 +88,11 @@ public class Expr extends StringFacadeAbstract
                 expression.setVariable(s, Double.parseDouble(
                         value));
             }
-            return Double.toString(expression.evaluate());
+            value = Double.toString(expression.evaluate());
+            if (value.endsWith(".0")) {
+                value = value.replace(".0", "");
+            }
+            return value;
         } catch (NumberFormatException e) {
 //            if (stringFacadeIF != null && value!= null) {
 //fixme                System.out.println("In \"" + stringFacadeIF.getName()

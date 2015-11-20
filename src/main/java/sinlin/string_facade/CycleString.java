@@ -54,8 +54,9 @@ public class CycleString extends StringFacadeAbstract
 
     @Override
     public String getValue(Map<String, String> keyMap, int n) {
-        double result = begin + n * step;
-        if (result > end) {
+        String value;
+        double doubleValue = begin + n * step;
+        if (doubleValue > end) {
             System.out.println("Cycle "
                     + this.name
                     + " have not value with number "
@@ -64,6 +65,10 @@ public class CycleString extends StringFacadeAbstract
             System.exit(1);
         }
 
-        return Double.toString(result);
+        value = Double.toString(doubleValue);
+        if (value.endsWith(".0")) {
+            value = value.replace(".0", "");
+        }
+        return value;
     }
 }
