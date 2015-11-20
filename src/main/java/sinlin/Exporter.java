@@ -62,27 +62,11 @@ public class Exporter {
                     System.out.println("Writing canceled. Exit.");
                     System.exit(0);
                 }
-                if (toOutStream) {
-                    for (int i = 0; i < n; i++) {
-                        writeExemplarXML(
-                                getXmlStreamWriter(null),
-                                tag, i, 0);
-                    }
-                } else {
-                    for (int i = 0; i < n; i++) {
-                        writeExemplarXML(
-                                getXmlStreamWriter(
-                                        prefix
-                                                + " "
-                                                + Integer.toString(i)
-                                                + ".svg"),
-                                tag, i, 0);
-                    }
-                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (n == 0) {
+        }
+        if (n == 0) {
             if (toOutStream) {
                 writeExemplarXML(
                         getXmlStreamWriter(null),
