@@ -26,7 +26,7 @@ public class StringFacadeBuilder {
         if (string.matches(OPERATORS)) {
             return new Expr(string);
         }
-        if (string.contains(StringFacadeIF.S)) {
+        if (string.contains(StringFacadeIF.DELIM_VAR)) {
             return new VarString(string);
         }
         if (string.contains(StringFacadeIF.DELIM_CYCLE)) {

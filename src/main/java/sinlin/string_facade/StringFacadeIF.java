@@ -12,7 +12,7 @@ import java.util.Map;
 public interface StringFacadeIF {
     public static final String DELIM = "$";//todo other constatns
     public static final String DELIM_CYCLE = ";";
-    String S = ",";
+    String DELIM_VAR = ",";
 
     public String getName();
 
