@@ -4,6 +4,8 @@ import org.apache.commons.cli.*;
 import sinlin.data.Data;
 import sinlin.data.odt.OdfData;
 import sinlin.string_facade.Fn;
+import sinlin.string_facade.StringFacadeBuilder;
+import sinlin.string_facade.StringFacadeIF;
 
 import java.util.ArrayDeque;
 
@@ -36,7 +38,7 @@ public class Main {
 
     public static void main(String[] args) {
         String versionWithLicense = version + "\n" +
-                "License GPLv3: GNU GPL versionWithLicense 3 <http://gnu.org/licenses/gpl.html>.\n" +
+                "License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>.\n" +
                 "This is free software: you are free to change and redistribute it.\n" +
                 "There is NO WARRANTY, to the extent permitted by law.\n\n" +
                 "Written by Artur Stepankevich.";
@@ -44,6 +46,23 @@ public class Main {
                 Copyright (C) 2015
                 Written by , see <http://git.  /tree/AUTHORS>.
 */
+
+        String help = "SINOPSYS\n\n" +
+                "To install just extract archive sinlin_vx.x.x.zip.\n" +
+                "All commands runs from extracted folder.\n\n" +
+                "java -jar sinlin.jar [options].\n\n" +
+                "OPTIONS\n" +
+                "\n" +
+                "-s\tfile\tPath to source file (svg or xml).\t\n" +
+                "-d\tfile\tPath to data file (ods)\t\n" +
+                "-p\tprefix\tDefine prefix (path to and begin of name of out file) for output file." +
+                "\n\t\t\tIf prefix is not defined by -p, then source path and data filename (if presend) used as prefix." +
+                "\n\t\t\tOut file extension will the same, that root tag in source file.\t\n" +
+                "-m\tlimut\tExport only first 20 exemplars for each tag if one has more\t\n" +
+                "-t\ttry \tTry data processing (renurns values of received string).\n" +
+                "-V\tversion\tPrint version and exit.\t\n" +
+                "-h\thelp\tPrint help and exit.";
+
         CommandLine commandLine;
 
         long t = System.currentTimeMillis();
@@ -60,6 +79,8 @@ public class Main {
 //        options.addOption("x", false, "copy source");
 //        options.addOption("o", false, "copy data");
         options.addOption("V", false, "version");
+        options.addOption("h", false, "help");
+        options.addOption("t", true, "try");
 //        options.addOption("v", false, "verbose");
 //        options.addOption("f", false, "fact data");
 //        options.addOption("b", false, "debug");
@@ -73,8 +94,8 @@ public class Main {
                 System.exit(0);
             }
 
-            if (!commandLine.hasOption("s")) {
-                System.out.println("what the file?");
+            if (commandLine.hasOption("h")) {
+                System.out.println(help);
                 System.exit(0);
             }
 
@@ -102,6 +123,14 @@ public class Main {
                         break;
                     case "p":
                         prefix = o.getValue();
+                        break;
+                    case "t":
+                        StringFacadeIF stringFacadeIF
+                                = StringFacadeBuilder.create(o.getValue());
+                        for (int i = 0; i < stringFacadeIF.getSize(); i++) {
+                            System.out.println(stringFacadeIF.getValue(null, i));
+                        }
+                        System.exit(0);
                         break;
                     case "c"://for next versions
                         break;
