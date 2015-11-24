@@ -158,7 +158,6 @@ public class Exporter {
                 }
                 xmlStreamWriter.writeEndElement();
                 xmlStreamWriter.writeCharacters("\n");
-                System.out.println();//because bug
             } catch (XMLStreamException e) {
                 e.printStackTrace();
                 System.exit(1);
