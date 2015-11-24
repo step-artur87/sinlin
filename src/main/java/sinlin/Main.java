@@ -37,6 +37,8 @@ public class Main {
     public static String version = "sinlin 0.1.0";
 
     public static void main(String[] args) {
+        long t = System.currentTimeMillis();
+
         String versionWithLicense = version + "\n" +
                 "License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>.\n" +
                 "This is free software: you are free to change and redistribute it.\n" +
@@ -64,8 +66,6 @@ public class Main {
                 "-h\thelp\tPrint help and exit.";
 
         CommandLine commandLine;
-
-        long t = System.currentTimeMillis();
 
         String prefix = "out";
 
@@ -106,20 +106,20 @@ public class Main {
             for (Option o : commandLine.getOptions()) {
                 switch (o.getOpt()) {
                     case "s":
-                        System.out.println("Parse time before = "
-                                + (System.currentTimeMillis() - t));
+                        System.out.println("Before parsing time = "
+                                + ((System.currentTimeMillis() - t)) / 1000. + " s");
                         SaxParsing.parse(new TagHandler(rootTagKostyl),
                                 o.getValue());
-                        System.out.println("Parse time after = "
-                                + (System.currentTimeMillis() - t));
+                        System.out.println("After parsing time = "
+                                + ((System.currentTimeMillis() - t)) / 1000. + " s");
                         break;
                     case "d":
-                        System.out.println("Data time before = "
-                                + (System.currentTimeMillis() - t));
+                        System.out.println("Before data received time = "
+                                + ((System.currentTimeMillis() - t)) / 1000. + " s");
                         data = new OdfData(o.getValue());
                         Fn.setData(data);
-                        System.out.println("Data time after = "
-                                + (System.currentTimeMillis() - t));
+                        System.out.println("After data received time = "
+                                + ((System.currentTimeMillis() - t)) / 1000. + " s");
                         break;
                     case "p":
                         prefix = o.getValue();
@@ -159,14 +159,13 @@ public class Main {
                 prefix = prefix.concat("_out");
             }
 
-            System.out.println("Export time before = "
-                    + (System.currentTimeMillis() - t));
+            System.out.println("Before export time = "
+                    + ((System.currentTimeMillis() - t)) / 1000. + " s");
             Exporter exporter = new Exporter();
             Tag r = rootTagKostyl.getFirst();
             exporter.writeAllXml(r, prefix, false);
-            System.out.println("Export time after = "
-                    + (System.currentTimeMillis() - t));
-
+            System.out.println("After export time  = "
+                    + ((System.currentTimeMillis() - t)) / 1000. + " s");
         } catch (ParseException e) {
             e.printStackTrace();
         }
