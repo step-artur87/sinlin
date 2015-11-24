@@ -28,7 +28,7 @@ public class CycleString extends StringFacadeAbstract
             } else if (stringTokenizer.countTokens() == 2) {
                 step = Double.parseDouble(stringTokenizer.nextToken());
                 end = Double.parseDouble(stringTokenizer.nextToken());
-            } else if (stringTokenizer.countTokens() == 2) {
+            } else if (stringTokenizer.countTokens() == 1) {
                 end = Double.parseDouble(stringTokenizer.nextToken());
             } else {
                 System.out.println("Cycle "
