@@ -47,7 +47,7 @@ public class OdfData implements Data {//fixme one cell as range
                     new File(fileName));
             tableList = document.getTableList();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
             System.exit(1);
         }
     }

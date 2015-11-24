@@ -98,7 +98,7 @@ public class Expr extends StringFacadeAbstract
 //fixme                System.out.println("In \"" + stringFacadeIF.getName()
 //                        + "\" value \"" + value + "\" is not number.");
 //            }
-            e.printStackTrace();
+            System.out.println(e.toString());
         } catch (IllegalArgumentException e) {
             if (stringFacadeIF != null && value != null) {
                 System.out.println("In \"" + stringFacadeIF.getName()
@@ -106,7 +106,7 @@ public class Expr extends StringFacadeAbstract
             }
             System.out.println("In expression \"" + this.getName()
                     + "\" diapasons must be written within []");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
 
         return null;

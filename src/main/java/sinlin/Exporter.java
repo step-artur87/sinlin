@@ -67,7 +67,7 @@ public class Exporter {
                     System.exit(0);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         if (n == 0) {
@@ -159,7 +159,7 @@ public class Exporter {
                 xmlStreamWriter.writeEndElement();
                 xmlStreamWriter.writeCharacters("\n");
             } catch (XMLStreamException e) {
-                e.printStackTrace();
+                System.out.println(e.toString());
                 System.exit(1);
             }
         }
@@ -179,7 +179,7 @@ public class Exporter {
         try {
             xmlStreamWriter.writeAttribute(k, v);
         } catch (XMLStreamException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
             System.exit(1);
         }
     }
@@ -188,7 +188,7 @@ public class Exporter {
         try {
             current.writeComment(Main.version);
         } catch (XMLStreamException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
@@ -212,7 +212,7 @@ public class Exporter {
 
             last.writeStartDocument();
         } catch (XMLStreamException | FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
             System.exit(1);
         }
         return last;

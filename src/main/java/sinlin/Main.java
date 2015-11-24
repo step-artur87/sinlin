@@ -167,7 +167,7 @@ public class Main {
             System.out.println("After export time  = "
                     + ((System.currentTimeMillis() - t)) / 1000. + " s");
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 }
