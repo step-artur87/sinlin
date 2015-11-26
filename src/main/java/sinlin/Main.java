@@ -80,38 +80,22 @@ public class Main {
         options.addOption("i", true, "input");
         options.addOption("d", true, "data");
         options.addOption("o", true, "output");
-//        options.addOption("c", false, "compile");
-//        options.addOption("x", false, "copy source");
-//        options.addOption("o", false, "copy data");
         options.addOption("V", false, "version");
         options.addOption("h", false, "help");
         options.addOption("t", true, "try");
-//        options.addOption("v", false, "verbose");
-//        options.addOption("f", false, "fact data");
-//        options.addOption("b", false, "debug");
         options.addOption("m", false, "fast and uncompleted");
 
         try {
             commandLine = (new DefaultParser()).parse(options, args);
 
-            if (commandLine.hasOption("V")) {
-                System.out.println(versionWithLicense);
-                System.exit(0);
-            }
-
-            if (commandLine.hasOption("h")
-                    || commandLine.getOptions().length == 0) {
+            if (commandLine.getOptions().length == 0) {
                 System.out.println(help);
                 System.exit(0);
             }
 
-            if (commandLine.hasOption("m")) {
-                Exporter.limit = 20;
-            }
-
             for (Option o : commandLine.getOptions()) {
                 switch (o.getOpt()) {
-                    case "s":
+                    case "i":
                         System.out.println("Before parsing time = "
                                 + ((System.currentTimeMillis() - t)) / 1000. + " s");
                         SaxParsing.parse(new TagHandler(rootTagKostyl),
@@ -127,8 +111,11 @@ public class Main {
                         System.out.println("After data received time = "
                                 + ((System.currentTimeMillis() - t)) / 1000. + " s");
                         break;
-                    case "p":
-                        prefix = o.getValue();
+                    case "o":
+                        prefix = o.getValue() + "_out";
+                        break;
+                    case "m":
+                        Exporter.limit = 20;
                         break;
                     case "t":
                         StringFacadeIF stringFacadeIF
@@ -138,17 +125,13 @@ public class Main {
                         }
                         System.exit(0);
                         break;
-                    case "c"://for next versions
+                    case "V":
+                        System.out.println(versionWithLicense);
+                        System.exit(0);
                         break;
-                    case "x"://for next versions
-                        break;
-                    case "o"://for next versions
-                        break;
-                    case "v"://for next versions
-                        break;
-                    case "f"://for next versions
-                        break;
-                    case "b"://for next versions
+                    case "h":
+                        System.out.println(help);
+                        System.exit(0);
                         break;
                 }
             }
@@ -159,10 +142,6 @@ public class Main {
                         ? (commandLine.getOptionValue("d") + "__")
                         : "")
                         + "out";
-            }
-
-            if (commandLine.getOptionValue("s").equals(prefix + ".svg")) {
-                prefix = prefix.concat("_out");
             }
 
             System.out.println("Before export time = "
