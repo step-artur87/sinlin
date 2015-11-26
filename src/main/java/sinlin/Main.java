@@ -55,15 +55,20 @@ public class Main {
                 "java -jar sinlin.jar [options].\n\n" +
                 "OPTIONS\n" +
                 "\n" +
-                "-s\tfile\tPath to source file (svg or xml).\t\n" +
-                "-d\tfile\tPath to data file (ods)\t\n" +
-                "-p\tprefix\tDefine prefix (path to and begin of name of out file) for output file." +
-                "\n\t\t\tIf prefix is not defined by -p, then source path and data filename (if presend) used as prefix." +
-                "\n\t\t\tOut file extension will the same, that root tag in source file.\t\n" +
-                "-m\tlimut\tExport only first 20 exemplars for each tag if one has more\t\n" +
-                "-t\ttry \tTry data processing (renurns values of received string).\n" +
-                "-V\tversion\tPrint version and exit.\t\n" +
-                "-h\thelp\tPrint help and exit.";
+                "-i input_file\n\tPath to source file (svg or xml).\n\n" +
+                "-d data _file\n\tPath to data file (ods).\n\n" +
+                "-o output_file\n\tPath and begin of name of output file." +
+                "\n\tOutput file extension will the same, that root tag in source file." +
+                "\n\tIf this option is absent, then input file path " +
+                "\n\tand data filename (if present) and _out is used.\n\n" +
+                "-m\n\t" +
+                "Export only first 20 exemplars for each tag if one has more.\n\n" +
+                "-t\tstring " +
+                "\n\tTry data processing (prints values of received string).\n\n" +
+                "-V" +
+                "\n\tPrint version\n\n" +
+                "-h" +
+                "\n\tPrint help\n";
 
         CommandLine commandLine;
 
