@@ -50,8 +50,6 @@ public class Main {
 */
 
         String help = "SINOPSYS\n\n" +
-                "To install just extract archive sinlin_vx.x.x.zip.\n" +
-                "All commands runs from extracted folder.\n\n" +
                 "java -jar sinlin.jar [options].\n\n" +
                 "OPTIONS\n" +
                 "\n" +
@@ -62,13 +60,13 @@ public class Main {
                 "\n\tIf this option is absent, then input file path " +
                 "\n\tand data filename (if present) and _out is used.\n\n" +
                 "-n number\n" +
-                "Export only number of first exemplars for each tag if one has more.\n\n" +
+                "\tExport only number of first exemplars for each tag if one has more.\n\n" +
                 "-t\tstring " +
                 "\n\tTry data processing (prints values of received string).\n\n" +
                 "-V" +
-                "\n\tPrint version\n\n" +
+                "\n\tPrint version.\n\n" +
                 "-h" +
-                "\n\tPrint help\n";
+                "\n\tPrint help.\n";
 
         CommandLine commandLine;
 
