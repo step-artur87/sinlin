@@ -134,8 +134,8 @@ public class Main {
                 }
             }
 
-            if (!commandLine.hasOption("p")) {//todo other symbols
-                prefix = commandLine.getOptionValue("s") + "__"
+            if (!commandLine.hasOption("o")) {//todo other symbols
+                prefix = commandLine.getOptionValue("i") + "__"
                         + (commandLine.hasOption("d")
                         ? (commandLine.getOptionValue("d") + "__")
                         : "")
