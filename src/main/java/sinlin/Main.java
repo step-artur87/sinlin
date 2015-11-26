@@ -61,8 +61,8 @@ public class Main {
                 "\n\tOutput file extension will the same, that root tag in source file." +
                 "\n\tIf this option is absent, then input file path " +
                 "\n\tand data filename (if present) and _out is used.\n\n" +
-                "-m\n\t" +
-                "Export only first 20 exemplars for each tag if one has more.\n\n" +
+                "-n number\n" +
+                "Export only number of first exemplars for each tag if one has more.\n\n" +
                 "-t\tstring " +
                 "\n\tTry data processing (prints values of received string).\n\n" +
                 "-V" +
@@ -83,7 +83,7 @@ public class Main {
         options.addOption("V", false, "version");
         options.addOption("h", false, "help");
         options.addOption("t", true, "try");
-        options.addOption("m", false, "fast and uncompleted");
+        options.addOption("n", false, "limit");
 
         try {
             commandLine = (new DefaultParser()).parse(options, args);
@@ -114,8 +114,8 @@ public class Main {
                     case "o":
                         prefix = o.getValue() + "_out";
                         break;
-                    case "m":
-                        Exporter.limit = 20;
+                    case "n"://todo change -o if nas -n
+                        Exporter.setLimit(Integer.parseInt(o.getValue()));
                         break;
                     case "t":
                         StringFacadeIF stringFacadeIF
@@ -151,7 +151,7 @@ public class Main {
             exporter.writeAllXml(r, prefix, false);
             System.out.println("After export time  = "
                     + ((System.currentTimeMillis() - t)) / 1000. + " s");
-        } catch (ParseException e) {
+        } catch (ParseException | NumberFormatException e) {
             System.out.println(e.toString());
         }
     }

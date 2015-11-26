@@ -40,6 +40,14 @@ public class Exporter {
     public static int limit = -1;
     private XMLStreamWriter last = null;
 
+    public static void setLimit(int limit) {
+        if (limit > 0) {
+            Exporter.limit = limit;
+        } else {
+            System.out.println("Limit (" + limit + ") must be > 0.");
+        }
+    }
+
     /**
      * Writes all exemplar of this tag
      * and all his childTags recursively to files.
