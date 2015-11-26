@@ -77,9 +77,9 @@ public class Main {
         Data data;
         ArrayDeque<Tag> rootTagKostyl = new ArrayDeque<>();
         Options options = new Options();
-        options.addOption("s", true, "source");
+        options.addOption("i", true, "input");
         options.addOption("d", true, "data");
-        options.addOption("p", true, "prefix");
+        options.addOption("o", true, "output");
 //        options.addOption("c", false, "compile");
 //        options.addOption("x", false, "copy source");
 //        options.addOption("o", false, "copy data");
@@ -99,7 +99,8 @@ public class Main {
                 System.exit(0);
             }
 
-            if (commandLine.hasOption("h")) {
+            if (commandLine.hasOption("h")
+                    || commandLine.getOptions().length == 0) {
                 System.out.println(help);
                 System.exit(0);
             }
