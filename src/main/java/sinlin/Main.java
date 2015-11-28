@@ -47,6 +47,7 @@ public class Main {
         BufferedReader bufferedReader;
         String line;
         StringFacadeIF stringFacadeIF;
+        String[] d;
 
         String versionWithLicense = version + "\n" +
                 "License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>.\n" +
@@ -157,11 +158,15 @@ public class Main {
                 if (commandLine.hasOption("o")) {
                     prefix = commandLine.getOptionValue("o") + "_out";
                 } else {
-                    prefix = commandLine.getOptionValue("i") + "__"
-                            + (commandLine.hasOption("d")
-                            ? (commandLine.getOptionValue("d") + "__")
-                            : "")
-                            + "out";
+                    if (commandLine.hasOption("d")) {
+                        d = commandLine.getOptionValue("d").split("/");
+                        prefix = commandLine.getOptionValue("i") + "__"
+                                + d[d.length - 1] + "__"
+                                + "out";
+                    } else {
+                        prefix = commandLine.getOptionValue("i") + "__"
+                                + "out";
+                    }
                 }
 
                 if (commandLine.hasOption("n")) {//todo change -o if nas -n
