@@ -133,6 +133,7 @@ public class Main {
                     do {
                         line = bufferedReader.readLine();
                         stringFacadeIF = StringFacadeBuilder.create(line);
+                        System.out.println(stringFacadeIF.getSize() + " element(s):");
                         System.out.println("[");
                         for (int i = 0; i < stringFacadeIF.getSize(); i++) {
                             System.out.println(stringFacadeIF.getValue(null, i));
