@@ -37,7 +37,6 @@ public class DataSourceHandler extends DefaultHandler {
     public static final String ROW = "row";
     public static final String ID = "id";
 
-    private XmlData xmlData;
     private Map<String, ArrayList<String>> dataMap;
     private ArrayList<String> currentColumn;
     private String string;
@@ -48,7 +47,6 @@ public class DataSourceHandler extends DefaultHandler {
      * @param xmlData is receiver for parsed xmlData
      */
     public DataSourceHandler(XmlData xmlData) {
-        this.xmlData = xmlData;
         dataMap = xmlData.getDataMap();
     }
 
