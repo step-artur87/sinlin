@@ -84,7 +84,7 @@ public class Main {
 
         CommandLine commandLine;
 
-        String prefix = "out";
+        String prefix;
 
         Data data;
         ArrayDeque<Tag> rootTagKostyl = new ArrayDeque<>();

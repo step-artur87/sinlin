@@ -61,7 +61,7 @@ public class Exporter {
             Tag tag,
             String prefix,
             boolean toOutStream) {
-        XMLStreamWriter current = null;
+        XMLStreamWriter current;
         int n = tag.sizes();
         String extension = tag.getName();
         if (limit >= 0 && limit < n) {
