@@ -39,6 +39,7 @@ public class Exporter {
     private static final int y = 121;
     public static int limit = -1;
     private XMLStreamWriter last = null;
+    private String extension;
 
     public static void setLimit(int limit) {
         if (limit > 0) {
@@ -63,6 +64,7 @@ public class Exporter {
             boolean toOutStream) {
         XMLStreamWriter current = null;
         int n = tag.sizes();
+        extension = tag.getName();
         if (limit >= 0 && limit < n) {
             n = limit;
         }
@@ -85,7 +87,7 @@ public class Exporter {
                         tag, 0, 0);
             } else {
                 current = getXmlStreamWriter(
-                        prefix + ".svg");
+                        prefix + "." + extension);
                 writeExemplarXML(
                         current,
                         tag, 0, 0);
@@ -103,7 +105,7 @@ public class Exporter {
                     current = getXmlStreamWriter(
                             prefix
                                     + " "
-                                    + Integer.toString(i) + ".svg");
+                                    + Integer.toString(i) + "." + extension);
                     writeExemplarXML(
                             current,
                             tag, i, 0);
