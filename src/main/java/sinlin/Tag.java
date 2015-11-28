@@ -97,8 +97,11 @@ public class Tag {
             System.out.println("In tag \""
                     + this.name + "\" attributes have not same sizes:");
             conMap.forEach((s, sf) -> {
-                System.out.println(s + "(" + sf.getSize() + ")");
+                System.out.println(s + " = " + sf.getName() + " (" + sf.getSize() + ")");
             });
+            if (this.text != null) {
+                System.out.println(text.getName() + " (" + text.getSize() + ")");
+            }
             System.out.println("Exit.");
             System.exit(1);
         }
