@@ -66,7 +66,10 @@ public class Main {
                 "-V" +
                 "\n\tPrint version.\n\n" +
                 "-h" +
-                "\n\tPrint help.\n";
+                "\n\tPrint help.\n\n" +
+                "See code at <https://github.com/step-artur87/sinlin> (Java, GPLv3),\n" +
+                "wiki at <https://github.com/step-artur87/sinlin/wiki> \n" +
+                "and binaries at <http://sourceforge.net/projects/sinlin/>.";
 
         CommandLine commandLine;
 
