@@ -95,7 +95,7 @@ public class Tag {
         }
         if (m < 0) {
             System.out.println("In tag \""
-                    + this.name + "\" fns have not same sizes:");
+                    + this.name + "\" attributes have not same sizes:");
             conMap.forEach((s, sf) -> {
                 System.out.println(s + "(" + sf.getSize() + ")");
             });
