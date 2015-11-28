@@ -10,6 +10,9 @@ import sinlin.string_facade.Fn;
 import sinlin.string_facade.StringFacadeBuilder;
 import sinlin.string_facade.StringFacadeIF;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 
 /*
@@ -41,6 +44,7 @@ public class Main {
 
     public static void main(String[] args) {
         long t = System.currentTimeMillis();
+        BufferedReader bufferedReader;
 
         String versionWithLicense = version + "\n" +
                 "License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>.\n" +
@@ -87,7 +91,7 @@ public class Main {
         options.addOption("o", true, "output");
         options.addOption("V", false, "version");
         options.addOption("h", false, "help");
-        options.addOption("t", true, "try");
+        options.addOption("t", false, "try");
         options.addOption("n", false, "limit");
 
         //there order of ifs is significant
@@ -119,10 +123,17 @@ public class Main {
             }
 
             if (commandLine.hasOption("t")) {
-                StringFacadeIF stringFacadeIF
-                        = StringFacadeBuilder.create(commandLine.getOptionValue("t"));
-                for (int i = 0; i < stringFacadeIF.getSize(); i++) {
-                    System.out.println(stringFacadeIF.getValue(null, i));
+                System.out.println("Write string:");
+                try {
+                    bufferedReader = new BufferedReader(
+                            new InputStreamReader(System.in));
+                    StringFacadeIF stringFacadeIF
+                            = StringFacadeBuilder.create(bufferedReader.readLine());
+                    for (int i = 0; i < stringFacadeIF.getSize(); i++) {
+                        System.out.println(stringFacadeIF.getValue(null, i));
+                    }
+                } catch (IOException e) {
+                    System.out.println(e.toString());
                 }
                 System.exit(0);
             }
