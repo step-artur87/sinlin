@@ -1,6 +1,9 @@
 package sinlin;
 
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import sinlin.data.Data;
 import sinlin.data.odt.OdfData;
 import sinlin.string_facade.Fn;
@@ -87,6 +90,7 @@ public class Main {
         options.addOption("t", true, "try");
         options.addOption("n", false, "limit");
 
+        //there order of ifs is significant
         try {
             commandLine = (new DefaultParser()).parse(options, args);
 
@@ -95,64 +99,68 @@ public class Main {
                 System.exit(0);
             }
 
-            for (Option o : commandLine.getOptions()) {
-                switch (o.getOpt()) {
-                    case "i":
-                        System.out.println("Before parsing time = "
-                                + ((System.currentTimeMillis() - t)) / 1000. + " s");
-                        SaxParsing.parse(new TagHandler(rootTagKostyl),
-                                o.getValue());
-                        System.out.println("After parsing time = "
-                                + ((System.currentTimeMillis() - t)) / 1000. + " s");
-                        break;
-                    case "d":
-                        System.out.println("Before data received time = "
-                                + ((System.currentTimeMillis() - t)) / 1000. + " s");
-                        data = new OdfData(o.getValue());
-                        Fn.setData(data);
-                        System.out.println("After data received time = "
-                                + ((System.currentTimeMillis() - t)) / 1000. + " s");
-                        break;
-                    case "o":
-                        prefix = o.getValue() + "_out";
-                        break;
-                    case "n"://todo change -o if nas -n
-                        Exporter.setLimit(Integer.parseInt(o.getValue()));
-                        break;
-                    case "t":
-                        StringFacadeIF stringFacadeIF
-                                = StringFacadeBuilder.create(o.getValue());
-                        for (int i = 0; i < stringFacadeIF.getSize(); i++) {
-                            System.out.println(stringFacadeIF.getValue(null, i));
-                        }
-                        System.exit(0);
-                        break;
-                    case "V":
-                        System.out.println(versionWithLicense);
-                        System.exit(0);
-                        break;
-                    case "h":
-                        System.out.println(help);
-                        System.exit(0);
-                        break;
+            if (commandLine.hasOption("V")) {
+                System.out.println(versionWithLicense);
+                System.exit(0);
+            }
+
+            if (commandLine.hasOption("h")) {
+                System.out.println(help);
+                System.exit(0);
+            }
+
+            if (commandLine.hasOption("d")) {
+                System.out.println("Before data received time = "
+                        + ((System.currentTimeMillis() - t)) / 1000. + " s");
+                data = new OdfData(commandLine.getOptionValue("d"));
+                Fn.setData(data);
+                System.out.println("After data received time = "
+                        + ((System.currentTimeMillis() - t)) / 1000. + " s");
+            }
+
+            if (commandLine.hasOption("t")) {
+                StringFacadeIF stringFacadeIF
+                        = StringFacadeBuilder.create(commandLine.getOptionValue("t"));
+                for (int i = 0; i < stringFacadeIF.getSize(); i++) {
+                    System.out.println(stringFacadeIF.getValue(null, i));
                 }
+                System.exit(0);
             }
 
-            if (!commandLine.hasOption("o")) {//todo other symbols
-                prefix = commandLine.getOptionValue("i") + "__"
-                        + (commandLine.hasOption("d")
-                        ? (commandLine.getOptionValue("d") + "__")
-                        : "")
-                        + "out";
+            if (commandLine.hasOption("i")) {
+                System.out.println("Before parsing time = "
+                        + ((System.currentTimeMillis() - t)) / 1000. + " s");
+                SaxParsing.parse(new TagHandler(rootTagKostyl),
+                        commandLine.getOptionValue("i"));
+                System.out.println("After parsing time = "
+                        + ((System.currentTimeMillis() - t)) / 1000. + " s");
+
+                if (commandLine.hasOption("o")) {
+                    prefix = commandLine.getOptionValue("o") + "_out";
+                } else {
+                    prefix = commandLine.getOptionValue("i") + "__"
+                            + (commandLine.hasOption("d")
+                            ? (commandLine.getOptionValue("d") + "__")
+                            : "")
+                            + "out";
+                }
+
+                if (commandLine.hasOption("n")) {//todo change -o if nas -n
+                    Exporter.setLimit(Integer.parseInt(commandLine.getOptionValue("n")));
+                }
+
+                System.out.println("Before export time = "
+                        + ((System.currentTimeMillis() - t)) / 1000. + " s");
+                Exporter exporter = new Exporter();
+                Tag r = rootTagKostyl.getFirst();
+                exporter.writeAllXml(r, prefix, false);
+                System.out.println("After export time  = "
+                        + ((System.currentTimeMillis() - t)) / 1000. + " s");
+                System.exit(0);
             }
 
-            System.out.println("Before export time = "
-                    + ((System.currentTimeMillis() - t)) / 1000. + " s");
-            Exporter exporter = new Exporter();
-            Tag r = rootTagKostyl.getFirst();
-            exporter.writeAllXml(r, prefix, false);
-            System.out.println("After export time  = "
-                    + ((System.currentTimeMillis() - t)) / 1000. + " s");
+            System.out.println(help);
+
         } catch (ParseException | NumberFormatException e) {
             System.out.println(e.toString());
         }
