@@ -67,7 +67,7 @@ public class Exporter {
             n = limit;
         }
         if (n > WARNING_QANTITY) {
-            System.out.print("Write " + n + " files? y/n");
+            System.out.println("Write " + n + " files? y/n");
             try {
                 int yn = System.in.read();
                 if (yn != y) {
