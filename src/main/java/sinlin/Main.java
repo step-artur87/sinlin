@@ -69,7 +69,8 @@ public class Main {
                 "\n\tPrint help.\n\n" +
                 "See code at <https://github.com/step-artur87/sinlin> (Java, GPLv3),\n" +
                 "wiki at <https://github.com/step-artur87/sinlin/wiki> \n" +
-                "and binaries at <http://sourceforge.net/projects/sinlin/>.";
+                "and binaries at <http://sourceforge.net/projects/sinlin/>.\n" +
+                "Twitter <https://twitter.com/sinlinSVG>.";
 
         CommandLine commandLine;
 
