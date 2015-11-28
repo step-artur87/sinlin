@@ -1,6 +1,7 @@
 package sinlin.string_facade;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -18,9 +19,7 @@ public class VarString extends StringFacadeAbstract
         name = string;
         string = StringFacadeBuilder.replaceAll(string);
         String[] strings = string.split(",");
-        for (int i = 0; i < strings.length; i++) {
-            varString.add(strings[i]);
-        }
+        Collections.addAll(varString, strings);
     }
 
     @Override
