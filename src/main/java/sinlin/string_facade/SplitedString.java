@@ -68,7 +68,7 @@ public class SplitedString extends StringFacadeAbstract
 
     @Override
     public String getValue(Map<String, String> keyMap, int n) {
-        String result = new String();
+        String result = "";
         for (StringFacadeIF anIf : ifs) {
             result = result.concat(
                     anIf.getValue(keyMap, n));
