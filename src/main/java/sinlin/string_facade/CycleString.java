@@ -12,9 +12,9 @@ import java.util.StringTokenizer;
  */
 public class CycleString extends StringFacadeAbstract
         implements StringFacadeIF {
-    Double begin = 0.;
-    Double step = 1.;
-    Double end = null;
+    private Double begin = 0.;
+    private Double step = 1.;
+    private Double end = null;
 
     public CycleString(String string) {
         name = string;

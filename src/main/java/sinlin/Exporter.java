@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 public class Exporter {
     private static final int WARNING_QANTITY = 100;
     private static final int y = 121;
-    public static int limit = -1;
+    private static int limit = -1;
     private XMLStreamWriter last = null;
 
     public static void setLimit(int limit) {

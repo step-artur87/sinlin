@@ -7,7 +7,7 @@ package sinlin.string_facade;
  * Time: 7:41 PM
  */
 public class StringFacadeBuilder {
-    public static final String OPERATORS = ".*[\\+\\-\\*/%^!#§&:~<>|=].*";
+    private static final String OPERATORS = ".*[\\+\\-\\*/%^!#§&:~<>|=].*";
 
     public static StringFacadeIF create(String string) {
         string = replaceAll(string);
