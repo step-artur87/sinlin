@@ -53,9 +53,9 @@ public class Main {
                 "java -jar sinlin.jar [options].\n\n" +
                 "OPTIONS\n" +
                 "\n" +
-                "-i input_file\n\tPath to source file (svg or xml).\n\n" +
-                "-d data _file\n\tPath to data file (ods).\n\n" +
-                "-o output_file\n\tPath and begin of name of output file." +
+                "-i file\n\tPath to input file (svg or xml).\n\n" +
+                "-d file\n\tPath to data file (ods).\n\n" +
+                "-o file\n\tPath and begin of name of output file." +
                 "\n\tOutput file extension will the same, that root tag in source file." +
                 "\n\tIf this option is absent, then input file path " +
                 "\n\tand data filename (if present) and _out is used.\n\n" +
