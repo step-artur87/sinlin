@@ -58,9 +58,7 @@ public class SplitedString extends StringFacadeAbstract
 
         if (m < 0) {
             System.out.println("Attr have not same sizes:");
-            ifs.forEach((s) -> {
-                System.out.println(s + "(" + s.getSize() + ")");
-            });
+            ifs.forEach((s) -> System.out.println(s + "(" + s.getSize() + ")"));
             System.out.println("Exit.");
             System.exit(1);
         }

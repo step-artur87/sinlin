@@ -67,9 +67,7 @@ public class Expr extends StringFacadeAbstract
         if (m < 0) {
             System.out.println("In expression \""
                     + this.name + "\" fns have not same sizes:");
-            map.forEach((s, sf) -> {
-                System.out.println(s + "(" + sf.getSize() + ")");
-            });
+            map.forEach((s, sf) -> System.out.println(s + "(" + sf.getSize() + ")"));
             System.out.println("Exit.");
             System.exit(1);
         }
