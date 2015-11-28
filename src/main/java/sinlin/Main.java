@@ -94,7 +94,7 @@ public class Main {
         options.addOption("V", false, "version");
         options.addOption("h", false, "help");
         options.addOption("t", false, "try");
-        options.addOption("n", false, "limit");
+        options.addOption("n", true, "limit");
 
         //there order of ifs is significant
         try {
