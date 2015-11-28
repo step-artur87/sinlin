@@ -26,8 +26,10 @@ public class Fn extends StringFacadeAbstract
 
     public int getSize() {
         if (Fn.data == null) {
-            System.out.println("Fn \"" + name + "\" has no sinlin.data. " +
-                    "Use StringFacade.setData(sinlin.data.Data sinlin.data) to set it. Exit");
+            System.out.println("Data of diapason \"" + name + "\" is unavailable. \n" +
+                    "Use command-line argument \"-d\" to define .ods file " +
+                    "with needed data.\n" +
+                    "Exit");
             System.exit(1);
         }
 
@@ -36,8 +38,10 @@ public class Fn extends StringFacadeAbstract
 
     public String getValue(Map<String, String> keyMap, int n) {
         if (Fn.data == null) {
-            System.out.println("Fn \"" + name + "\" has no sinlin.data. " +
-                    "Use StringFacade.setData(sinlin.data.Data sinlin.data) to set it. Exit");
+            System.out.println("Data of diapason \"" + name + "\" is unavailable. \n" +
+                    "Use command-line argument \"-d\" to define .ods file " +
+                    "with needed data.\n" +
+                    "Exit");
             System.exit(1);
         }
 
