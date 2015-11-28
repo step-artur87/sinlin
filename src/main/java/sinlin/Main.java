@@ -45,6 +45,8 @@ public class Main {
     public static void main(String[] args) {
         long t = System.currentTimeMillis();
         BufferedReader bufferedReader;
+        String line;
+        StringFacadeIF stringFacadeIF;
 
         String versionWithLicense = version + "\n" +
                 "License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>.\n" +
@@ -123,15 +125,18 @@ public class Main {
             }
 
             if (commandLine.hasOption("t")) {
-                System.out.println("Write string:");
                 try {
                     bufferedReader = new BufferedReader(
                             new InputStreamReader(System.in));
-                    StringFacadeIF stringFacadeIF
-                            = StringFacadeBuilder.create(bufferedReader.readLine());
-                    for (int i = 0; i < stringFacadeIF.getSize(); i++) {
-                        System.out.println(stringFacadeIF.getValue(null, i));
-                    }
+
+                    System.out.println("Write string (blank string for exit):");
+                    do {
+                        line = bufferedReader.readLine();
+                        stringFacadeIF = StringFacadeBuilder.create(line);
+                        for (int i = 0; i < stringFacadeIF.getSize(); i++) {
+                            System.out.println(stringFacadeIF.getValue(null, i));
+                        }
+                    } while (line.length() > 0);
                 } catch (IOException e) {
                     System.out.println(e.toString());
                 }
