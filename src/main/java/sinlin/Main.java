@@ -59,7 +59,7 @@ public class Main {
                 Written by , see <http://git.  /tree/AUTHORS>.
 */
 
-        String help = "SINOPSYS\n\n" +
+        String help = "SYNOPSIS\n\n" +
                 "java -jar sinlin.jar [options].\n\n" +
                 "OPTIONS\n" +
                 "\n" +
@@ -87,7 +87,7 @@ public class Main {
         String prefix;
 
         Data data;
-        ArrayDeque<Tag> rootTagKostyl = new ArrayDeque<>();
+        ArrayDeque<Tag> rootTagExoskeleton = new ArrayDeque<>();
         Options options = new Options();
         options.addOption("i", true, "input");
         options.addOption("d", true, "data");
@@ -150,7 +150,7 @@ public class Main {
             if (commandLine.hasOption("i")) {
                 System.out.println("Before parsing time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
-                SaxParsing.parse(new TagHandler(rootTagKostyl),
+                SaxParsing.parse(new TagHandler(rootTagExoskeleton),
                         commandLine.getOptionValue("i"));
                 System.out.println("After parsing time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
@@ -176,7 +176,7 @@ public class Main {
                 System.out.println("Before export time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 Exporter exporter = new Exporter();
-                Tag r = rootTagKostyl.getFirst();
+                Tag r = rootTagExoskeleton.getFirst();
                 exporter.writeAllXml(r, prefix, false);
                 System.out.println("After export time  = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");

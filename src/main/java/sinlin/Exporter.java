@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Time: 6:34 PM
  */
 public class Exporter {
-    private static final int WARNING_QANTITY = 100;
+    private static final int WARNING_QUANTITY = 100;
     private static final int y = 121;
     private static int limit = -1;
     private XMLStreamWriter last = null;
@@ -67,7 +67,7 @@ public class Exporter {
         if (limit >= 0 && limit < n) {
             n = limit;
         }
-        if (n > WARNING_QANTITY) {
+        if (n > WARNING_QUANTITY) {
             System.out.println("Write " + n + " files? y/n");
             try {
                 int yn = System.in.read();
@@ -136,7 +136,7 @@ public class Exporter {
             int n, int tabs) {
         Map<String, StringFacadeIF> map;
         int m;
-        if (tag.isExemplarWrited(n)) {
+        if (tag.isExemplarWritten(n)) {
             map = tag.getStringFacadeMap();
             m = tag.getTagArrayDeque().size();
             if (limit >= 0 && limit < m) {

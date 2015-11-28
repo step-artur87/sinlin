@@ -136,7 +136,7 @@ public class Tag {
      * @param n
      * @return
      */
-    public boolean isExemplarWrited(int n) {
+    public boolean isExemplarWritten(int n) {
         return !(attributesMapFnExt.containsKey(EXIST)
                 && ZERO.equals(attributesMapFnExt.get(EXIST)
                 .getValue(null, n)));

@@ -14,7 +14,7 @@ public class StringFacadeBuilder {
         if (!string.contains(StringFacadeIF.DELIM)) {
             return new FlatString(string);
         } else if (string.split("\\$").length != 1) {
-            return new SplitedString(string);
+            return new SplitString(string);
         }
         string = string.replace("$", "");
         return createVCEF(string);

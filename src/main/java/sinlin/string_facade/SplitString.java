@@ -11,12 +11,12 @@ import java.util.StringTokenizer;
  * Date: 11/4/15
  * Time: 11:40 AM
  */
-public class SplitedString extends StringFacadeAbstract
+public class SplitString extends StringFacadeAbstract
         implements StringFacadeIF {
     private ArrayList<StringFacadeIF> ifs
             = new ArrayList<>();
 
-    public SplitedString(String string) {
+    public SplitString(String string) {
         name = string;
         string = StringFacadeBuilder.replaceAll(string);
         StringTokenizer stringTokenizer

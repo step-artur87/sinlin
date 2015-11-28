@@ -33,11 +33,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 public class TagHandler extends DefaultHandler {
     private ArrayDeque<Tag> arrayDeque = new ArrayDeque<>();
-    private ArrayDeque<Tag> rootTagKostyl;
+    private ArrayDeque<Tag> rootTagExoskeleton;
 
-    public TagHandler(ArrayDeque<Tag> rootTagKostyl) {
-        this.rootTagKostyl = rootTagKostyl;
-        this.rootTagKostyl.clear();
+    public TagHandler(ArrayDeque<Tag> rootTagExoskeleton) {
+        this.rootTagExoskeleton = rootTagExoskeleton;
+        this.rootTagExoskeleton.clear();
         arrayDeque.clear();
     }
 
@@ -69,7 +69,7 @@ public class TagHandler extends DefaultHandler {
                            String qName)
             throws SAXException {
         if (arrayDeque.size() == 1) {//todo if root again
-            rootTagKostyl.push(arrayDeque.peek());
+            rootTagExoskeleton.push(arrayDeque.peek());
         }
 
         //poll
