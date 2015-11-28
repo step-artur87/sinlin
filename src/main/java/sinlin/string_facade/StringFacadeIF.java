@@ -7,7 +7,6 @@ import java.util.Map;
  * User: art
  * Date: 10/26/15
  * Time: 12:27 AM
- * To change this template use File | Settings | File Templates.
  */
 public interface StringFacadeIF {
     public static final String DELIM = "$";//todo other constatns

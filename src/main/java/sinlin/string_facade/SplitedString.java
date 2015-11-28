@@ -10,7 +10,6 @@ import java.util.StringTokenizer;
  * User: art
  * Date: 11/4/15
  * Time: 11:40 AM
- * To change this template use File | Settings | File Templates.
  */
 public class SplitedString extends StringFacadeAbstract
         implements StringFacadeIF {

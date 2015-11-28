@@ -8,7 +8,6 @@ import java.util.StringTokenizer;
  * User: art
  * Date: 11/10/15
  * Time: 9:51 AM
- * To change this template use File | Settings | File Templates.
  */
 public class CycleString extends StringFacadeAbstract
         implements StringFacadeIF {

@@ -25,7 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * User: art
  * Date: 10/10/15
  * Time: 2:44 AM
- * To change this template use File | Settings | File Templates.
  */
 public interface Data {
     public ArrayList<String> getRow(String name);

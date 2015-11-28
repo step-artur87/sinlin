@@ -10,7 +10,6 @@ import java.util.*;
  * User: art
  * Date: 11/5/15
  * Time: 10:43 AM
- * To change this template use File | Settings | File Templates.
  */
 public class Expr extends StringFacadeAbstract
         implements StringFacadeIF {

@@ -34,7 +34,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * User: art
  * Date: 10/10/15
  * Time: 2:14 AM
- * To change this template use File | Settings | File Templates.
  */
 public class OdfData implements Data {//fixme one cell as range
     private SpreadsheetDocument document;
