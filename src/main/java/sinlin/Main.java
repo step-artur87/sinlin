@@ -69,7 +69,7 @@ public class Main {
                 "\n\tOutput file extension will the same, that root tag in source file." +
                 "\n\tIf this option is absent, then input file path " +
                 "\n\tand data filename (if present) and _out is used.\n\n" +
-                "-n number\n" +
+                "-m number\n" +
                 "\tExport only number of first exemplars for each tag if one has more.\n\n" +
                 "-t\tstring " +
                 "\n\tTry data processing (prints values of received string).\n\n" +
@@ -95,7 +95,7 @@ public class Main {
         options.addOption("V", false, "version");
         options.addOption("h", false, "help");
         options.addOption("t", false, "try");
-        options.addOption("n", true, "limit");
+        options.addOption("m", true, "limit");
 
         //there order of ifs is significant
         try {
@@ -169,8 +169,8 @@ public class Main {
                     }
                 }
 
-                if (commandLine.hasOption("n")) {//todo change -o if nas -n
-                    Exporter.setLimit(Integer.parseInt(commandLine.getOptionValue("n")));
+                if (commandLine.hasOption("m")) {//todo change -o if nas -m
+                    Exporter.setLimit(Integer.parseInt(commandLine.getOptionValue("m")));
                 }
 
                 System.out.println("Before export time = "

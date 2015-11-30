@@ -58,23 +58,22 @@ public class OdfData implements Data {//fixme one cell as range
             stringArrayList = new ArrayList<>();
             CellRange cellRange;
             int rowNumber;
-            for (Table odfTable : tableList) {
-                cellRange = odfTable.getCellRangeByName(name);
-                if (cellRange == null) {
-                    System.out.print("File "
-                            + document.getBaseURI()
-                            + " has not cell range with name "
-                            + name
-                            + ". Exit.");
-                    System.exit(1);
-                }
-
-                rowNumber = cellRange.getRowNumber();
-                for (int i = 0; i < rowNumber; i++) {
-                    stringArrayList.add(
-                            cellRange.getCellByPosition(0, i)
-                                    .getDisplayText());
-                }
+            //Bug all <table>.cellRange get cells from <table>
+            //if it has place on other
+            cellRange = tableList.get(0).getCellRangeByName(name);
+            if (cellRange == null) {
+                System.out.print("File "
+                        + document.getBaseURI()
+                        + " has not cell range with name "
+                        + name
+                        + ". Exit.");
+                System.exit(1);
+            }
+            rowNumber = cellRange.getRowNumber();
+            for (int i = 0; i < rowNumber; i++) {
+                stringArrayList.add(
+                        cellRange.getCellByPosition(0, i)
+                                .getDisplayText());
             }
             rows.put(name, stringArrayList);
         }
