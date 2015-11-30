@@ -3,4 +3,5 @@
 *.ods
 *Test.java
 *.svg
+!example/*.svg
 1
