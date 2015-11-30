@@ -25,4 +25,4 @@ Output file (![svg](../master/example/sine.svg__out.svg))
 
 ![svg](https://pbs.twimg.com/media/CVD4H9XWoAELO6x.png)
 
-See more at ![Wiki](Home).
+See more at ![](https://github.com/step-artur87/sinlin/wiki).
