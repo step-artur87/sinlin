@@ -9,13 +9,11 @@ import java.util.Map;
  * Time: 12:27 AM
  */
 public interface StringFacadeIF {
-    public static final String DELIM = "$";//todo other constants
-
     /**
      * The delimiter used to divide parsed string
      * in SplitedString to StringFacadeIFs and FlatStrings
      */
-    public static final String DELIM = "$";//todo other constatns
+    public static final String DELIM = "$";//todo other constants
 
     /**
      * The delimiter used to divide parsed string
