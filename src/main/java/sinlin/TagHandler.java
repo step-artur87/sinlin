@@ -30,7 +30,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Date: 8/26/15
  * Time: 8:17 PM
  */
-
 public class TagHandler extends DefaultHandler {
     private ArrayDeque<Tag> arrayDeque = new ArrayDeque<>();
     private ArrayDeque<Tag> rootTagExoskeleton;

@@ -133,8 +133,8 @@ public class Tag {
      * Return false if this tag has attribute EXIST
      * and its value equals ZERO or true otherwise.
      *
-     * @param n
-     * @return
+     * @param n number of exemplar
+     * @return true if this exemplar of tag has to be written
      */
     public boolean isExemplarWritten(int n) {
         return !(attributesMapFnExt.containsKey(EXIST)

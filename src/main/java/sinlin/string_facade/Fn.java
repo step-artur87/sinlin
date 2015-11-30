@@ -15,11 +15,6 @@ public class Fn extends StringFacadeAbstract
         result = string;
     }
 
-    /**
-     * Only needed when fn has links to sinlin.data
-     *
-     * @param data
-     */
     public static void setData(Data data) {
         Fn.data = data;
     }
