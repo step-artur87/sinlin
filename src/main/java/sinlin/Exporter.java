@@ -134,6 +134,7 @@ public class Exporter {
             XMLStreamWriter xmlStreamWriter,
             Tag tag,
             int n, int tabs) {
+        String string;
         Map<String, StringFacadeIF> map;
         int m;
         if (tag.isExemplarWritten(n)) {
@@ -147,8 +148,25 @@ public class Exporter {
                 xmlStreamWriter.writeStartElement(
                         tag.getName());
                 for (String s : tag.getAttributeNames()) {
-                    catchingWriteAttribute(xmlStreamWriter, s,
-                            map.get(s).getValue(null, n));
+                    if (s.endsWith("...")) {
+                        string = s.replace("...", "");
+                        if (tag.getAttributeNames().contains(string)) {
+                            catchingWriteAttribute(xmlStreamWriter, string,
+                                    map.get(s).getValue(null, n));
+                        } else {
+                            System.out.println("\"" + s + "\" has not pair. Exit");
+                            System.exit(1);
+                        }
+                    } else {
+                        string = s.concat("...");
+                        if (tag.getAttributeNames().contains(string)) {
+                            catchingWriteAttribute(xmlStreamWriter, string,
+                                    map.get(s).getValue(null, n));
+                        } else {
+                            catchingWriteAttribute(xmlStreamWriter, s,
+                                    map.get(s).getValue(null, n));
+                        }
+                    }
                 }
 
                 if (!tag.isEmpty()) {
