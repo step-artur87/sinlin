@@ -95,9 +95,9 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (d == null) {
-            d = (c - a) / b;
+            d = Math.ceil((c - a) / b);
         } else if (c != null) {
-            d = Math.min(d, (c - a) / b);
+            d = Math.min(d, Math.ceil((c - a) / b));
         }
 
         if (d.isInfinite() || d.isNaN() || (d <= 0)) {
