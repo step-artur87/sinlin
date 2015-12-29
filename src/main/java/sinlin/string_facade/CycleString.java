@@ -116,8 +116,7 @@ public class CycleString extends StringFacadeAbstract
     @Override
     public String getValue(Map<String, String> keyMap, int n) {
         String value;
-        double doubleValue = a + n * b;
-        if (doubleValue > c) {
+        if (n > d || n < 0) {
             System.out.println("Cycle "
                     + this.name
                     + " have not value with number "
@@ -126,7 +125,7 @@ public class CycleString extends StringFacadeAbstract
             System.exit(1);
         }
 
-        value = Double.toString(doubleValue);
+        value = Double.toString(a + b * n);
         if (value.endsWith(".0")) {
             value = value.replace(".0", "");
         }
