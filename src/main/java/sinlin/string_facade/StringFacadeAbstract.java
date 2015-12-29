@@ -13,4 +13,11 @@ public abstract class StringFacadeAbstract implements StringFacadeIF {
     public String getName() {
         return name;
     }
+
+    protected void handleException(Exception e) {
+        System.out.println("In " + this.getClass().getSimpleName() + " \"" + this.getName() + "\" thrown exception:");
+        System.out.println(e.toString());
+        System.out.println("Exit.");
+        System.exit(0);
+    }
 }

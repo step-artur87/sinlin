@@ -44,13 +44,7 @@ public class CycleString extends StringFacadeAbstract
             }
             //todo as for(;;)
         } catch (NumberFormatException e) {
-            System.out.println("In cycle \""
-                    + name
-                    + "\":"
-            );
-            System.out.println(e.toString());
-            System.out.println("Exit");
-            System.exit(1);
+            handleException(e);
         }
 
         if (c == null && d == null) {
