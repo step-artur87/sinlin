@@ -1,6 +1,5 @@
 package sinlin.string_facade;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.OptionalInt;
 import java.util.StringTokenizer;
@@ -13,9 +12,6 @@ import java.util.StringTokenizer;
  */
 public class SplitString extends StringFacadeAbstract
         implements StringFacadeIF {
-    private ArrayList<StringFacadeIF> ifs
-            = new ArrayList<>();
-
     public SplitString(String string) {
         name = string;
         string = StringFacadeBuilder.replaceAll(string);
@@ -27,9 +23,9 @@ public class SplitString extends StringFacadeAbstract
             s = stringTokenizer.nextToken();
             if (!s.equals(StringFacadeIF.DELIM)) {
                 if (toFs) {
-                    ifs.add(StringFacadeBuilder.createVCEF(s));
+                    nodes.add(StringFacadeBuilder.createVCEF(s));
                 } else {
-                    ifs.add(new FlatString(s));
+                    nodes.add(new FlatString(s));
                 }
             } else {
                 toFs = !toFs;
@@ -40,14 +36,14 @@ public class SplitString extends StringFacadeAbstract
     @Override
     public int getSize() {
         int m = -1;
-        if (ifs.isEmpty()) {
+        if (nodes.isEmpty()) {
             return 1;
         }
-        OptionalInt min = ifs.stream()
+        OptionalInt min = nodes.stream()
                 .mapToInt(StringFacadeIF::getSize)
                 .filter((i) -> i > 1)
                 .min();
-        OptionalInt max = ifs.stream()
+        OptionalInt max = nodes.stream()
                 .mapToInt(StringFacadeIF::getSize)
                 .filter((i) -> i > 1)
                 .max();
@@ -61,7 +57,7 @@ public class SplitString extends StringFacadeAbstract
         if (m < 0) {
             System.out.println("In " + this.getClass().getSimpleName() + " \""
                     + this.name + "\" attributes have not same sizes:");
-            ifs.forEach((s) -> System.out.println(s.getClass().getSimpleName() + " " + s.getName() + " (" + s.getSize() + ")"));
+            nodes.forEach((s) -> System.out.println(s.getClass().getSimpleName() + " " + s.getName() + " (" + s.getSize() + ")"));
             System.out.println("Exit.");
             System.exit(1);
         }
@@ -72,7 +68,7 @@ public class SplitString extends StringFacadeAbstract
     @Override
     public String getValue(Map<String, String> keyMap, int n) {
         String result = "";
-        for (StringFacadeIF anIf : ifs) {
+        for (StringFacadeIF anIf : nodes) {
             result = result.concat(
                     anIf.getValue(keyMap, n));
         }

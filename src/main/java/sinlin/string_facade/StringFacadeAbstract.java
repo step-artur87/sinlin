@@ -1,5 +1,7 @@
 package sinlin.string_facade;
 
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: art
@@ -8,6 +10,8 @@ package sinlin.string_facade;
  */
 public abstract class StringFacadeAbstract implements StringFacadeIF {
     protected String name;
+    protected ArrayList<StringFacadeIF> nodes
+            = new ArrayList<>();
 
     @Override
     public String getName() {
