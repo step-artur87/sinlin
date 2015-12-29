@@ -38,8 +38,15 @@ public class Expr extends StringFacadeAbstract
                 exprString = exprString.concat(tokens.get(i));
             }
         }
-        expression = (new ExpressionBuilder(exprString)
-                .variables(map.keySet())).build();
+        try {
+            expression = (new ExpressionBuilder(exprString)
+                    .variables(map.keySet())).build();
+        } catch (IllegalArgumentException e) {
+            System.out.println("In expression \"" + this.getName() + "\":");
+            System.out.println(e.toString());
+            System.out.println("Exit.");
+            System.exit(0);
+        }
     }
 
     @Override
@@ -91,11 +98,10 @@ public class Expr extends StringFacadeAbstract
             }
             return value;
         } catch (NumberFormatException e) {
-//            if (stringFacadeIF != null && value!= null) {
-//fixme                System.out.println("In \"" + stringFacadeIF.getName()
-//                        + "\" value \"" + value + "\" is not number.");
-//            }
+            System.out.println("In expression \"" + this.getName() + "\":");
             System.out.println(e.toString());
+            System.out.println("Exit.");
+            System.exit(0);
         } catch (IllegalArgumentException e) {
             if (stringFacadeIF != null && value != null) {
                 System.out.println("In \"" + stringFacadeIF.getName()

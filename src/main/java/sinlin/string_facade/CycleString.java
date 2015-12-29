@@ -44,10 +44,12 @@ public class CycleString extends StringFacadeAbstract
             }
             //todo as for(;;)
         } catch (NumberFormatException e) {
-            System.out.println("In cycle "
+            System.out.println("In cycle \""
                     + name
-                    + " some double was not parsed. Exit"
+                    + "\":"
             );
+            System.out.println(e.toString());
+            System.out.println("Exit");
             System.exit(1);
         }
 
@@ -105,7 +107,7 @@ public class CycleString extends StringFacadeAbstract
                     + name
                     + " count = " +
                     d +
-                    " . Exit"
+                    ". Exit"
             );
             System.exit(1);
         }
