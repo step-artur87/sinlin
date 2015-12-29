@@ -11,9 +11,10 @@ import java.util.*;
  * Date: 11/5/15
  * Time: 10:43 AM
  */
+//todo strings --> strings, nodes
 public class Expr extends StringFacadeAbstract
         implements StringFacadeIF {
-    private Map<String, StringFacadeIF> map = new HashMap<>();
+    private ArrayList<String> strings = new ArrayList<>();
     private Expression expression;
 
     public Expr(String string) {
@@ -30,7 +31,8 @@ public class Expr extends StringFacadeAbstract
             if (tokens.size() > i + 1
                     && tokens.get(i + 1).equals("]")) {
                 exprString = exprString.concat("var" + n);
-                map.put("var" + n,
+                strings.add("var" + n);
+                nodes.add(
                         StringFacadeBuilder.createVCEF(
                                 tokens.get(i)));
                 n++;
@@ -40,7 +42,7 @@ public class Expr extends StringFacadeAbstract
         }
         try {
             expression = (new ExpressionBuilder(exprString)
-                    .variables(map.keySet())).build();
+                    .variables(new HashSet<>(strings))).build();
         } catch (IllegalArgumentException e) {
             handleException(e);
         }
@@ -48,16 +50,16 @@ public class Expr extends StringFacadeAbstract
 
     @Override
     public int getSize() {
-        //todo new map putAll, putAll
+        //todo new strings putAll, putAll
         int m = -1;
-        if (map.isEmpty()) {
+        if (strings.isEmpty()) {
             return 0;
         }
-        OptionalInt min = map.values().stream()
+        OptionalInt min = nodes.stream()
                 .mapToInt(StringFacadeIF::getSize)
                 .filter((i) -> i > 1)
                 .min();
-        OptionalInt max = map.values().stream()
+        OptionalInt max = nodes.stream()
                 .mapToInt(StringFacadeIF::getSize)
                 .filter((i) -> i > 1)
                 .max();
@@ -71,7 +73,10 @@ public class Expr extends StringFacadeAbstract
         if (m < 0) {
             System.out.println("In " + this.getClass().getSimpleName() + " \""
                     + this.name + "\" attributes have not same sizes:");
-            map.forEach((s, sf) -> System.out.println(sf.getClass().getSimpleName() + " " + sf.getName() + " (" + sf.getSize() + ")"));
+            nodes.forEach((n) -> System.out.println(
+                    n.getClass().getSimpleName() + " "
+                            + n.getName() + " ("
+                            + n.getSize() + ")"));
             System.out.println("Exit.");
             System.exit(1);
         }
@@ -84,10 +89,10 @@ public class Expr extends StringFacadeAbstract
         StringFacadeIF stringFacadeIF = null;
         String value = null;
         try {
-            for (String s : map.keySet()) {
-                stringFacadeIF = map.get(s);
+            for (int i = 0; i < strings.size(); i++) {
+                stringFacadeIF = nodes.get(i);
                 value = stringFacadeIF.getValue(keyMap, n);
-                expression.setVariable(s, Double.parseDouble(
+                expression.setVariable(strings.get(i), Double.parseDouble(
                         value));
             }
             value = Double.toString(expression.evaluate());
