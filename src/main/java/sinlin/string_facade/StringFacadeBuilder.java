@@ -26,14 +26,14 @@ public class StringFacadeBuilder {
         assert !string.contains(StringFacadeIF.DELIM);
         String clearedString = clearSquareBrackets(string);
 
+        if (clearedString.contains(StringFacadeIF.DELIM_CYCLE)) {
+            return new CycleString(string);
+        }
         if (clearedString.matches(OPERATORS)) {
             return new Expr(string);
         }
         if (clearedString.contains(StringFacadeIF.DELIM_VAR)) {
             return new VarString(string);
-        }
-        if (clearedString.contains(StringFacadeIF.DELIM_CYCLE)) {
-            return new CycleString(string);
         }
         return new Fn(string);
     }
