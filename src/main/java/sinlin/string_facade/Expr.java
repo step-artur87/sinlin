@@ -3,7 +3,10 @@ package sinlin.string_facade;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -46,42 +49,6 @@ public class Expr extends StringFacadeAbstract
         } catch (IllegalArgumentException e) {
             handleException(e);
         }
-    }
-
-    @Override
-    public int getSize() {
-        //todo new strings putAll, putAll
-        int m = -1;
-        if (strings.isEmpty()) {
-            return 0;
-        }
-        OptionalInt min = nodes.stream()
-                .mapToInt(StringFacadeIF::getSize)
-                .filter((i) -> i > 1)
-                .min();
-        OptionalInt max = nodes.stream()
-                .mapToInt(StringFacadeIF::getSize)
-                .filter((i) -> i > 1)
-                .max();
-
-        if (!min.isPresent() || !max.isPresent()) {
-            m = 1;
-        } else if (min.equals(max)) {
-            m = min.getAsInt();
-        }
-
-        if (m < 0) {
-            System.out.println("In " + this.getClass().getSimpleName() + " \""
-                    + this.name + "\" attributes have not same sizes:");
-            nodes.forEach((n) -> System.out.println(
-                    n.getClass().getSimpleName() + " "
-                            + n.getName() + " ("
-                            + n.getSize() + ")"));
-            System.out.println("Exit.");
-            System.exit(1);
-        }
-
-        return m;
     }
 
     @Override

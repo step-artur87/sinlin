@@ -1,7 +1,6 @@
 package sinlin.string_facade;
 
 import java.util.Map;
-import java.util.OptionalInt;
 import java.util.StringTokenizer;
 
 /**
@@ -31,38 +30,6 @@ public class SplitString extends StringFacadeAbstract
                 toFs = !toFs;
             }
         }
-    }
-
-    @Override
-    public int getSize() {
-        int m = -1;
-        if (nodes.isEmpty()) {
-            return 1;
-        }
-        OptionalInt min = nodes.stream()
-                .mapToInt(StringFacadeIF::getSize)
-                .filter((i) -> i > 1)
-                .min();
-        OptionalInt max = nodes.stream()
-                .mapToInt(StringFacadeIF::getSize)
-                .filter((i) -> i > 1)
-                .max();
-
-        if (!min.isPresent() || !max.isPresent()) {
-            m = 1;
-        } else if (min.equals(max)) {
-            m = min.getAsInt();
-        }
-
-        if (m < 0) {
-            System.out.println("In " + this.getClass().getSimpleName() + " \""
-                    + this.name + "\" attributes have not same sizes:");
-            nodes.forEach((s) -> System.out.println(s.getClass().getSimpleName() + " " + s.getName() + " (" + s.getSize() + ")"));
-            System.out.println("Exit.");
-            System.exit(1);
-        }
-
-        return m;
     }
 
     @Override
