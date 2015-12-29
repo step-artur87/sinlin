@@ -21,7 +21,7 @@ public class CycleString extends StringFacadeAbstract
                 .replace(" ", "")
                 .split(";");
         try {
-            if (strings.length == 4) {
+            if (strings.length == 3 || strings.length == 4) {
                 a = (strings[0].length() > 0)
                         ? Double.parseDouble(strings[0])
                         : null;
@@ -30,9 +30,11 @@ public class CycleString extends StringFacadeAbstract
                 c = (strings[2].length() > 0)
                         ? Double.parseDouble(strings[2])
                         : null;
-                d = (strings[3].length() > 0)
-                        ? Double.parseDouble(strings[3])
-                        : null;
+                if (strings.length == 4) {
+                    d = (strings[3].length() > 0)
+                            ? Double.parseDouble(strings[3])
+                            : null;
+                }
             } else {
                 System.out.println("Cycle "
                         + name
@@ -57,7 +59,7 @@ public class CycleString extends StringFacadeAbstract
             System.exit(1);
         }
 
-        if (d == 0) {
+        if (d != null && d == 0) {
             System.out.println("Cycle "
                     + name
                     + " has zero count. Exit"
