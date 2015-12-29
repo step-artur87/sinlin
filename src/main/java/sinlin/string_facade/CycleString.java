@@ -110,7 +110,7 @@ public class CycleString extends StringFacadeAbstract
 
     @Override
     public int getSize() {
-        return (int) ((c - a) / b);
+        return d.intValue();
     }
 
     @Override
