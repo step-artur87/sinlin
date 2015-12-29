@@ -1,7 +1,6 @@
 package sinlin.string_facade;
 
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,21 +17,22 @@ public class CycleString extends StringFacadeAbstract
 
     public CycleString(String string) {
         name = string;
-        StringTokenizer stringTokenizer
-                = new StringTokenizer(string, DELIM_CYCLE);
+        String[] strings = string
+                .replace(" ", "")
+                .split(";");
         try {
-            if (stringTokenizer.countTokens() == 4) {
-                a = Double.parseDouble(stringTokenizer.nextToken());
-                b = Double.parseDouble(stringTokenizer.nextToken());
-                c = Double.parseDouble(stringTokenizer.nextToken());
-                d = Double.parseDouble(stringTokenizer.nextToken());
-/*
-            } else if (stringTokenizer.countTokens() == 2) {
-                b = Double.parseDouble(stringTokenizer.nextToken());
-                c = Double.parseDouble(stringTokenizer.nextToken());
-            } else if (stringTokenizer.countTokens() == 1) {
-                c = Double.parseDouble(stringTokenizer.nextToken());
-*/
+            if (strings.length == 4) {
+                a = (strings[0].length() > 0)
+                        ? Double.parseDouble(strings[0])
+                        : null;
+                b = (strings[1].length() > 0)
+                        ? Double.parseDouble(strings[1]) : null;
+                c = (strings[2].length() > 0)
+                        ? Double.parseDouble(strings[2])
+                        : null;
+                d = (strings[3].length() > 0)
+                        ? Double.parseDouble(strings[3])
+                        : null;
             } else {
                 System.out.println("Cycle "
                         + name
@@ -94,9 +94,10 @@ public class CycleString extends StringFacadeAbstract
 
         if (d == null) {
             d = (c - a) / b;
-        } else {
+        } else if (c != null) {
             d = Math.min(d, (c - a) / b);
         }
+
         if (d.isInfinite() || d.isNaN() || (d <= 0)) {
             System.out.println("Cycle "
                     + name
