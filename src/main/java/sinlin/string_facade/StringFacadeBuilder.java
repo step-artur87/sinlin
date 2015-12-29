@@ -1,5 +1,7 @@
 package sinlin.string_facade;
 
+import java.util.StringTokenizer;
+
 /**
  * Created with IntelliJ IDEA.
  * User: art
@@ -22,14 +24,15 @@ public class StringFacadeBuilder {
 
     public static StringFacadeIF createVCEF(String string) {
         assert !string.contains(StringFacadeIF.DELIM);
+        String clearedString = clearSquareBrackets(string);
 
-        if (string.matches(OPERATORS)) {
+        if (clearedString.matches(OPERATORS)) {
             return new Expr(string);
         }
-        if (string.contains(StringFacadeIF.DELIM_VAR)) {
+        if (clearedString.contains(StringFacadeIF.DELIM_VAR)) {
             return new VarString(string);
         }
-        if (string.contains(StringFacadeIF.DELIM_CYCLE)) {
+        if (clearedString.contains(StringFacadeIF.DELIM_CYCLE)) {
             return new CycleString(string);
         }
         return new Fn(string);
@@ -43,5 +46,30 @@ public class StringFacadeBuilder {
                 .replace("-> ", "->")
                 .replace(" ->", "->");
         return string;
+    }
+
+    public static String clearSquareBrackets(String s) {
+        int n = 0;
+        String result = "";
+        String s1;
+        StringTokenizer stringTokenizer
+                = new StringTokenizer(s, "[]", true);
+        while (stringTokenizer.hasMoreElements()) {
+            s1 = stringTokenizer.nextToken();
+            if (s1.equals("[")) {
+                n++;
+            } else if (s1.equals("]")) {
+                n--;
+                if (n < 0) {//todo sout
+                    System.exit(1);
+                }
+            } else if (n == 0) {
+                result = result.concat(s1);
+            }
+        }
+        if (n > 0) {
+            System.exit(1);
+        }
+        return result;
     }
 }
