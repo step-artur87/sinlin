@@ -56,8 +56,9 @@ public class SplitString extends StringFacadeAbstract
         }
 
         if (m < 0) {
-            System.out.println("Attr have not same sizes:");
-            ifs.forEach((s) -> System.out.println(s + "(" + s.getSize() + ")"));
+            System.out.println("In " + this.getClass().getSimpleName() + " \""
+                    + this.name + "\" attributes have not same sizes:");
+            ifs.forEach((s) -> System.out.println(s.getClass().getSimpleName() + " " + s.getName() + " (" + s.getSize() + ")"));
             System.out.println("Exit.");
             System.exit(1);
         }
