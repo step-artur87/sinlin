@@ -49,9 +49,12 @@ public class SplitString extends StringFacadeAbstract
                 .min();
         OptionalInt max = ifs.stream()
                 .mapToInt(StringFacadeIF::getSize)
+                .filter((i) -> i > 1)
                 .max();
 
-        if (min.equals(max)) {
+        if (!min.isPresent() || !max.isPresent()) {
+            m = 1;
+        } else if (min.equals(max)) {
             m = min.getAsInt();
         }
 

@@ -59,9 +59,10 @@ public class Expr extends StringFacadeAbstract
                 .min();
         OptionalInt max = map.values().stream()
                 .mapToInt(StringFacadeIF::getSize)
+                .filter((i) -> i > 1)
                 .max();
 
-        if (!min.isPresent()) {
+        if (!min.isPresent() || !max.isPresent()) {
             m = 1;
         } else if (min.equals(max)) {
             m = min.getAsInt();
