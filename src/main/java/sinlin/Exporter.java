@@ -138,13 +138,8 @@ public class Exporter {
         ArrayList<Tag> alt = new ArrayList(tag.getTagArrayDeque());
         String string;
         Map<String, StringFacadeIF> map;
-        int m;
         if (tag.isExemplarWritten(n)) {
             map = tag.getStringFacadeMap();
-            m = tag.getTagArrayDeque().size();
-            if (limit >= 0 && limit < m) {
-                m = limit;
-            }
             try {
                 tabs(xmlStreamWriter, tabs);
                 xmlStreamWriter.writeStartElement(
@@ -176,13 +171,13 @@ public class Exporter {
                 }
 
                 if (!tag.oneNode()) {
-                    tag.getTagArrayDeque().stream().limit(m).forEach(
+                    tag.getTagArrayDeque().stream().forEach(
                             t -> writeAllXml(xmlStreamWriter, t, tabs + 1));
                 } else {
                     if (tag.getTagArrayDeque().stream().filter(
                             (t) -> t.sizes() != tag.sizes())
                             .count() == 0) {
-                        tag.getTagArrayDeque().stream().limit(m).forEach(
+                        tag.getTagArrayDeque().stream().forEach(
                                 t -> writeExemplarXML(xmlStreamWriter, t, n, tabs + 1));
                     } else {
                         System.out.println("Tag \""
