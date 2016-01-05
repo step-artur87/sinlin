@@ -34,6 +34,7 @@ public class Tag {
     private static final boolean DEBUG = false;//write map..Ext
     private static final String ZERO = "0";
     private static final String EXIST = "exist";
+    private static final String ONENODE = "onenode";
     private String name;
     private StringFacadeIF text = null;
     private Map<String, StringFacadeIF> attributesMapFn = new HashMap<>();
@@ -50,7 +51,7 @@ public class Tag {
             for (int i = 0; i < attributes.getLength(); i++) {
                 value = attributes.getValue(i);
                 qName = attributes.getQName(i);
-                if (qName.equals(EXIST)) {//todo arrayList
+                if (qName.equals(EXIST) || qName.equals(ONENODE)) {//todo arrayList
                     attributesMapFnExt.put(qName, StringFacadeBuilder.create(value));
                 } else {
                     attributesMapFn.put(qName, StringFacadeBuilder.create(value));
@@ -140,6 +141,10 @@ public class Tag {
         return !(attributesMapFnExt.containsKey(EXIST)
                 && ZERO.equals(attributesMapFnExt.get(EXIST)
                 .getValue(null, n)));
+    }
+
+    public boolean oneNode() {
+        return attributesMapFnExt.containsKey(ONENODE);
     }
 
     public ArrayList<String> getAttributeNames() {

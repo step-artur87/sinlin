@@ -8,6 +8,7 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 /*
@@ -134,6 +135,7 @@ public class Exporter {
             XMLStreamWriter xmlStreamWriter,
             Tag tag,
             int n, int tabs) {
+        ArrayList<Tag> alt = new ArrayList(tag.getTagArrayDeque());
         String string;
         Map<String, StringFacadeIF> map;
         int m;
@@ -173,8 +175,29 @@ public class Exporter {
                     xmlStreamWriter.writeCharacters("\n");
                 }
 
-                tag.getTagArrayDeque().stream().limit(m).forEach(
-                        t -> writeAllXml(xmlStreamWriter, t, tabs + 1));
+                if (!tag.oneNode()) {
+                    tag.getTagArrayDeque().stream().limit(m).forEach(
+                            t -> writeAllXml(xmlStreamWriter, t, tabs + 1));
+                } else {
+                    if (tag.getTagArrayDeque().stream().filter(
+                            (t) -> t.sizes() != tag.sizes())
+                            .count() == 0) {
+                        tag.getTagArrayDeque().stream().limit(m).forEach(
+                                t -> writeExemplarXML(xmlStreamWriter, t, n, tabs + 1));
+                    } else {
+                        System.out.println("Tag \""
+                                + tag.getName()
+                                + "\" ("
+                                + tag.sizes()
+                                + ") has node(s) with different sizes:");
+                        tag.getTagArrayDeque().forEach((t) -> {
+                            System.out.println(t.getName()
+                                    + " (" + t.sizes() + ")");
+                        });
+                        System.out.println("Exit");
+                        System.exit(1);
+                    }
+                }
 
                 if (tag.getText() != null) {
                     xmlStreamWriter.writeCharacters(
