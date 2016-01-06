@@ -64,7 +64,7 @@ public class Main {
                 "OPTIONS\n" +
                 "\n" +
                 "-i file\n\tPath to input file (svg or xml).\n\n" +
-                "-d file\n\tPath to data file (.ods).\n\n" +
+                "-d file\n\tPath to data file (ods).\n\n" +
                 "-o file\n\tPath and begin of name of output file." +
                 "\n\t\"_out\" will add to end of file" +
                 "\n\tOutput file extension will the same, that root tag in source file." +
@@ -72,8 +72,9 @@ public class Main {
                 "\n\tand data filename (if present) and _out is used.\n\n" +
                 "-m number\n" +
                 "\tExport only number of first exemplars for each tag if one has more.\n\n" +
-                "-t\tstring " +
-                "\n\tTry data processing (prints values of received string).\n\n" +
+                "-g\t" +
+                "\n\tGenerate data sequence from string." +
+                "\n\tWith option -d can get data from ods files.\n\n" +
                 "-V" +
                 "\n\tPrint version.\n\n" +
                 "-h" +
@@ -97,7 +98,7 @@ public class Main {
         options.addOption("o", true, "output");
         options.addOption("V", false, "version");
         options.addOption("h", false, "help");
-        options.addOption("t", false, "try");
+        options.addOption("g", false, "generate");
         options.addOption("m", true, "limit");
 
         //there order of ifs is significant
@@ -128,14 +129,14 @@ public class Main {
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
             }
 
-            if (commandLine.hasOption("t")) {
+            if (commandLine.hasOption("g")) {
                 try {
                     bufferedReader = new BufferedReader(
                             new InputStreamReader(System.in));
 
                     System.out.println("Write string (blank string for exit):");
-                    do {
-                        line = bufferedReader.readLine();
+                    line = bufferedReader.readLine();
+                    while (line.length() > 0) {
                         stringFacadeIF = StringFacadeBuilder.create(line);
                         System.out.println(stringFacadeIF.getSize() + " element(s):");
                         System.out.println("[");
@@ -143,7 +144,8 @@ public class Main {
                             System.out.println(stringFacadeIF.getValue(null, i));
                         }
                         System.out.println("]");
-                    } while (line.length() > 0);
+                        line = bufferedReader.readLine();
+                    }
                 } catch (IOException e) {
                     System.out.println(e.toString());
                 }
