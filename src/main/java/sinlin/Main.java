@@ -66,6 +66,7 @@ public class Main {
                 "-i file\n\tPath to input file (svg or xml).\n\n" +
                 "-d file\n\tPath to data file (.ods).\n\n" +
                 "-o file\n\tPath and begin of name of output file." +
+                "\n\t\"_out\" will add to end of file" +
                 "\n\tOutput file extension will the same, that root tag in source file." +
                 "\n\tIf this option is absent, then input file path " +
                 "\n\tand data filename (if present) and _out is used.\n\n" +
@@ -79,9 +80,7 @@ public class Main {
                 "\n\tPrint help.\n\n" +
                 "KNOWN BUGS\n\n" +
                 "1.From .ods files all data is taken only from first sheet.\n" +
-                "2.Exception thrown if \"-\" is used in attributes or texts\n" +
-                "except expression (e.g. \"$0;-1;-10\").\n\n" +
-                "See code at <https://github.com/step-artur87/sinlin> (Java, GPLv3),\n" +
+                "\nSee code at <https://github.com/step-artur87/sinlin> (Java, GPLv3),\n" +
                 "wiki at <https://github.com/step-artur87/sinlin/wiki> \n" +
                 "and binaries at <http://sourceforge.net/projects/sinlin/>.\n" +
                 "Twitter <https://twitter.com/sinlinSVG>.";
@@ -160,6 +159,7 @@ public class Main {
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
 
                 if (commandLine.hasOption("o")) {
+                    //!!if no _out added and no filename (only path) - not works
                     prefix = commandLine.getOptionValue("o") + "_out";
                 } else {
                     if (commandLine.hasOption("d")) {
