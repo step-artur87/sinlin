@@ -9,7 +9,8 @@ import java.util.StringTokenizer;
  * Time: 7:41 PM
  */
 public class StringFacadeBuilder {
-    private static final String OPERATORS = ".*[\\+\\-\\*/%^!#§&:~<>|=].*";
+    private static final String OPERATORS
+            = ".*[\\+\\-\\*/%^!#§&:~<>|=].*";//expression detection
 
     public static StringFacadeIF create(String string) {
         string = replaceAll(string);

@@ -37,8 +37,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class OdfData implements Data {//fixme one cell as range
     private SpreadsheetDocument document;
-    private List<Table> tableList;
-    private Map<String, ArrayList<String>> rows = new HashMap<>();
+    private List<Table> tableList;//sheats
+    private Map<String, ArrayList<String>> rows
+            = new HashMap<>();//<diapason_name, diapason_values_arrayList>
 
     public OdfData(String fileName) {
         try {

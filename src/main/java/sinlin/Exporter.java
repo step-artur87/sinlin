@@ -36,10 +36,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Time: 6:34 PM
  */
 public class Exporter {
-    private static final int WARNING_QUANTITY = 100;
-    private static final int yCharCode = 121;//charCode for "y"
-    private static int limit = -1;
-    private XMLStreamWriter last = null;
+    private static final int WARNING_QUANTITY
+            = 100;//if export more files then it - print question
+    private static final int yCharCode
+            = 121;//charCode for "y"
+    private static int limit
+            = -1;//number from option -m
+    private XMLStreamWriter last
+            = null;//when getXmlStreamWriter(), for last (if exist)
+    //writeEndDocument() an close()
 
     public static void setLimit(int limit) {
         if (limit > 0) {
@@ -51,7 +56,7 @@ public class Exporter {
 
     /**
      * Writes all exemplar of this tag
-     * and all his childTags recursively to files.
+     * and all his nodes recursively to files.
      * One file to exemplar
      * (exemplar is text, representing tag
      * with attribute - fn, replaced by fn value)

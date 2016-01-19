@@ -36,12 +36,15 @@ public class Tag {
     private static final String EXIST = "exist";
     private static final String ONENODE = "onenode";
     private String name;
-    private StringFacadeIF text = null;
-    private Map<String, StringFacadeIF> attributesMapFn = new HashMap<>();
-    private Map<String, StringFacadeIF> attributesMapFnExt = new HashMap<>();
-    private Map<String, StringFacadeIF> conMap = new HashMap<>();
-    private ArrayDeque<Tag> tagArrayDeque = new ArrayDeque<>();
-    private ArrayList<String> attributeNames = new ArrayList<>();
+    private StringFacadeIF text = null;//text of xml tag
+    private Map<String, StringFacadeIF> attributesMapFn
+            = new HashMap<>();//<attribute_name, attribute_value>
+    private Map<String, StringFacadeIF> attributesMapFnExt
+            = new HashMap<>();//<hidden: attribute_name, attribute_value>
+    private Map<String, StringFacadeIF> conMap
+            = new HashMap<>();//attributesMapFn + attributesMapFnExt
+    private ArrayDeque<Tag> tagArrayDeque = new ArrayDeque<>();//<nodes>
+    private ArrayList<String> attributeNames = new ArrayList<>();//todo #del
 
     public Tag(String name, Attributes attributes) {
         this.name = name;
@@ -108,7 +111,7 @@ public class Tag {
         return m;
     }
 
-    public void addChildTag(Tag tag) {
+    public void addNodeTag(Tag tag) {
         tagArrayDeque.add(tag);
     }
 
@@ -147,7 +150,7 @@ public class Tag {
         return attributesMapFnExt.containsKey(ONENODE);
     }
 
-    public ArrayList<String> getAttributeNames() {
+    public ArrayList<String> getAttributeNames() {//todo replace map.keySet
         return attributeNames;
     }
 

@@ -31,8 +31,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Time: 8:17 PM
  */
 public class TagHandler extends DefaultHandler {
-    private ArrayDeque<Tag> arrayDeque = new ArrayDeque<>();
-    private ArrayDeque<Tag> rootTagExoskeleton;
+    private ArrayDeque<Tag> arrayDeque
+            = new ArrayDeque<>();//tag buffer for creating tag tree
+    private ArrayDeque<Tag> rootTagExoskeleton;//todo #ref
 
     public TagHandler(ArrayDeque<Tag> rootTagExoskeleton) {
         this.rootTagExoskeleton = rootTagExoskeleton;
@@ -52,9 +53,9 @@ public class TagHandler extends DefaultHandler {
             throws SAXException {
         Tag tag = new Tag(qName, attributes);
 
-        //addChild
+        //addNode
         if (!arrayDeque.isEmpty()) {
-            arrayDeque.peek().addChildTag(tag);
+            arrayDeque.peek().addNodeTag(tag);
         }
 
         //push
