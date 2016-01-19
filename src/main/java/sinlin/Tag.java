@@ -43,8 +43,9 @@ public class Tag {
             = new HashMap<>();//<hidden: attribute_name, attribute_value>
     private Map<String, StringFacadeIF> conMap
             = new HashMap<>();//attributesMapFn + attributesMapFnExt
-    private ArrayDeque<Tag> tagArrayDeque = new ArrayDeque<>();//<nodes>
-    private ArrayList<String> attributeNames = new ArrayList<>();//todo #del
+    private ArrayDeque<Tag> nodes = new ArrayDeque<>();//<nodes>
+    private ArrayList<String> attributeNames
+            = new ArrayList<>();//used for save attr order
 
     public Tag(String name, Attributes attributes) {
         this.name = name;
@@ -71,7 +72,7 @@ public class Tag {
      *
      * @return size of attributesMapFn values.
      */
-    public int sizes() {//todo new map putAll, putAll
+    public int attrSizes() {//todo new map putAll, putAll
         int m = -1;
         if (conMap.isEmpty() && text == null) {
             return 0;
@@ -111,8 +112,40 @@ public class Tag {
         return m;
     }
 
+    public int nodeSizes() {//todo new map putAll, putAll
+        int m = -1;
+        if (nodes.isEmpty()) {
+            return attrSizes();
+        }
+        OptionalInt min = nodes.stream()
+                .mapToInt(Tag::attrSizes)
+                .filter((i) -> i > 1)
+                .min();
+        OptionalInt max = nodes.stream()
+                .mapToInt(Tag::attrSizes)
+                .max();
+
+        if (!min.isPresent()) {
+            m = 0;
+        } else if (min.equals(max) && (this.attrSizes() == min.getAsInt())) {
+            m = min.getAsInt();
+        }
+
+        if (m < 0) {
+            System.out.println("In tag \""
+                    + this.name
+                    + "\" (" + this.attrSizes() + ") nodes have not same sizes:");
+            nodes.forEach((t) -> System.out.println(t.getName()
+                    + " (" + t.attrSizes() + ")"));
+            System.out.println("Exit.");
+            System.exit(1);
+        }
+
+        return m;
+    }
+
     public void addNodeTag(Tag tag) {
-        tagArrayDeque.add(tag);
+        nodes.add(tag);
     }
 
     public String getName() {
@@ -129,8 +162,8 @@ public class Tag {
         return attributesMapFn;
     }
 
-    public ArrayDeque<Tag> getTagArrayDeque() {
-        return tagArrayDeque;
+    public ArrayDeque<Tag> getNodes() {
+        return nodes;
     }
 
     /**
@@ -150,7 +183,7 @@ public class Tag {
         return attributesMapFnExt.containsKey(ONENODE);
     }
 
-    public ArrayList<String> getAttributeNames() {//todo replace map.keySet
+    public ArrayList<String> getAttributeNames() {
         return attributeNames;
     }
 
@@ -165,6 +198,6 @@ public class Tag {
     }
 
     public boolean isEmpty() {
-        return tagArrayDeque.isEmpty() && text == null;
+        return nodes.isEmpty() && text == null;
     }
 }

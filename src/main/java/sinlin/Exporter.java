@@ -8,7 +8,6 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Map;
 
 /*
@@ -68,7 +67,7 @@ public class Exporter {
             String prefix,
             boolean toOutStream) {
         XMLStreamWriter current;
-        int n = tag.sizes();
+        int n = tag.attrSizes();
         String extension = tag.getName();
         if (limit >= 0 && limit < n) {
             n = limit;
@@ -124,7 +123,7 @@ public class Exporter {
             XMLStreamWriter xmlStreamWriter,
             Tag tag,
             int tabs) {
-        int n = tag.sizes();
+        int n = tag.attrSizes();
         if (limit >= 0 && limit < n) {
             n = limit;
         }
@@ -140,7 +139,6 @@ public class Exporter {
             XMLStreamWriter xmlStreamWriter,
             Tag tag,
             int n, int tabs) {
-        ArrayList<Tag> alt = new ArrayList(tag.getTagArrayDeque());
         String string;
         Map<String, StringFacadeIF> map;
         if (tag.isExemplarWritten(n)) {
@@ -176,26 +174,14 @@ public class Exporter {
                 }
 
                 if (!tag.oneNode()) {
-                    tag.getTagArrayDeque().stream().forEach(
+                    tag.getNodes().stream().forEach(
                             t -> writeAllXml(xmlStreamWriter, t, tabs + 1));
                 } else {
-                    if (tag.getTagArrayDeque().stream().filter(
-                            (t) -> t.sizes() != tag.sizes())
-                            .count() == 0) {
-                        tag.getTagArrayDeque().stream().forEach(
-                                t -> writeExemplarXML(xmlStreamWriter, t, n, tabs + 1));
-                    } else {
-                        System.out.println("Tag \""
-                                + tag.getName()
-                                + "\" ("
-                                + tag.sizes()
-                                + ") has node(s) with different sizes:");
-                        tag.getTagArrayDeque().forEach((t) -> {
-                            System.out.println(t.getName()
-                                    + " (" + t.sizes() + ")");
-                        });
-                        System.out.println("Exit");
-                        System.exit(1);
+                    if (tag.nodeSizes() > -1) {
+                        tag.getNodes().stream().forEach(
+                                t -> writeExemplarXML(
+                                        xmlStreamWriter,
+                                        t, n, tabs + 1));
                     }
                 }
 
