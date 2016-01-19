@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class Exporter {
     private static final int WARNING_QUANTITY = 100;
-    private static final int y = 121;
+    private static final int yCharCode = 121;//charCode for "y"
     private static int limit = -1;
     private XMLStreamWriter last = null;
 
@@ -72,7 +72,7 @@ public class Exporter {
             System.out.println("Write " + n + " files? y/n");
             try {
                 int yn = System.in.read();
-                if (yn != y) {
+                if (yn != yCharCode) {
                     System.out.println("Writing canceled. Exit.");
                     System.exit(0);
                 }
