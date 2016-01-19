@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Time: 12:45 AM
  */
 public class Main {
-    public static String version = "sinlin v0.1.1";
+    public static String version = "sinlin v0.2.0";
 
     public static void main(String[] args) {
         long t = System.currentTimeMillis();
