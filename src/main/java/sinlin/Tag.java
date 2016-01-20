@@ -32,8 +32,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class Tag {
     private static boolean debug = false;//write map..Ext
-    private static final String ZERO = "0";
     private static final String EXIST = "exist";
+    private static final String EXIST0 = "exist0";
     private static final String ONENODE = "onenode";
     private String name;
     private StringFacadeIF text = null;//text of xml tag
@@ -57,7 +57,7 @@ public class Tag {
             for (int i = 0; i < attributes.getLength(); i++) {
                 value = attributes.getValue(i);
                 qName = attributes.getQName(i);
-                if (qName.equals(EXIST) || qName.equals(ONENODE)) {//todo arrayList
+                if (qName.equals(EXIST) || qName.equals(EXIST0) || qName.equals(ONENODE)) {//todo arrayList (m.b. slow)
                     attributesMapFnExt.put(qName, StringFacadeBuilder.create(value));
                 } else {
                     attributesMapFn.put(qName, StringFacadeBuilder.create(value));
@@ -178,9 +178,27 @@ public class Tag {
      * @return true if this exemplar of tag has to be written
      */
     public boolean isExemplarWritten(int n) {
-        return !(attributesMapFnExt.containsKey(EXIST)
-                && ZERO.equals(attributesMapFnExt.get(EXIST)
-                .getValue(null, n)));
+        if (attributesMapFnExt.containsKey(EXIST0)) {
+            double d = 1;
+            String value = attributesMapFnExt.get(EXIST0)
+                    .getValue(null, n);
+            try {
+                d = Double.parseDouble(value);
+            } catch (NumberFormatException e) {
+//                System.out.println("In tag " + this.getName() //todo or not todo
+//                        + " " + EXIST0 + " value \"" + value
+//                        + "\" was not parsed and then not 0.");
+                d = 1;
+            }
+            return !(d == 0);
+        }
+
+        if (attributesMapFnExt.containsKey(EXIST)) {
+            return !(attributesMapFnExt.get(EXIST)
+                    .getValue(null, n).length() == 0);
+        }
+
+        return true;
     }
 
     public boolean oneNode() {
