@@ -79,6 +79,8 @@ public class Main {
                 "\n\tPrint version.\n\n" +
                 "-h" +
                 "\n\tPrint help.\n\n" +
+                "-b" +
+                "\n\tDebug. Exports also sinlin attributes (exist, onenode, etc).\n\n" +
                 "KNOWN BUGS\n\n" +
                 "1.From .ods files all data is taken only from first sheet.\n" +
                 "\nSee code at <https://github.com/step-artur87/sinlin> (Java, GPLv3),\n" +
@@ -100,6 +102,7 @@ public class Main {
         options.addOption("h", false, "help");
         options.addOption("g", false, "generate");
         options.addOption("m", true, "limit");
+        options.addOption("b", false, "debug");
 
         //there order of ifs is significant
         try {
@@ -153,6 +156,9 @@ public class Main {
             }
 
             if (commandLine.hasOption("i")) {
+                if (commandLine.hasOption("b")) {
+                    Tag.setDebug(true);
+                }
                 System.out.println("Before parsing time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 SaxParsing.parse(new TagHandler(rootTagExoskeleton),

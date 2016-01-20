@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Time: 6:55 PM
  */
 public class Tag {
-    private static final boolean DEBUG = false;//write map..Ext
+    private static boolean debug = false;//write map..Ext
     private static final String ZERO = "0";
     private static final String EXIST = "exist";
     private static final String ONENODE = "onenode";
@@ -46,6 +46,8 @@ public class Tag {
     private ArrayDeque<Tag> nodes = new ArrayDeque<>();//<nodes>
     private ArrayList<String> attributeNames
             = new ArrayList<>();//used for save attr order
+    private ArrayList<String> attributeNamesExt
+            = new ArrayList<>();//shown and hidden attributes
 
     public Tag(String name, Attributes attributes) {
         this.name = name;
@@ -62,8 +64,13 @@ public class Tag {
                     attributeNames.add(qName);
                 }
                 conMap.put(qName, StringFacadeBuilder.create(value));
+                attributeNamesExt.add(qName);
             }
         }
+    }
+
+    public static void setDebug(boolean debug) {
+        Tag.debug = debug;
     }
 
     /**
@@ -153,11 +160,8 @@ public class Tag {
     }
 
     public Map<String, StringFacadeIF> getStringFacadeMap() {
-        if (DEBUG) {
-            Map<String, StringFacadeIF> map = new HashMap<>();
-            map.putAll(attributesMapFn);
-            map.putAll(attributesMapFnExt);
-            return map;
+        if (debug) {
+            return conMap;
         }
         return attributesMapFn;
     }
@@ -184,6 +188,9 @@ public class Tag {
     }
 
     public ArrayList<String> getAttributeNames() {
+        if (debug) {
+            return attributeNamesExt;
+        }
         return attributeNames;
     }
 
