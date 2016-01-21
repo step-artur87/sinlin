@@ -44,6 +44,7 @@ public class Main {
 
     public static void main(String[] args) {
         long t = System.currentTimeMillis();
+        StringBuilder s;
         BufferedReader bufferedReader;
         String line;
         StringFacadeIF stringFacadeIF;
@@ -54,10 +55,6 @@ public class Main {
                 "This is free software: you are free to change and redistribute it.\n" +
                 "There is NO WARRANTY, to the extent permitted by law.\n\n" +
                 "Written by Artur Stepankevich.";
-/*
-                Copyright (C) 2015
-                Written by , see <http://git.  /tree/AUTHORS>.
-*/
 
         String help = "SYNOPSIS\n\n" +
                 "java -jar sinlin.jar [options].\n\n" +
@@ -74,6 +71,7 @@ public class Main {
                 "\tExport only number of first exemplars for each tag if one has more.\n\n" +
                 "-g\t" +
                 "\n\tGenerate data sequence from string." +
+                "\n\tSymbol \"$\" must be replaced by \"\\$\"." +
                 "\n\tWith option -d can get data from ods files.\n\n" +
                 "-V" +
                 "\n\tPrint version.\n\n" +
@@ -100,7 +98,7 @@ public class Main {
         options.addOption("o", true, "output");
         options.addOption("V", false, "version");
         options.addOption("h", false, "help");
-        options.addOption("g", false, "generate");
+        options.addOption("g", true, "generate");
         options.addOption("m", true, "limit");
         options.addOption("b", false, "debug");
 
@@ -133,26 +131,37 @@ public class Main {
             }
 
             if (commandLine.hasOption("g")) {
-                try {
-                    bufferedReader = new BufferedReader(
-                            new InputStreamReader(System.in));
-
-                    System.out.println("Write string (blank string for exit):");
-                    line = bufferedReader.readLine();
-                    while (line.length() > 0) {
-                        stringFacadeIF = StringFacadeBuilder.create(line);
-                        System.out.println(stringFacadeIF.getSize() + " element(s):");
-                        System.out.println("[");
-                        for (int i = 0; i < stringFacadeIF.getSize(); i++) {
-                            System.out.println(stringFacadeIF.getValue(null, i));
-                        }
-                        System.out.println("]");
-                        line = bufferedReader.readLine();
+                if (true) {//todo
+                    s = new StringBuilder();
+                    stringFacadeIF = StringFacadeBuilder.create(
+                            commandLine.getOptionValue("g"));
+                    for (int i = 0; i < stringFacadeIF.getSize(); i++) {
+                        s.append(stringFacadeIF.getValue(null, i)).append("\n");
                     }
-                } catch (IOException e) {
-                    System.out.println(e.toString());
+                    System.out.println(s);
+                    System.exit(0);
+                } else {//dialog mode
+                    try {
+                        bufferedReader = new BufferedReader(
+                                new InputStreamReader(System.in));
+
+                        System.out.println("Write string (blank string for exit):");
+                        line = bufferedReader.readLine();
+                        while (line.length() > 0) {
+                            stringFacadeIF = StringFacadeBuilder.create(line);
+                            System.out.println(stringFacadeIF.getSize() + " element(s):");
+                            System.out.println("[");
+                            for (int i = 0; i < stringFacadeIF.getSize(); i++) {
+                                System.out.println(stringFacadeIF.getValue(null, i));
+                            }
+                            System.out.println("]");
+                            line = bufferedReader.readLine();
+                        }
+                    } catch (IOException e) {
+                        System.out.println(e.toString());
+                    }
+                    System.exit(0);
                 }
-                System.exit(0);
             }
 
             if (commandLine.hasOption("i")) {

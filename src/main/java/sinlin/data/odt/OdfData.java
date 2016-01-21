@@ -35,6 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Date: 10/10/15
  * Time: 2:14 AM
  */
+
+//Get all rangenames of document is impossible
 public class OdfData implements Data {//fixme one cell as range
     private SpreadsheetDocument document;
     private List<Table> tableList;//sheats
