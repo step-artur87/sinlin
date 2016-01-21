@@ -44,7 +44,6 @@ public class Main {
 
     public static void main(String[] args) {
         long t = System.currentTimeMillis();
-        StringBuilder s;
         BufferedReader bufferedReader;
         String line;
         StringFacadeIF stringFacadeIF;
@@ -134,13 +133,12 @@ public class Main {
 
             if (commandLine.hasOption("g")) {
                 if (true) {//todo
-                    s = new StringBuilder();
                     stringFacadeIF = StringFacadeBuilder.create(
                             commandLine.getOptionValue("g"));
                     for (int i = 0; i < stringFacadeIF.getSize(); i++) {
-                        s.append(stringFacadeIF.getValue(null, i)).append("\n");
+                        //no concat all with "\n" because Windows EOL diffs
+                        System.out.println(stringFacadeIF.getValue(null, i));
                     }
-                    System.out.println(s);
                     System.exit(0);
                 } else {//dialog mode
                     try {
