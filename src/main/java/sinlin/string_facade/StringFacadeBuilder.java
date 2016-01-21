@@ -11,6 +11,25 @@ import java.util.StringTokenizer;
 public class StringFacadeBuilder {
     private static final String OPERATORS
             = ".*[\\+\\-\\*/%^!#§&:~<>|=].*";//expression detection
+    private static final String FUNC
+            = ".*(abs\\(" +
+            "|acos\\(" +
+            "|asin\\(" +
+            "|atan\\(" +
+            "|cbrt\\(" +
+            "|ceil\\(" +
+            "|cos\\(" +
+            "|cosh\\(" +
+            "|exp\\(" +
+            "|floor\\(" +
+            "|log\\(" +
+            "|log10\\(" +
+            "|log2\\(" +
+            "|sin\\(" +
+            "|sinh\\(" +
+            "|sqrt\\(" +
+            "|tan\\(" +
+            "|tanh).*";
 
     public static StringFacadeIF create(String string) {
         string = replaceAll(string);
@@ -30,7 +49,7 @@ public class StringFacadeBuilder {
         if (clearedString.contains(StringFacadeIF.DELIM_CYCLE)) {
             return new CycleString(string);
         }
-        if (clearedString.matches(OPERATORS)) {
+        if (clearedString.matches(OPERATORS) || clearedString.matches(FUNC)) {
             return new Expr(string);
         }
         if (clearedString.contains(StringFacadeIF.DELIM_VAR)) {
