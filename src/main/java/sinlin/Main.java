@@ -80,8 +80,6 @@ public class Main {
                 "\n\tDebug. Exports also sinlin attributes (exist, onenode, etc).\n\n" +
                 "KNOWN BUGS\n\n" +
                 "1.From .ods files all data is taken only from first sheet.\n" +
-                "2.Text within \"[]\" is always range name. If no, then in it must be \",\".\n" +
-                "\tE.g. \"$log([range])\"; \"$log([10.3,])\" instead of \"$log([10.3])\"\n" +
                 "\nSee code at <https://github.com/step-artur87/sinlin> (Java, GPLv3),\n" +
                 "wiki at <https://github.com/step-artur87/sinlin/wiki> \n" +
                 "and binaries at <http://sourceforge.net/projects/sinlin/>.\n" +
