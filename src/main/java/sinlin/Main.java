@@ -78,7 +78,7 @@ public class Main {
                 "\n\tPrint help.\n\n" +
                 "-b" +
                 "\n\tDebug. Exports also sinlin attributes (exist, onenode, etc).\n\n" +
-                "KNOWN BUGS\n\n" +
+                "BIGGEST KNOWN BUGS\n\n" +
                 "1.From .ods files all data is taken only from first sheet.\n" +
                 "\nSee code at <https://github.com/step-artur87/sinlin> (Java, GPLv3),\n" +
                 "wiki at <https://github.com/step-artur87/sinlin/wiki> \n" +
