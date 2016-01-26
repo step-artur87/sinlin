@@ -40,11 +40,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Time: 12:45 AM
  */
 
-/*
-Other bugs:
-1. range of one cell not works
-2. "$1,  , 1, , " not works
-*/
 public class Main {
     public static String version = "sinlin v0.2.0";
 
