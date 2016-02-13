@@ -63,6 +63,7 @@ public class OdfData implements Data {//fixme one cell as range
             stringArrayList = new ArrayList<>();
             CellRange cellRange;
             int rowNumber;
+            int columnNumber;
             //Bug all <table>.cellRange get cells from <table>
             //if it has place on other
             cellRange = tableList.get(0).getCellRangeByName(name);
@@ -75,10 +76,13 @@ public class OdfData implements Data {//fixme one cell as range
                 System.exit(1);
             }
             rowNumber = cellRange.getRowNumber();
-            for (int i = 0; i < rowNumber; i++) {
-                stringArrayList.add(
-                        cellRange.getCellByPosition(0, i)
-                                .getDisplayText());
+            columnNumber = cellRange.getColumnNumber();
+            for (int i = 0; i < columnNumber; i++) {
+                for (int j = 0; j < rowNumber; j++) {
+                    stringArrayList.add(
+                            cellRange.getCellByPosition(i, j)
+                                    .getDisplayText());
+                }
             }
             rows.put(name, stringArrayList);
         }
