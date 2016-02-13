@@ -50,6 +50,8 @@ public class Main {
     public static String version = "sinlin v0.2.0";
 
     public static void main(String[] args) {
+        boolean toOutStream = false;
+        boolean silent = false;
         long t = System.currentTimeMillis();
         BufferedReader bufferedReader;
         String line;
@@ -73,6 +75,9 @@ public class Main {
                 "\n\tOutput file extension will the same, that root tag in source file." +
                 "\n\tIf this option is absent, then input file path " +
                 "\n\tand data filename (if present) and _out is used.\n\n" +
+                "-p\n" +
+                "--print\n\tExport to System.out. Option -o ignored\n" +
+                "\tTimes not prints.\n\n" +
                 "-m number\n" +
                 "\tExport only number of first exemplars for each tag if one has more.\n\n" +
                 "-g\t" +
@@ -107,8 +112,11 @@ public class Main {
         options.addOption("g", true, "generate");
         options.addOption("m", true, "limit");
         options.addOption("b", false, "debug");
+        options.addOption("b", false, "debug");
+        options.addOption("p", "print", false, "print");
 
         //there order of ifs is significant
+        //todo organize flow
         try {
             commandLine = (new DefaultParser()).parse(options, args);
 
@@ -127,12 +135,17 @@ public class Main {
                 System.exit(0);
             }
 
+            if (commandLine.hasOption("p")) {
+                toOutStream = true;
+                silent = true;
+            }
+
             if (commandLine.hasOption("d")) {
-                System.out.println("Before data received time = "
+                if (!silent) System.out.println("Before data received time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 data = new OdfData(commandLine.getOptionValue("d"));
                 Fn.setData(data);
-                System.out.println("After data received time = "
+                if (!silent) System.out.println("After data received time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
             }
 
@@ -173,11 +186,11 @@ public class Main {
                 if (commandLine.hasOption("b")) {
                     Tag.setDebug(true);
                 }
-                System.out.println("Before parsing time = "
+                if (!silent) System.out.println("Before parsing time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 SaxParsing.parse(new TagHandler(rootTagExoskeleton),
                         commandLine.getOptionValue("i"));
-                System.out.println("After parsing time = "
+                if (!silent) System.out.println("After parsing time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
 
                 if (commandLine.hasOption("o")) {
@@ -199,12 +212,12 @@ public class Main {
                     Exporter.setLimit(Integer.parseInt(commandLine.getOptionValue("m")));
                 }
 
-                System.out.println("Before export time = "
+                if (!silent) System.out.println("Before export time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 Exporter exporter = new Exporter();
                 Tag r = rootTagExoskeleton.getFirst();
-                exporter.writeAllXml(r, prefix, false);
-                System.out.println("After export time  = "
+                exporter.writeAllXml(r, prefix, toOutStream);
+                if (!silent) System.out.println("After export time  = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 System.exit(0);
             }
