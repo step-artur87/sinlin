@@ -42,7 +42,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /*
 Other bugs:
-1. range of one cell not works
 2. "$1,  , 1, , " not works
 */
 
@@ -92,6 +91,7 @@ public class Main {
                 "\n\tDebug. Exports also sinlin attributes (exist, onenode, etc).\n\n" +
                 "BIGGEST KNOWN BUGS\n\n" +  //program has littler bugs
                 "1.From .ods files all data is taken only from first sheet.\n" +
+                "2.Error when get range with one cell from .ods files.\n" +
                 "\nSee code at <https://github.com/step-artur87/sinlin> (Java, GPLv3),\n" +
                 "wiki at <https://github.com/step-artur87/sinlin/wiki> \n" +
                 "and binaries at <http://sourceforge.net/projects/sinlin/>.\n" +
