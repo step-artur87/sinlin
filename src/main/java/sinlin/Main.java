@@ -211,7 +211,7 @@ public class Main {
                 }
 
                 if (commandLine.hasOption("m")) {//todo change -o if nas -m
-                    Exporter.setLimit(Integer.parseInt(commandLine.getOptionValue("m")));
+                    exporter.setLimit(Integer.parseInt(commandLine.getOptionValue("m")));
                 }
 
                 if (!silent) System.out.println("Before export time = "

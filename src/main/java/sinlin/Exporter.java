@@ -40,7 +40,7 @@ public class Exporter {
             = 100;//if export more files then it - print question
     private static final int yCharCode
             = 121;//charCode for "y"
-    private static int limit
+    private int limit
             = -1;//number from option -m
     private XMLStreamWriter last
             = null;//when getXmlStreamWriter(), for last (if exist)
@@ -48,9 +48,9 @@ public class Exporter {
 
     private ArrayList<String> path = new ArrayList<>();
 
-    public static void setLimit(int limit) {
+    public void setLimit(int limit) {
         if (limit > 0) {
-            Exporter.limit = limit;
+            this.limit = limit;
         } else {
             System.out.println("Limit (" + limit + ") must be > 0.");
         }
