@@ -106,9 +106,10 @@ public class Tag {
             }
         }
         if (m < 0) {
-            System.out.println("In tag \""
-                    + this.name + "\" attributes have not same sizes:");
-            conMap.forEach((s, sf) -> System.out.println(s + " = " + sf.getName() + " (" + sf.getSize() + ")"));
+            printErrorInPath();
+            System.out.println("In tag "
+                    + this.getNameWithAttr() + " attributes have not same sizes:");
+            conMap.forEach((s, sf) -> System.out.println("\t" + s + " = " + sf.getName() + " (" + sf.getSize() + ")"));
             if (this.text != null) {
                 System.out.println(text.getName() + " (" + text.getSize() + ")");
             }
@@ -139,15 +140,11 @@ public class Tag {
         }
 
         if (m < 0) {
-            System.out.print("Error in path: ");
-            Exporter.getPath().forEach((s) -> {
-                System.out.print("<" + s.getName() + ">");
-            });
-            System.out.println();
-            System.out.println("In tag \""
-                    + this.name
-                    + "\" (" + this.attrSizes() + ") nodes have not same sizes:");
-            nodes.forEach((t) -> System.out.println(t.getName()
+            printErrorInPath();
+            System.out.println("In tag "
+                    + this.getNameWithAttr()
+                    + " (" + this.attrSizes() + ") nodes have not same sizes:");
+            nodes.forEach((t) -> System.out.println("\t" + t.getNameWithAttr()
                     + " (" + t.attrSizes() + ")"));
             System.out.println("Exit.");
             System.exit(1);
@@ -156,11 +153,19 @@ public class Tag {
         return m;
     }
 
+    private void printErrorInPath() {
+        System.out.print("Error in path: ");
+        Exporter.getPath().forEach((s) -> {
+            System.out.print(s.getNameWithAttr());
+        });
+        System.out.println();
+    }
+
     public void addNodeTag(Tag tag) {
         nodes.add(tag);
     }
 
-    public String getName() {
+    public String getName() {//todo replage with getNameWithAttr
         return name;
     }
 
@@ -229,5 +234,16 @@ public class Tag {
 
     public boolean isEmpty() {
         return nodes.isEmpty() && text == null;
+    }
+
+    public String getNameWithAttr() {//todo replace by it code in exporter (? "<" and ">")
+        StringBuilder s = new StringBuilder("<");
+        s.append(this.getName());
+        for (String s1 : attributeNamesExt) {
+            s.append(" ").append(s1).append("=\"").append(conMap.get(s1).getName()).append("\"");
+        }
+        s.append(">");
+
+        return s.toString();
     }
 }
