@@ -46,7 +46,7 @@ public class Exporter {
             = null;//when getXmlStreamWriter(), for last (if exist)
     //writeEndDocument() an close()
 
-    private ArrayList<String> path = new ArrayList<>();
+    private static ArrayList<Tag> path = new ArrayList<>();
 
     public void setLimit(int limit) {
         if (limit > 0) {
@@ -142,9 +142,7 @@ public class Exporter {
             XMLStreamWriter xmlStreamWriter,
             Tag tag,
             int n, int tabs) {
-        getPath().add(tag.getName());
-        getPath().forEach(System.out::print);
-        System.out.println();
+        path.add(tag);
         String string;
         Map<String, StringFacadeIF> map;
         if (tag.isExemplarWritten(n)) {
@@ -263,7 +261,7 @@ public class Exporter {
         return last;
     }
 
-    public ArrayList<String> getPath() {
+    public static ArrayList<Tag> getPath() {
         return path;
     }
 }

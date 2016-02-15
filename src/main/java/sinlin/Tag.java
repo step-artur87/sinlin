@@ -139,6 +139,11 @@ public class Tag {
         }
 
         if (m < 0) {
+            System.out.print("Error in path: ");
+            Exporter.getPath().forEach((s) -> {
+                System.out.print("<" + s.getName() + ">");
+            });
+            System.out.println();
             System.out.println("In tag \""
                     + this.name
                     + "\" (" + this.attrSizes() + ") nodes have not same sizes:");
