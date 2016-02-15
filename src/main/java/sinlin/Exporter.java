@@ -8,6 +8,7 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 /*
@@ -44,6 +45,8 @@ public class Exporter {
     private XMLStreamWriter last
             = null;//when getXmlStreamWriter(), for last (if exist)
     //writeEndDocument() an close()
+
+    private ArrayList<String> path = new ArrayList<>();
 
     public static void setLimit(int limit) {
         if (limit > 0) {
@@ -139,6 +142,9 @@ public class Exporter {
             XMLStreamWriter xmlStreamWriter,
             Tag tag,
             int n, int tabs) {
+        getPath().add(tag.getName());
+        getPath().forEach(System.out::print);
+        System.out.println();
         String string;
         Map<String, StringFacadeIF> map;
         if (tag.isExemplarWritten(n)) {
@@ -201,6 +207,7 @@ public class Exporter {
                 System.exit(1);
             }
         }
+        getPath().remove(getPath().size() - 1);
     }
 
     private static void tabs(
@@ -254,5 +261,9 @@ public class Exporter {
             System.exit(1);
         }
         return last;
+    }
+
+    public ArrayList<String> getPath() {
+        return path;
     }
 }
