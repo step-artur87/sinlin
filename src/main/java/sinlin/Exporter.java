@@ -186,8 +186,10 @@ public class Exporter {
                 }
 
                 if (tag.getText() != null) {
+                    tabs(xmlStreamWriter, tabs + 1);
                     xmlStreamWriter.writeCharacters(
                             tag.getText().getValue(null, n));
+                    xmlStreamWriter.writeCharacters("\n");
                 }
                 if (!tag.isEmpty()) {
                     tabs(xmlStreamWriter, tabs);
