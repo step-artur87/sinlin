@@ -141,11 +141,11 @@ public class Main {
             }
 
             if (commandLine.hasOption("d")) {
-                if (!silent) System.out.println("Before data received time = "
+                if (!silent) System.out.println("Before data load time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 data = new OdfData(commandLine.getOptionValue("d"));
                 Fn.setData(data);
-                if (!silent) System.out.println("After data received time = "
+                if (!silent) System.out.println("After data load time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
             }
 
