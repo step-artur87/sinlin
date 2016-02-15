@@ -55,6 +55,8 @@ public class Main {
         BufferedReader bufferedReader;
         String line;
         StringFacadeIF stringFacadeIF;
+        Exporter exporter = new Exporter();
+
         String[] d;
 
         String versionWithLicense = version + "\n" +
@@ -214,7 +216,6 @@ public class Main {
 
                 if (!silent) System.out.println("Before export time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
-                Exporter exporter = new Exporter();
                 Tag r = rootTagExoskeleton.getFirst();
                 exporter.writeAllXml(r, prefix, toOutStream);
                 if (!silent) System.out.println("After export time  = "
