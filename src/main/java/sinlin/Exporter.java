@@ -109,9 +109,10 @@ public class Exporter {
                 }
             } else {
                 for (int i = 0; i < n; i++) {
+                    //todo not number, but generated attributes
                     current = getXmlStreamWriter(
                             prefix
-                                    + " "
+                                    + "__"
                                     + Integer.toString(i) + "." + extension);
                     writeExemplarXML(
                             current,
