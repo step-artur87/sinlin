@@ -46,7 +46,8 @@ public class Exporter {
             = null;//when getXmlStreamWriter(), for last (if exist)
     //writeEndDocument() an close()
 
-    private static ArrayList<Tag> path = new ArrayList<>();
+    private static ArrayList<Tag> path
+            = new ArrayList<>();//all parents of exported now tag
 
     public void setLimit(int limit) {
         if (limit > 0) {
@@ -72,9 +73,14 @@ public class Exporter {
         XMLStreamWriter current;
         int n = tag.attrSizes();
         String extension = tag.getName();
+
+        //if tag size > m, _trim it_
         if (limit >= 0 && limit < n) {
             n = limit;
         }
+
+        //if tag size > WARNING_QUANTITY, ask user.
+        //This tag is root tag of export, so quantity of files equals to its size
         if (n > WARNING_QUANTITY) {
             System.out.println("Write " + n + " files? y/n");
             try {
@@ -87,12 +93,16 @@ public class Exporter {
                 System.out.println(e.toString());
             }
         }
+
+        //if must be one file, export it
         if (n == 0) {
+            //if to out, print
             if (toOutStream) {
                 writeExemplarXML(
                         getXmlStreamWriter(null),
                         tag, 0, 0);
             } else {
+                //if to file, export
                 current = getXmlStreamWriter(
                         prefix + "." + extension);
                 writeExemplarXML(
@@ -100,7 +110,9 @@ public class Exporter {
                         tag, 0, 0);
                 writeVersion(current);
             }
+            //if files many,
         } else {
+            //if to out,print all
             if (toOutStream) {
                 for (int i = 0; i < n; i++) {
                     writeExemplarXML(
@@ -108,6 +120,7 @@ public class Exporter {
                             tag, i, 0);
                 }
             } else {
+                //if to files, export all appended with __[№]
                 for (int i = 0; i < n; i++) {
                     //todo not number, but generated attributes
                     current = getXmlStreamWriter(
@@ -128,13 +141,17 @@ public class Exporter {
             Tag tag,
             int tabs) {
         int n = tag.attrSizes();
+        //if tag size > m, _trim it_
+
         if (limit >= 0 && limit < n) {
             n = limit;
         }
+
+        //export i-th exemplar
         for (int i = 0; i < n; i++) {
             writeExemplarXML(xmlStreamWriter, tag, i, tabs);
         }
-        if (n == 0) {
+        if (n == 0) {//fixme tag.attrSizes() must be >=1
             writeExemplarXML(xmlStreamWriter, tag, 0, tabs);
         }
     }
@@ -143,15 +160,26 @@ public class Exporter {
             XMLStreamWriter xmlStreamWriter,
             Tag tag,
             int n, int tabs) {
-        path.add(tag);
         String string;
         Map<String, StringFacadeIF> map;
+
+        //add this tag to end of path
+        path.add(tag);
+
+        //filtr exemplar by EXIST, EXIST0, ONENODE (and m.b. something else in future)
         if (tag.isExemplarWritten(n)) {
             map = tag.getStringFacadeMap();
+
             try {
+                //"\t" * tabs
                 tabs(xmlStreamWriter, tabs);
+
+                //<tag>
                 xmlStreamWriter.writeStartElement(
                         tag.getName());
+
+                //replace attr with "..." by same without dots d and vice versa
+                //and export it
                 for (String s : tag.getAttributeNames()) {
                     if (s.endsWith("...")) {
                         string = s.replace("...", "");
@@ -174,15 +202,17 @@ public class Exporter {
                     }
                 }
 
+                //if not <tag></tag>, \n
                 if (!tag.isEmpty()) {
                     xmlStreamWriter.writeCharacters("\n");
                 }
 
+                //export nodes with "\t" * (tabs + 1)
                 if (!tag.oneNode()) {
                     tag.getNodes().stream().forEach(
                             t -> writeAllXml(xmlStreamWriter, t, tabs + 1));
                 } else {
-                    if (tag.nodeSizes() > -1) {
+                    if (tag.nodeSizes() > -1) {//fixme, because tag.nodeSizes() can not return -1
                         tag.getNodes().stream().forEach(
                                 t -> writeExemplarXML(
                                         xmlStreamWriter,
@@ -190,22 +220,32 @@ public class Exporter {
                     }
                 }
 
+                //text
                 if (tag.getText() != null) {
                     tabs(xmlStreamWriter, tabs + 1);
                     xmlStreamWriter.writeCharacters(
                             tag.getText().getValue(null, n));
                     xmlStreamWriter.writeCharacters("\n");
                 }
+
+                //if not <tag></tag>, "\t" * (tabs)
                 if (!tag.isEmpty()) {
                     tabs(xmlStreamWriter, tabs);
                 }
+                //</tag>
                 xmlStreamWriter.writeEndElement();
+
+                //\n
                 xmlStreamWriter.writeCharacters("\n");
+
+                //print only exception name, not stackTrace (if catch this exception)
             } catch (XMLStreamException e) {
                 System.out.println(e.toString());
                 System.exit(1);
             }
         }
+
+        //remove this tag from path
         getPath().remove(getPath().size() - 1);
     }
 
@@ -217,6 +257,7 @@ public class Exporter {
         }
     }
 
+    //todo inline (lambdas apsend)
     private void catchingWriteAttribute(
             XMLStreamWriter xmlStreamWriter,
             String k, String v) {
@@ -236,6 +277,7 @@ public class Exporter {
         }
     }
 
+    //todo comments
     private XMLStreamWriter getXmlStreamWriter(
             String fileName) {
         try {
