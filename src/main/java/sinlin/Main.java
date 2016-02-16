@@ -49,8 +49,8 @@ public class Main {
     public static String version = "sinlin v0.2.0";
 
     public static void main(String[] args) {
-        boolean toOutStream = false;
-        boolean silent = false;
+        boolean toOutStream = false;//use System.out if true and file otherwise
+        boolean silent = false;//no times out
         long t = System.currentTimeMillis();
         BufferedReader bufferedReader;
         String line;
@@ -105,6 +105,8 @@ public class Main {
 
         Data data;
         ArrayDeque<Tag> rootTagExoskeleton = new ArrayDeque<>();
+
+        //define options
         Options options = new Options();
         options.addOption("i", true, "input");
         options.addOption("d", true, "data");
@@ -122,26 +124,31 @@ public class Main {
         try {
             commandLine = (new DefaultParser()).parse(options, args);
 
+            //if no argument, print help and exit
             if (commandLine.getOptions().length == 0) {
                 System.out.println(help);
                 System.exit(0);
             }
 
+            //print version and exit
             if (commandLine.hasOption("V")) {
                 System.out.println(versionWithLicense);
                 System.exit(0);
             }
 
+            //print help and exit
             if (commandLine.hasOption("h")) {
                 System.out.println(help);
                 System.exit(0);
             }
 
+            //set output stream to System.out
             if (commandLine.hasOption("p")) {
                 toOutStream = true;
                 silent = true;
             }
 
+            //if defined data file, load it
             if (commandLine.hasOption("d")) {
                 if (!silent) System.out.println("Before data load time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
@@ -151,6 +158,7 @@ public class Main {
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
             }
 
+            //if generate mode, print needed and exit
             if (commandLine.hasOption("g")) {
                 if (true) {//todo
                     stringFacadeIF = StringFacadeBuilder.create(
@@ -184,10 +192,15 @@ public class Main {
                 }
             }
 
+            //if normal mode, do needed
             if (commandLine.hasOption("i")) {
+
+                //if debug, set it
                 if (commandLine.hasOption("b")) {
                     Tag.setDebug(true);
                 }
+
+                //parse input file
                 if (!silent) System.out.println("Before parsing time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 SaxParsing.parse(new TagHandler(rootTagExoskeleton),
@@ -195,6 +208,7 @@ public class Main {
                 if (!silent) System.out.println("After parsing time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
 
+                //define prefix
                 if (commandLine.hasOption("o")) {
                     //!!if no _out added and no filename (only path) - not works
                     prefix = commandLine.getOptionValue("o") + "_out";
@@ -210,10 +224,12 @@ public class Main {
                     }
                 }
 
+                //if defined max export exemplar count , set it
                 if (commandLine.hasOption("m")) {//todo change -o if nas -m
                     exporter.setLimit(Integer.parseInt(commandLine.getOptionValue("m")));
                 }
 
+                //export and exit
                 if (!silent) System.out.println("Before export time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 Tag r = rootTagExoskeleton.getFirst();
@@ -223,8 +239,10 @@ public class Main {
                 System.exit(0);
             }
 
+            //if undefined argument combination print help (end of main)
             System.out.println(help);
 
+            //print only exception name, not stackTrace (if these exception)
         } catch (ParseException | NumberFormatException e) {
             System.out.println(e.toString());
         }
