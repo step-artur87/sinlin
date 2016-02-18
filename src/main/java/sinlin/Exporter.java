@@ -184,7 +184,7 @@ public class Exporter {
                     if (s.endsWith("...")) {
                         string = s.replace("...", "");
                         if (tag.getAttributeNames().contains(string)) {
-                            catchingWriteAttribute(xmlStreamWriter, string,
+                            xmlStreamWriter.writeAttribute(string,
                                     map.get(s).getValue(null, n));
                         } else {
                             System.out.println("\"" + s + "\" has not pair. Exit");
@@ -193,10 +193,10 @@ public class Exporter {
                     } else {
                         string = s.concat("...");
                         if (tag.getAttributeNames().contains(string)) {
-                            catchingWriteAttribute(xmlStreamWriter, string,
+                            xmlStreamWriter.writeAttribute(string,
                                     map.get(s).getValue(null, n));
                         } else {
-                            catchingWriteAttribute(xmlStreamWriter, s,
+                            xmlStreamWriter.writeAttribute(s,
                                     map.get(s).getValue(null, n));
                         }
                     }
@@ -257,18 +257,6 @@ public class Exporter {
         }
     }
 
-    //todo inline (lambdas apsend)
-    private void catchingWriteAttribute(
-            XMLStreamWriter xmlStreamWriter,
-            String k, String v) {
-        try {
-            xmlStreamWriter.writeAttribute(k, v);
-        } catch (XMLStreamException e) {
-            System.out.println(e.toString());
-            System.exit(1);
-        }
-    }
-
     private void writeVersion(XMLStreamWriter current) {
         try {
             current.writeComment(Main.version);
@@ -277,7 +265,6 @@ public class Exporter {
         }
     }
 
-    //todo comments
     private XMLStreamWriter getXmlStreamWriter(
             String fileName) {
         try {
