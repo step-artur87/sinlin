@@ -82,7 +82,8 @@ public class Tag {
     public int attrSizes() {//todo new map putAll, putAll
         int m = -1;
         if (conMap.isEmpty() && text == null) {
-            return 0;
+            //tag without attributes and text exported one time
+            return 1;
         }
         OptionalInt min = conMap.values().stream()
                 .mapToInt(StringFacadeIF::getSize)
@@ -93,7 +94,8 @@ public class Tag {
                 .max();
 
         if (!min.isPresent()) {
-            m = 0;
+            //tag without attributes and text exported one time
+            m = 1;
         } else if (min.equals(max)) {
             m = min.getAsInt();
         }
@@ -134,7 +136,8 @@ public class Tag {
                 .max();
 
         if (!min.isPresent()) {
-            m = 0;
+            //tag without nodes exported one time
+            m = 1;
         } else if (min.equals(max) && (this.attrSizes() == min.getAsInt())) {
             m = min.getAsInt();
         }

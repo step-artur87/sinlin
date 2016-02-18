@@ -212,7 +212,7 @@ public class Exporter {
                     tag.getNodes().stream().forEach(
                             t -> writeAllXml(xmlStreamWriter, t, tabs + 1));
                 } else {
-                    if (tag.nodeSizes() > -1) {//fixme, because tag.nodeSizes() can not return -1
+                    if (tag.nodeSizes() > -1) {
                         tag.getNodes().stream().forEach(
                                 t -> writeExemplarXML(
                                         xmlStreamWriter,
