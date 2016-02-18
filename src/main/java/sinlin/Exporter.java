@@ -253,12 +253,14 @@ public class Exporter {
             XMLStreamWriter xmlStreamWriter,
             int tabs) throws XMLStreamException {
         for (int i = 0; i < tabs; i++) {
+            //write one tab
             xmlStreamWriter.writeCharacters("\t");
         }
     }
 
     private void writeVersion(XMLStreamWriter current) {
         try {
+            //write "sinlin vx.x.x" in end of docement
             current.writeComment(Main.version);
         } catch (XMLStreamException e) {
             System.out.println(e.toString());
@@ -268,14 +270,19 @@ public class Exporter {
     private XMLStreamWriter getXmlStreamWriter(
             String fileName) {
         try {
+
+            // if for some XMLStreamWriter was run writeStartDocument,
+            //run writeEndDocument and close it
             if (last != null) {
                 last.writeEndDocument();
                 last.close();
             }
 
+            //if..., create XMLStreamWriter to out
             if (fileName == null) {
                 last = XMLOutputFactory.newInstance()
                         .createXMLStreamWriter(System.out);
+                //else, create XMLStreamWriter to file
             } else {
                 last = XMLOutputFactory.newInstance()
                         .createXMLStreamWriter(
