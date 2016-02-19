@@ -122,7 +122,6 @@ public class Exporter {
             } else {
                 //if to files, export all appended with __[№]
                 for (int i = 0; i < n; i++) {
-                    //todo not number, but generated attributes
                     current = getXmlStreamWriter(
                             prefix
                                     + "__("
