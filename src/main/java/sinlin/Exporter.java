@@ -151,9 +151,6 @@ public class Exporter {
         for (int i = 0; i < n; i++) {
             writeExemplarXML(xmlStreamWriter, tag, i, tabs);
         }
-        if (n == 0) {//fixme tag.attrSizes() must be >=1
-            writeExemplarXML(xmlStreamWriter, tag, 0, tabs);
-        }
     }
 
     private void writeExemplarXML(
