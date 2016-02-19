@@ -125,8 +125,9 @@ public class Exporter {
                     //todo not number, but generated attributes
                     current = getXmlStreamWriter(
                             prefix
-                                    + "__"
-                                    + Integer.toString(i) + "." + extension);
+                                    + "__("
+                                    + tag.getNameWithAttr(i)
+                                    .replace(" ", "_") + ")." + extension);
                     writeExemplarXML(
                             current,
                             tag, i, 0);

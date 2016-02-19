@@ -246,4 +246,13 @@ public class Tag {
         }
         return s.toString();
     }
+
+    public String getNameWithAttr(int n) {
+        StringBuilder s = new StringBuilder(this.getName());
+        for (String s1 : attributeNamesExt) {
+            s.append(" ").append(s1).append("=\"").append(conMap.get(s1).getValue(null, n)).append("\"");
+        }
+        return s.toString();
+    }
+
 }
