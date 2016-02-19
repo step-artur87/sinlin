@@ -95,7 +95,7 @@ public class Exporter {
         }
 
         //if must be one file, export it
-        if (n == 0) {
+        if (n <= 1) {
             //if to out, print
             if (toOutStream) {
                 writeExemplarXML(
