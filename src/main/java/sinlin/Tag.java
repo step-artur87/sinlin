@@ -109,8 +109,8 @@ public class Tag {
         }
         if (m < 0) {
             printErrorInPath();
-            System.out.println("In tag "
-                    + this.getNameWithAttr() + " attributes have not same sizes:");
+            System.out.println("In tag <"
+                    + this.getNameWithAttr() + "> attributes have not same sizes:");//todo (n)
             conMap.forEach((s, sf) -> System.out.println("\t" + s + " = " + sf.getName() + " (" + sf.getSize() + ")"));
             if (this.text != null) {
                 System.out.println(text.getName() + " (" + text.getSize() + ")");
@@ -144,11 +144,11 @@ public class Tag {
 
         if (m < 0) {
             printErrorInPath();
-            System.out.println("In tag "
+            System.out.println("In tag <"
                     + this.getNameWithAttr()
-                    + " (" + this.attrSizes() + ") nodes have not same sizes:");
-            nodes.forEach((t) -> System.out.println("\t" + t.getNameWithAttr()
-                    + " (" + t.attrSizes() + ")"));
+                    + "> (" + this.attrSizes() + ") nodes have not same sizes:");
+            nodes.forEach((t) -> System.out.println("\t<" + t.getNameWithAttr()
+                    + "> (" + t.attrSizes() + ")"));
             System.out.println("Exit.");
             System.exit(1);
         }
@@ -159,7 +159,7 @@ public class Tag {
     private void printErrorInPath() {
         System.out.print("Error in path: ");
         Exporter.getPath().forEach((s) -> {
-            System.out.print(s.getNameWithAttr());
+            System.out.print("<" + s.getNameWithAttr() + ">");
         });
         System.out.println();
     }
@@ -239,14 +239,11 @@ public class Tag {
         return nodes.isEmpty() && text == null;
     }
 
-    public String getNameWithAttr() {//todo replace by it code in exporter (? "<" and ">")
-        StringBuilder s = new StringBuilder("<");
-        s.append(this.getName());
+    public String getNameWithAttr() {
+        StringBuilder s = new StringBuilder(this.getName());
         for (String s1 : attributeNamesExt) {
             s.append(" ").append(s1).append("=\"").append(conMap.get(s1).getName()).append("\"");
         }
-        s.append(">");
-
         return s.toString();
     }
 }
