@@ -11,8 +11,6 @@ import sinlin.string_facade.StringFacadeBuilder;
 import sinlin.string_facade.StringFacadeIF;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 
 /*
@@ -160,36 +158,13 @@ public class Main {
 
             //if generate mode, print needed and exit
             if (commandLine.hasOption("g")) {
-                if (true) {//todo
-                    stringFacadeIF = StringFacadeBuilder.create(
-                            commandLine.getOptionValue("g"));
-                    for (int i = 0; i < stringFacadeIF.getSize(); i++) {
-                        //no concat all with "\n" because Windows EOL diffs
-                        System.out.println(stringFacadeIF.getValue(null, i));
-                    }
-                    System.exit(0);
-                } else {//dialog mode
-                    try {
-                        bufferedReader = new BufferedReader(
-                                new InputStreamReader(System.in));
-
-                        System.out.println("Write string (blank string for exit):");
-                        line = bufferedReader.readLine();
-                        while (line.length() > 0) {
-                            stringFacadeIF = StringFacadeBuilder.create(line);
-                            System.out.println(stringFacadeIF.getSize() + " element(s):");
-                            System.out.println("[");
-                            for (int i = 0; i < stringFacadeIF.getSize(); i++) {
-                                System.out.println(stringFacadeIF.getValue(null, i));
-                            }
-                            System.out.println("]");
-                            line = bufferedReader.readLine();
-                        }
-                    } catch (IOException e) {
-                        System.out.println(e.toString());
-                    }
-                    System.exit(0);
+                stringFacadeIF = StringFacadeBuilder.create(
+                        commandLine.getOptionValue("g"));
+                for (int i = 0; i < stringFacadeIF.getSize(); i++) {
+                    //no concat all with "\n" because Windows EOL diffs
+                    System.out.println(stringFacadeIF.getValue(null, i));
                 }
+                System.exit(0);
             }
 
             //if normal mode, do needed
@@ -225,7 +200,7 @@ public class Main {
                 }
 
                 //if defined max export exemplar count , set it
-                if (commandLine.hasOption("m")) {//todo change -o if nas -m
+                if (commandLine.hasOption("m")) {
                     exporter.setLimit(Integer.parseInt(commandLine.getOptionValue("m")));
                 }
 
