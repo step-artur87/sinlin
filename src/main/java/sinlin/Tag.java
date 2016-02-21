@@ -39,6 +39,7 @@ public class Tag {
     private static final String EXIST0 = "exist0";
     private static final String ONENODE = "onenode";
     private String name;
+    private String sText = "";
     private StringFacadeIF text = null;//text of xml tag
     private Map<String, StringFacadeIF> attributesMapFn
             = new HashMap<>();//<attribute_name, attribute_value>
@@ -91,8 +92,8 @@ public class Tag {
                     .mapToInt(StringFacadeIF::getSize));
         }
 
-        if (text != null) {
-            t = text.getSize();
+        if (getText() != null) {
+            t = getText().getSize();
         }
 
         n = Util.oneOrEqual(n, t);
@@ -102,8 +103,8 @@ public class Tag {
             System.out.println("In tag <"
                     + this.getNameWithAttr() + "> attributes have not same sizes:");
             conMap.forEach((s, sf) -> System.out.println("\t" + s + " = " + sf.getName() + " (" + sf.getSize() + ")"));
-            if (this.text != null) {
-                System.out.println(text.getName() + " (" + text.getSize() + ")");
+            if (this.getText() != null) {
+                System.out.println(getText().getName() + " (" + getText().getSize() + ")");
             }
             System.out.println("Exit.");
             System.exit(1);
@@ -206,23 +207,13 @@ public class Tag {
     }
 
     public void setText(String s) {
-        String t = "";
         if (s.trim().length() > 0) {
-            if (text != null) {
-                t = text.getName();
-            }
-            if (s.length() > 0) {
-                text = StringFacadeBuilder.create(t + s);
-            }
+            sText = sText.concat(s);
         }
     }
 
-    public StringFacadeIF getText() {
-        return text;
-    }
-
     public boolean isEmpty() {
-        return nodes.isEmpty() && text == null;
+        return nodes.isEmpty() && getText() == null;
     }
 
     public String getNameWithAttr() {
@@ -241,4 +232,11 @@ public class Tag {
         return s.toString();
     }
 
+    public StringFacadeIF getText() {
+        if (text == null) {
+            text = StringFacadeBuilder.create(sText);
+        }
+
+        return text;
+    }
 }
