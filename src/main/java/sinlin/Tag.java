@@ -4,7 +4,10 @@ import org.xml.sax.Attributes;
 import sinlin.string_facade.StringFacadeBuilder;
 import sinlin.string_facade.StringFacadeIF;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
 sinlin - SVG preprocessor, that can add data from .ods files to SVG.
@@ -80,34 +83,21 @@ public class Tag {
      * @return size of attributesMapFn values.
      */
     public int attrSizes() {//todo new map putAll, putAll
-        int m = -1;
-        if (conMap.isEmpty() && text == null) {
-            //tag without attributes and text exported one time
-            return 1;
-        }
-        OptionalInt min = conMap.values().stream()
-                .mapToInt(StringFacadeIF::getSize)
-                .filter((i) -> i > 1)
-                .min();
-        OptionalInt max = conMap.values().stream()
-                .mapToInt(StringFacadeIF::getSize)
-                .max();
+        int n = 1;
+        int t = 1;
 
-        if (!min.isPresent()) {
-            //tag without attributes and text exported one time
-            m = 1;
-        } else if (min.equals(max)) {
-            m = min.getAsInt();
+        if (!conMap.isEmpty()) {
+            n = Util.mapElementsSizes(conMap.values().stream()
+                    .mapToInt(StringFacadeIF::getSize));
         }
 
-        if (text != null && text.getSize() > 1) {//todo simplify
-            if (m > 1 && text.getSize() != m) {
-                m = -1;
-            } else {
-                m = text.getSize();
-            }
+        if (text != null) {
+            t = text.getSize();
         }
-        if (m < 0) {
+
+        n = Util.oneOrEqual(n, t);
+
+        if (n < 0) {
             printErrorInPath();
             System.out.println("In tag <"
                     + this.getNameWithAttr() + "> attributes have not same sizes:");//todo (n)
@@ -119,7 +109,7 @@ public class Tag {
             System.exit(1);
         }
 
-        return m;
+        return n;
     }
 
     public int nodeSizes() {//todo new map putAll, putAll
