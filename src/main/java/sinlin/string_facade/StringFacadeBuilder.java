@@ -81,6 +81,7 @@ public class StringFacadeBuilder {
             } else if (s1.equals("]")) {
                 n--;
                 if (n < 0) {//todo sout
+                    System.out.println("Error with [] in " + s);
                     System.exit(1);
                 }
             } else if (n == 0) {
@@ -88,6 +89,7 @@ public class StringFacadeBuilder {
             }
         }
         if (n > 0) {
+            System.out.println("Error with [] in " + s);
             System.exit(1);
         }
         return result;
