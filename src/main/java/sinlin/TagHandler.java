@@ -83,6 +83,5 @@ public class TagHandler extends DefaultHandler {
             throws SAXException {
         arrayDeque.peek().setText(new String(ch, start, length));
         //fixme <g>20*[x]</g>
-        //todo -/n only here
     }
 }

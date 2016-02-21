@@ -82,7 +82,7 @@ public class Tag {
      *
      * @return size of attributesMapFn values.
      */
-    public int attrSizes() {//todo new map putAll, putAll
+    public int attrSizes() {
         int n = 1;
         int t = 1;
 
@@ -100,7 +100,7 @@ public class Tag {
         if (n < 0) {
             printErrorInPath();
             System.out.println("In tag <"
-                    + this.getNameWithAttr() + "> attributes have not same sizes:");//todo (n)
+                    + this.getNameWithAttr() + "> attributes have not same sizes:");
             conMap.forEach((s, sf) -> System.out.println("\t" + s + " = " + sf.getName() + " (" + sf.getSize() + ")"));
             if (this.text != null) {
                 System.out.println(text.getName() + " (" + text.getSize() + ")");
@@ -112,7 +112,7 @@ public class Tag {
         return n;
     }
 
-    public int nodeSizes() {//todo new map putAll, putAll
+    public int nodeSizes() {
         int a = attrSizes();
         int n;
 
@@ -151,7 +151,7 @@ public class Tag {
         nodes.add(tag);
     }
 
-    public String getName() {//todo replage with getNameWithAttr
+    public String getName() {
         return name;
     }
 
@@ -181,9 +181,6 @@ public class Tag {
             try {
                 d = Double.parseDouble(value);
             } catch (NumberFormatException e) {
-//                System.out.println("In tag " + this.getName() //todo or not todo
-//                        + " " + EXIST0 + " value \"" + value
-//                        + "\" was not parsed and then not 0.");
                 d = 1;
             }
             return !(d == 0);
@@ -209,8 +206,14 @@ public class Tag {
     }
 
     public void setText(String s) {
-        if (!s.contains("\n")) {//fixme qwerty \n qwerty
-            text = StringFacadeBuilder.create(s);
+        String t = "";
+        if (s.trim().length() > 0) {
+            if (text != null) {
+                t = text.getName();
+            }
+            if (s.length() > 0) {
+                text = StringFacadeBuilder.create(t + s);
+            }
         }
     }
 
