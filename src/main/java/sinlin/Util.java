@@ -15,4 +15,20 @@ public class Util {
                 -> (a == -1) ? -1 : (b == 1) ? a : (a == b) ? a : -1);
         return n.isPresent() ? n.getAsInt() : 1;
     }
+
+    public static int oneOrEqual(int a, int b) {
+        if (a < 0 || b < 0) {
+            return -1;
+        }
+
+        if (a == b) {
+            return a;
+        } else {
+            if (a != 1 && b != 1) {
+                return -1;
+            } else {
+                return a > b ? a : b;
+            }
+        }
+    }
 }
