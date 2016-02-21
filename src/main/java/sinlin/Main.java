@@ -11,7 +11,6 @@ import sinlin.string_facade.StringFacadeBuilder;
 import sinlin.string_facade.StringFacadeIF;
 
 import java.io.BufferedReader;
-import java.util.ArrayDeque;
 
 /*
 sinlin - SVG preprocessor, that can add data from .ods files to SVG.
@@ -53,6 +52,7 @@ public class Main {
         BufferedReader bufferedReader;
         String line;
         StringFacadeIF stringFacadeIF;
+        TagHandler tagHandler = new TagHandler();
         Exporter exporter = new Exporter();
 
         String[] d;
@@ -102,7 +102,6 @@ public class Main {
         String prefix;
 
         Data data;
-        ArrayDeque<Tag> rootTagExoskeleton = new ArrayDeque<>();
 
         //define options
         Options options = new Options();
@@ -178,7 +177,7 @@ public class Main {
                 //parse input file
                 if (!silent) System.out.println("Before parsing time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
-                SaxParsing.parse(new TagHandler(rootTagExoskeleton),
+                SaxParsing.parse(tagHandler,
                         commandLine.getOptionValue("i"));
                 if (!silent) System.out.println("After parsing time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
@@ -207,7 +206,7 @@ public class Main {
                 //export and exit
                 if (!silent) System.out.println("Before export time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
-                Tag r = rootTagExoskeleton.getFirst();
+                Tag r = tagHandler.getRootTag();
                 exporter.writeAllXml(r, prefix, toOutStream);
                 if (!silent) System.out.println("After export time  = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");

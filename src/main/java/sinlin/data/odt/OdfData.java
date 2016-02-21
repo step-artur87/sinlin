@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //Get all rangenames of document is impossible
 //Get range with one cell impossible (error)
 //Get range on not first sheet impossible
-public class OdfData implements Data {//fixme one cell as range
+public class OdfData implements Data {
     private SpreadsheetDocument document;
     private List<Table> tableList;//sheats
     private Map<String, ArrayList<String>> rows

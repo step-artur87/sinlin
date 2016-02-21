@@ -33,12 +33,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 public class TagHandler extends DefaultHandler {
     private ArrayDeque<Tag> arrayDeque
             = new ArrayDeque<>();//tag buffer for creating tag tree
-    private ArrayDeque<Tag> rootTagExoskeleton;//todo #ref
+    private Tag rootTag = null;
 
-    public TagHandler(ArrayDeque<Tag> rootTagExoskeleton) {
-        this.rootTagExoskeleton = rootTagExoskeleton;
-        this.rootTagExoskeleton.clear();
+    public TagHandler() {
         arrayDeque.clear();
+    }
+
+    public Tag getRootTag() {
+        return rootTag;
     }
 
     @Override
@@ -68,8 +70,8 @@ public class TagHandler extends DefaultHandler {
                            String localName,
                            String qName)
             throws SAXException {
-        if (arrayDeque.size() == 1) {//todo if root again
-            rootTagExoskeleton.push(arrayDeque.peek());
+        if (arrayDeque.size() == 1) {
+            rootTag = arrayDeque.peek();
         }
 
         //poll
@@ -82,6 +84,5 @@ public class TagHandler extends DefaultHandler {
                            int length)
             throws SAXException {
         arrayDeque.peek().setText(new String(ch, start, length));
-        //fixme <g>20*[x]</g>
     }
 }
