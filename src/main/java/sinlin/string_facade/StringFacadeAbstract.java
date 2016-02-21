@@ -1,7 +1,8 @@
 package sinlin.string_facade;
 
+import sinlin.Util;
+
 import java.util.ArrayList;
-import java.util.OptionalInt;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,26 +17,15 @@ public abstract class StringFacadeAbstract implements StringFacadeIF {
 
     @Override
     public int getSize() {
-        int m = -1;
+        int n;
         if (nodes.isEmpty()) {
             return 1;
         }
-        OptionalInt min = nodes.stream()
-                .mapToInt(StringFacadeIF::getSize)
-                .filter((i) -> i > 1)
-                .min();
-        OptionalInt max = nodes.stream()
-                .mapToInt(StringFacadeIF::getSize)
-                .filter((i) -> i > 1)
-                .max();
 
-        if (!min.isPresent() || !max.isPresent()) {
-            m = 1;
-        } else if (min.equals(max)) {
-            m = min.getAsInt();
-        }
+        n = Util.mapElementsSizes(nodes.stream()
+                .mapToInt(StringFacadeIF::getSize));
 
-        if (m < 0) {
+        if (n < 0) {
             System.out.println("In " + this.getClass().getSimpleName() + " \""
                     + this.name + "\" attributes have not same sizes:");
             nodes.forEach((s) -> System.out.println(s.getClass().getSimpleName() + " " + s.getName() + " (" + s.getSize() + ")"));
@@ -43,7 +33,7 @@ public abstract class StringFacadeAbstract implements StringFacadeIF {
             System.exit(1);
         }
 
-        return m;
+        return n;
     }
 
     @Override
