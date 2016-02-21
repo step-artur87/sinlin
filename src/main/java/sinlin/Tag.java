@@ -57,7 +57,7 @@ public class Tag {
             for (int i = 0; i < attributes.getLength(); i++) {
                 value = attributes.getValue(i);
                 qName = attributes.getQName(i);
-                if (qName.equals(EXIST) || qName.equals(EXIST0) || qName.equals(ONENODE)) {//todo arrayList (m.b. slow)
+                if (qName.equals(EXIST) || qName.equals(EXIST0) || qName.equals(ONENODE)) {
                     attributesMapFnExt.put(qName, StringFacadeBuilder.create(value));
                 } else {
                     attributesMapFn.put(qName, StringFacadeBuilder.create(value));
@@ -123,26 +123,21 @@ public class Tag {
     }
 
     public int nodeSizes() {//todo new map putAll, putAll
-        int m = -1;
+        int a = attrSizes();
+        int n;
+
         if (nodes.isEmpty()) {
-            return attrSizes();
-        }
-        OptionalInt min = nodes.stream()
-                .mapToInt(Tag::attrSizes)
-                .filter((i) -> i > 1)
-                .min();
-        OptionalInt max = nodes.stream()
-                .mapToInt(Tag::attrSizes)
-                .max();
-
-        if (!min.isPresent()) {
-            //tag without nodes exported one time
-            m = 1;
-        } else if (min.equals(max) && (this.attrSizes() == min.getAsInt())) {
-            m = min.getAsInt();
+            return a;
         }
 
-        if (m < 0) {
+        n = Util.mapElementsSizes(nodes.stream()
+                .mapToInt(Tag::attrSizes));
+
+        if (n != a) {
+            n = -1;
+        }
+
+        if (n < 0) {
             printErrorInPath();
             System.out.println("In tag <"
                     + this.getNameWithAttr()
@@ -153,7 +148,7 @@ public class Tag {
             System.exit(1);
         }
 
-        return m;
+        return n;
     }
 
     private void printErrorInPath() {
