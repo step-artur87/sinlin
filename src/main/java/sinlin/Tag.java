@@ -123,9 +123,7 @@ public class Tag {
         n = Util.mapElementsSizes(nodes.stream()
                 .mapToInt(Tag::attrSizes));
 
-        if (n != a) {
-            n = -1;
-        }
+        n = Util.oneOrEqual(n, a);
 
         if (n < 0) {
             printErrorInPath();

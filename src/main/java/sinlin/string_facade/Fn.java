@@ -19,6 +19,7 @@ public class Fn extends StringFacadeAbstract
         Fn.data = data;
     }
 
+    //can return 0
     public int getSize() {
         if (Fn.data == null) {
             System.out.println("Data of diapason \"" + name + "\" is unavailable. \n" +
