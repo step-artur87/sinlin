@@ -1,14 +1,13 @@
 package sinlin.data.odt;
 
-import org.odftoolkit.simple.SpreadsheetDocument;
-import org.odftoolkit.simple.table.CellRange;
-import org.odftoolkit.simple.table.Table;
+import org.jopendocument.dom.ODPackage;
+import org.jopendocument.dom.spreadsheet.Range;
+import org.jopendocument.dom.spreadsheet.SpreadSheet;
 import sinlin.data.Data;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /*
@@ -40,16 +39,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //Get range with one cell impossible (error)
 //Get range on not first sheet impossible
 public class OdfData implements Data {
-    private SpreadsheetDocument document;
-    private List<Table> tableList;//sheats
     private Map<String, ArrayList<String>> rows
             = new HashMap<>();//<diapason_name, diapason_values_arrayList>
+    private ODPackage odPackage;
+    private SpreadSheet spreadSheet;
 
     public OdfData(String fileName) {
         try {
-            document = SpreadsheetDocument.loadDocument(
-                    new File(fileName));
-            tableList = document.getTableList();
+            odPackage = new ODPackage(new File("test.ods"));
+            spreadSheet = odPackage
+                    .getSpreadSheet();
         } catch (Exception e) {
             System.out.println(e.toString());
             System.exit(1);
@@ -59,17 +58,17 @@ public class OdfData implements Data {
     @Override
     public ArrayList<String> getRow(String name) {
         ArrayList<String> stringArrayList;
+        Range range;
         if (!rows.containsKey(name)) {
             stringArrayList = new ArrayList<>();
-            CellRange cellRange;
             int rowNumber;
             int columnNumber;
             //Bug all <table>.cellRange get cells from <table>
             //if it has place on other
-            cellRange = tableList.get(0).getCellRangeByName(name);
-            if (cellRange == null) {
+            range = spreadSheet.getRange(name);
+            if (range == null) {
                 System.out.print("File "
-                        + document.getBaseURI()
+                        + odPackage.getFile().getName()
                         + " has not cell range with name "
                         + name
                         + "\n" +
@@ -77,13 +76,18 @@ public class OdfData implements Data {
                         "and can not be taken, because bug in odftoolkit. Exit.");
                 System.exit(1);
             }
-            rowNumber = cellRange.getRowNumber();
-            columnNumber = cellRange.getColumnNumber();
-            for (int i = 0; i < columnNumber; i++) {
-                for (int j = 0; j < rowNumber; j++) {
+            int strartX = range.getStartPoint().x;
+            int strartY = range.getStartPoint().y;
+            int endX = (int) range.getEndPoint().getX();
+            int endY = (int) range.getEndPoint().getY();
+            String startS = range.getStartSheet();
+
+            for (int i = strartX; i <= endX; i++) {
+                for (int j = strartY; j <= endY; j++) {
                     stringArrayList.add(
-                            cellRange.getCellByPosition(i, j)
-                                    .getDisplayText());
+                            spreadSheet
+                                    .getSheet(startS)
+                                    .getCellAt(i, j).getTextValue());
                 }
             }
             rows.put(name, stringArrayList);
