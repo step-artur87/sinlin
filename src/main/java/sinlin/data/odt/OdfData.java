@@ -72,7 +72,9 @@ public class OdfData implements Data {
                         + document.getBaseURI()
                         + " has not cell range with name "
                         + name
-                        + ". Exit.");
+                        + "\n" +
+                        "or (if you see ArrayIndexOutOfBoundsException) cell range has one cell\n" +
+                        "and can not be taken, because bug in odftoolkit. Exit.");
                 System.exit(1);
             }
             rowNumber = cellRange.getRowNumber();
