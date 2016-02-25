@@ -16,7 +16,6 @@ public class VarString extends StringFacadeAbstract
 
     public VarString(String string) {
         name = string;
-        string = StringFacadeBuilder.replaceAll(string);
         String[] strings = string.split(",");
         Collections.addAll(varString, strings);
     }

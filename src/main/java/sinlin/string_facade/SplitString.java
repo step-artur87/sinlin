@@ -13,7 +13,6 @@ public class SplitString extends StringFacadeAbstract
         implements StringFacadeIF {
     public SplitString(String string) {
         name = string;
-        string = StringFacadeBuilder.replaceAll(string);
         StringTokenizer stringTokenizer
                 = new StringTokenizer(string, StringFacadeIF.DELIM, true);
         String s;

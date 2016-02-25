@@ -11,7 +11,6 @@ public class Fn extends StringFacadeAbstract
 
     public Fn(String string) {
         name = string;
-        string = StringFacadeBuilder.replaceAll(string);
         result = string;
     }
 
