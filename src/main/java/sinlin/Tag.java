@@ -61,13 +61,14 @@ public class Tag {
             for (int i = 0; i < attributes.getLength(); i++) {
                 value = attributes.getValue(i);
                 qName = attributes.getQName(i);
+                StringFacadeIF stringFacadeIF = StringFacadeBuilder.create(value);
                 if (qName.equals(EXIST) || qName.equals(EXIST0) || qName.equals(ONENODE)) {
-                    attributesMapFnExt.put(qName, StringFacadeBuilder.create(value));
+                    attributesMapFnExt.put(qName, stringFacadeIF);
                 } else {
-                    attributesMapFn.put(qName, StringFacadeBuilder.create(value));
+                    attributesMapFn.put(qName, stringFacadeIF);
                     attributeNames.add(qName);
                 }
-                conMap.put(qName, StringFacadeBuilder.create(value));
+                conMap.put(qName, stringFacadeIF);
                 attributeNamesExt.add(qName);
             }
         }
