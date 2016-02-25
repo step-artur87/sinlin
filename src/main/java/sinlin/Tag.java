@@ -234,7 +234,7 @@ public class Tag {
     }
 
     public StringFacadeIF getText() {
-        if (text == null) {
+        if (text == null && sText.length() > 0) {
             text = StringFacadeBuilder.create(sText);
         }
 
