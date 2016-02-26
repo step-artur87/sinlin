@@ -111,8 +111,8 @@ public class Main {
         options.addOption("V", false, "version");
         options.addOption("h", false, "help");
         options.addOption("g", true, "generate");
+        options.addOption("r", false, "ranges");
         options.addOption("m", true, "limit");
-        options.addOption("b", false, "debug");
         options.addOption("b", false, "debug");
         options.addOption("p", "print", false, "print");
 
@@ -152,6 +152,10 @@ public class Main {
                 Fn.setData(data);
                 if (!silent) System.out.println("After data load time = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
+                if (commandLine.hasOption("r")) {
+                    ((OdfData) data).printRanges();
+                    System.exit(0);
+                }
             }
 
             //if generate mode, print needed and exit

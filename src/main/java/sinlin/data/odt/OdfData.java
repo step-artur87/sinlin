@@ -94,4 +94,9 @@ public class OdfData implements Data {
         }
         return rows.get(name);
     }
+
+    public void printRanges() {
+        System.out.println("File \"" + odPackage.getFile() + "\" has next cell ranges:");
+        spreadSheet.getRangesNames().forEach(System.out::println);
+    }
 }
