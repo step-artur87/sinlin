@@ -28,7 +28,7 @@ public class Fn extends StringFacadeAbstract
             System.exit(1);
         }
 
-        return Fn.data.getRow(result).size();//todo rows * columns
+        return Fn.data.getRow(result).size();
     }
 
     public String getValue(Map<String, String> keyMap, int n) {

@@ -38,7 +38,7 @@ public class StringFacadeBuilder {
         } else if (string.split("\\$").length != 1) {
             return new SplitString(string);
         }
-        string = string.replace("$", "");
+        string = string.replace(StringFacadeIF.DELIM, "");
         return createVCEF(string);
     }
 
@@ -80,7 +80,7 @@ public class StringFacadeBuilder {
                 n++;
             } else if (s1.equals("]")) {
                 n--;
-                if (n < 0) {//todo sout
+                if (n < 0) {
                     System.out.println("Error with [] in " + s);
                     System.exit(1);
                 }

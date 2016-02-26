@@ -13,7 +13,7 @@ public class CycleString extends StringFacadeAbstract
     private Double a = null;//begin
     private Double b = null;//step
     private Double c = null;//end
-    private Double d = null;//count, todo m.b. integer
+    private Double d = null;//count
 
     public CycleString(String string) {
         name = string;

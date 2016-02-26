@@ -117,7 +117,6 @@ public class Main {
         options.addOption("p", "print", false, "print");
 
         //there order of ifs is significant
-        //todo organize flow
         try {
             commandLine = (new DefaultParser()).parse(options, args);
 

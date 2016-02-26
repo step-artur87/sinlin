@@ -13,7 +13,7 @@ public interface StringFacadeIF {
      * The delimiter used to divide parsed string
      * in SplitedString to StringFacadeIFs and FlatStrings
      */
-    public static final String DELIM = "$";//todo other constants
+    public static final String DELIM = "$";
 
     /**
      * The delimiter used to divide parsed string
