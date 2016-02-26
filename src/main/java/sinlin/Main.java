@@ -83,6 +83,8 @@ public class Main {
                 "\n\tGenerate data sequence from string." +
                 "\n\tSymbol \"$\" must be replaced by \"\\$\"." +
                 "\n\tWith option -d can get data from ods files.\n\n" +
+                "-r" +
+                "\n\tPrint names of all cell ranges in ods file, defined with option -d.\n\n" +
                 "-V" +
                 "\n\tPrint version.\n\n" +
                 "-h" +
