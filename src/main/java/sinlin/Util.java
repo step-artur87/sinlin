@@ -11,8 +11,14 @@ import java.util.stream.IntStream;
  */
 public class Util {
     public static int mapElementsSizes(IntStream intStream) {
-        OptionalInt n = intStream.reduce((a, b)
-                -> (a == -1) ? -1 : (b == 1) ? a : (a == b) ? a : -1);
+        OptionalInt n = intStream.reduce((a, b) ->
+                (a == -1) ? -1 : (b == 1) ? a : (a == b) ? a : (a == 1) ? b : -1
+                //          reduce() return -1
+                //                          no changes of a
+                //                                         no changes of a
+                //                                                        change to b
+                //                                                             change to -1
+        );
         return n.isPresent() ? n.getAsInt() : 1;
     }
 
