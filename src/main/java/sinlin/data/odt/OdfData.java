@@ -46,7 +46,7 @@ public class OdfData implements Data {
 
     public OdfData(String fileName) {
         try {
-            odPackage = new ODPackage(new File("test.ods"));
+            odPackage = new ODPackage(new File(fileName));
             spreadSheet = odPackage
                     .getSpreadSheet();
         } catch (Exception e) {
