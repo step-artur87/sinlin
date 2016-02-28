@@ -48,4 +48,12 @@ public abstract class StringFacadeAbstract implements StringFacadeIF {
         System.out.println("Exit.");
         System.exit(1);
     }
+
+    protected String unScreen(String string) {
+        return string
+                .replace("\\$", "$")
+                .replace("\\[", "]")
+                .replace("\\;", ";")
+                .replace("\\,", ",");//todo for all getValue
+    }
 }
