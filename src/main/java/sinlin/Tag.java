@@ -199,10 +199,15 @@ public class Tag {
         return attributeNames;
     }
 
-    public void setText(String s) {
-        if (s.trim().length() > 0) {
-            sText = sText.concat(s);
+    public void setTextConcat(String s) {
+        if (s == null) {
+            sText = null;
+        } else {
+            if (s.trim().length() > 0) {
+                sText = sText.concat(s);
+            }
         }
+        text = null;
     }
 
     public boolean isEmpty() {

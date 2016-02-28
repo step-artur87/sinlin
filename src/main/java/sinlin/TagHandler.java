@@ -83,6 +83,6 @@ public class TagHandler extends DefaultHandler {
                            int start,
                            int length)
             throws SAXException {
-        arrayDeque.peek().setText(new String(ch, start, length));
+        arrayDeque.peek().setTextConcat(new String(ch, start, length));
     }
 }
