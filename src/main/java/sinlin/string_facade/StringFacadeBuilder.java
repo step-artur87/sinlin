@@ -43,7 +43,6 @@ public class StringFacadeBuilder {
     }
 
     public static StringFacadeIF createVCEF(String string) {
-        assert !string.contains(StringFacadeIF.DELIM);
         String clearedString = clearSquareBrackets(string);
 
         if (clearedString.contains(StringFacadeIF.DELIM_CYCLE)) {

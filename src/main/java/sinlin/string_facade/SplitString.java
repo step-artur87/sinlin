@@ -1,7 +1,6 @@
 package sinlin.string_facade;
 
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,19 +12,31 @@ public class SplitString extends StringFacadeAbstract
         implements StringFacadeIF {
     public SplitString(String string) {
         name = string;
-        StringTokenizer stringTokenizer
-                = new StringTokenizer(string, StringFacadeIF.DELIM, true);
-        String s;
+        String[] strings = string.split("\\$");
+        String buffer = null;
         boolean toFs = false;
-        while (stringTokenizer.hasMoreElements()) {
-            s = stringTokenizer.nextToken();
-            if (!s.equals(StringFacadeIF.DELIM)) {
-                if (toFs) {
-                    nodes.add(StringFacadeBuilder.createVCEF(s));
-                } else {
-                    nodes.add(new FlatString(s));
+
+        for (int i = 0; i < strings.length; i++) {
+            if (buffer != null) {
+                strings[i] = buffer.concat(strings[i]);
+                buffer = null;
+            }
+
+            if (strings[i].endsWith("\\")) {
+                buffer = strings[i].substring(0, strings[i].length() - 1);
+                strings[i] = null;
+            }
+        }
+
+        for (int i = 0; i < strings.length; i++) {
+            if (strings[i] != null) {
+                if (strings[i].length() > 0) {
+                    if (toFs) {
+                        nodes.add(StringFacadeBuilder.createVCEF(strings[i]));
+                    } else {
+                        nodes.add(new FlatString(strings[i]));
+                    }
                 }
-            } else {
                 toFs = !toFs;
             }
         }
