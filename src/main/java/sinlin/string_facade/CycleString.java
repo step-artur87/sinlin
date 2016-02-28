@@ -130,4 +130,9 @@ public class CycleString extends StringFacadeAbstract
         }
         return value;
     }
+
+    public static boolean test(String string) {
+        String s = string.replaceAll("\\[.*\\]", "");
+        return s.split("\\;").length > s.split("\\\\\\;").length;
+    }
 }
