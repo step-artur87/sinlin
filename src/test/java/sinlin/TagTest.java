@@ -41,35 +41,35 @@ public class TagTest {
 
 
     @Test
-    public void testSetText() throws Exception {
-        tag.setText("s");
+    public void testsetTextConcat() throws Exception {
+        tag.setTextConcat("s");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setText("\ns\n");
+        tag.setTextConcat("\ns\n");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setText("\ts\t");
+        tag.setTextConcat("\ts\t");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setText(" s ");
+        tag.setTextConcat(" s ");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setText("\n\ts\t\n");
+        tag.setTextConcat("\n\ts\t\n");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setText("\ts\ts\t");
+        tag.setTextConcat("\ts\ts\t");
         Assert.assertEquals("s\ts",
                 tag.getText().getName());
-        tag.setText("\ns\ns\n");
+        tag.setTextConcat("\ns\ns\n");
         Assert.assertEquals("s\ns",
                 tag.getText().getName());
-        tag.setText("s");
+        tag.setTextConcat("s");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setText("\t\t");
+        tag.setTextConcat("\t\t");
         Assert.assertEquals(null,
                 tag.getText().getName());
-        tag.setText("\t\n\t\n");
+        tag.setTextConcat("\t\n\t\n");
         Assert.assertEquals(null,
                 tag.getText().getName());
     }
