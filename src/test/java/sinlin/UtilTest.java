@@ -29,7 +29,13 @@ public class UtilTest {
 
     @Test
     public void testOneOrEqual() throws Exception {
-
+        Assert.assertEquals(Util.oneOrEqual(-10, 10), -1);
+        Assert.assertEquals(Util.oneOrEqual(10, -10), -1);
+        Assert.assertEquals(Util.oneOrEqual(10, 10), 10);
+        Assert.assertEquals(Util.oneOrEqual(9, 10), -1);
+        Assert.assertEquals(Util.oneOrEqual(10, 9), -1);
+        Assert.assertEquals(Util.oneOrEqual(1, 10), 10);
+        Assert.assertEquals(Util.oneOrEqual(10, 1), 10);
     }
 
     @Test
