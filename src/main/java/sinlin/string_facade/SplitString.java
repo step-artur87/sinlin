@@ -42,6 +42,10 @@ public class SplitString extends StringFacadeAbstract
         }
     }
 
+    public static boolean test(String string) {
+        return string.split("\\$").length > string.split("\\\\\\$").length;
+    }
+
     @Override
     public String getValue(Map<String, String> keyMap, int n) {
         String result = "";

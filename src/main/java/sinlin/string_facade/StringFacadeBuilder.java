@@ -35,7 +35,7 @@ public class StringFacadeBuilder {
         string = replaceAll(string);
         if (!string.contains(StringFacadeIF.DELIM)) {
             return new FlatString(string);
-        } else if (string.split("\\$").length != 1) {
+        } else if (SplitString.test(string)) {
             return new SplitString(string);
         }
         string = string.replace(StringFacadeIF.DELIM, "");
