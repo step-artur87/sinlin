@@ -202,16 +202,18 @@ public class Tag {
     public void setTextConcat(String s) {
         if (s == null) {
             sText = null;
+            text = null;
         } else {
-            if (s.trim().length() > 0) {
+            s = s.trim();
+            if (s.length() > 0) {
                 if (sText == null) {
                     sText = s;
                 } else {
                     sText = sText.concat(s);
                 }
+                text = null;
             }
         }
-        text = null;
     }
 
     public boolean isEmpty() {
