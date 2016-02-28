@@ -201,12 +201,12 @@ public class Tag {
 
     public void setTextConcat(String s) {
         if (s == null) {
-            sText = null;
+            sText = "";
             text = null;
         } else {
             s = s.trim();
             if (s.length() > 0) {
-                if (sText == null) {
+                if (sText.equals("")) {
                     sText = s;
                 } else {
                     sText = sText.concat(s);
