@@ -22,11 +22,6 @@ public class FnTest {
     }
 
     @Test
-    public void testSetData() throws Exception {
-
-    }
-
-    @Test
     public void testGetSize() throws Exception {
 
     }
@@ -36,8 +31,4 @@ public class FnTest {
 
     }
 
-    @Test
-    public void testGetName() throws Exception {
-
-    }
 }
