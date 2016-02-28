@@ -75,4 +75,31 @@ public class Expr extends StringFacadeAbstract
 
         return null;
     }
+
+    public static boolean test(String string) {
+        String s = string.replaceAll("\\[.*\\]", "");
+        return (s.matches(OPERATORS) || s.matches(FUNC));//todo avoid \+ and test
+    }
+
+    private static final String OPERATORS
+            = ".*[\\+\\-\\*/%^!#§&:~<>|=].*";//expression detection
+    private static final String FUNC
+            = ".*(abs\\(" +
+            "|acos\\(" +
+            "|asin\\(" +
+            "|atan\\(" +
+            "|cbrt\\(" +
+            "|ceil\\(" +
+            "|cos\\(" +
+            "|cosh\\(" +
+            "|exp\\(" +
+            "|floor\\(" +
+            "|log\\(" +
+            "|log10\\(" +
+            "|log2\\(" +
+            "|sin\\(" +
+            "|sinh\\(" +
+            "|sqrt\\(" +
+            "|tan\\(" +
+            "|tanh).*";
 }

@@ -9,28 +9,6 @@ import java.util.StringTokenizer;
  * Time: 7:41 PM
  */
 public class StringFacadeBuilder {
-    private static final String OPERATORS
-            = ".*[\\+\\-\\*/%^!#§&:~<>|=].*";//expression detection
-    private static final String FUNC
-            = ".*(abs\\(" +
-            "|acos\\(" +
-            "|asin\\(" +
-            "|atan\\(" +
-            "|cbrt\\(" +
-            "|ceil\\(" +
-            "|cos\\(" +
-            "|cosh\\(" +
-            "|exp\\(" +
-            "|floor\\(" +
-            "|log\\(" +
-            "|log10\\(" +
-            "|log2\\(" +
-            "|sin\\(" +
-            "|sinh\\(" +
-            "|sqrt\\(" +
-            "|tan\\(" +
-            "|tanh).*";
-
     public static StringFacadeIF create(String string) {
         string = replaceAll(string);
         if (SplitString.test(string)) {
@@ -43,15 +21,15 @@ public class StringFacadeBuilder {
     public static StringFacadeIF createVCEF(String string) {
         String clearedString = clearSquareBrackets(string);
 
-        if (clearedString.contains(StringFacadeIF.DELIM_CYCLE)) {
+        if (CycleString.test(clearedString)) {
             return new CycleString(string);
         }
-        if (clearedString.matches(OPERATORS) || clearedString.matches(FUNC)) {
+        if (Expr.test(clearedString)) {
             return new Expr(string);
         }
-        if (clearedString.contains(StringFacadeIF.DELIM_VAR)) {
-            return new VarString(string);
-        }
+//        if (VarString.test(clearedString)) {
+//            return new VarString(string);
+//        }
         return new Fn(string);
     }
 
