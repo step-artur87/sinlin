@@ -132,7 +132,23 @@ public class CycleString extends StringFacadeAbstract
     }
 
     public static boolean test(String string) {
+        /*
+        For possible future releases, where can be cycle "[];[];[];[]"
         String s = string.replaceAll("\\[.*\\]", "");
         return s.split("\\;").length > s.split("\\\\\\;").length;
+        */
+        if (string.split("\\;").length > string.split("\\\\\\;").length) {
+            if ((string.split("\\[").length > string.split("\\\\\\[").length)
+                    || ((string.split("\\]").length > string.split("\\\\\\]").length))) {
+                System.out.println("Can not create cycle from \""
+                        + string
+                        + "\",\n" +
+                        "because cycles not support inner preprocessed strings ([]). Exit.");
+                System.exit(1);
+            }
+
+            return true;
+        }
+        return false;
     }
 }
