@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.stream.IntStream;
+
 /**
  * Created with IntelliJ IDEA.
  * User: art
@@ -24,18 +26,48 @@ public class UtilTest {
 
     @Test
     public void testMapElementsSizes() throws Exception {
-
+        Assert.assertEquals(10,
+                Util.mapElementsSizes(IntStream.of(1, 10, 1, 10, 1)));
+        Assert.assertEquals(-1,
+                Util.mapElementsSizes(IntStream.of(1, 10, 1, 9, 1)));
+        Assert.assertEquals(10,
+                Util.mapElementsSizes(IntStream.of(10, 10, 1, 10, 1)));
+        Assert.assertEquals(-1,
+                Util.mapElementsSizes(IntStream.of(10, 10, 1, 9, 1)));
+        Assert.assertEquals(10,
+                Util.mapElementsSizes(IntStream.of(1, 10, 1, 10, 10)));
+        Assert.assertEquals(-1,
+                Util.mapElementsSizes(IntStream.of(1, 10, 1, 9, 10)));
+        Assert.assertEquals(10,
+                Util.mapElementsSizes(IntStream.of(10, 10, 10, 10, 10)));
+        Assert.assertEquals(-1,
+                Util.mapElementsSizes(IntStream.of(9, 10, 10, 10, 10)));
+        Assert.assertEquals(-1,
+                Util.mapElementsSizes(IntStream.of(10, 10, 9, 10, 10)));
+        Assert.assertEquals(-1,
+                Util.mapElementsSizes(IntStream.of(10, 10, 10, 10, 9)));
+        Assert.assertEquals(-1,
+                Util.mapElementsSizes(IntStream.of(10, 9, 9, 10, 10)));
+        Assert.assertEquals(1,
+                Util.mapElementsSizes(IntStream.of(1, 1, 1, 1, 1)));
     }
 
     @Test
     public void testOneOrEqual() throws Exception {
-        Assert.assertEquals(Util.oneOrEqual(-10, 10), -1);
-        Assert.assertEquals(Util.oneOrEqual(10, -10), -1);
-        Assert.assertEquals(Util.oneOrEqual(10, 10), 10);
-        Assert.assertEquals(Util.oneOrEqual(9, 10), -1);
-        Assert.assertEquals(Util.oneOrEqual(10, 9), -1);
-        Assert.assertEquals(Util.oneOrEqual(1, 10), 10);
-        Assert.assertEquals(Util.oneOrEqual(10, 1), 10);
+        Assert.assertEquals(-1,
+                Util.oneOrEqual(-10, 10));
+        Assert.assertEquals(-1,
+                Util.oneOrEqual(10, -10));
+        Assert.assertEquals(10,
+                Util.oneOrEqual(10, 10));
+        Assert.assertEquals(-1,
+                Util.oneOrEqual(9, 10));
+        Assert.assertEquals(-1,
+                Util.oneOrEqual(10, 9));
+        Assert.assertEquals(10,
+                Util.oneOrEqual(1, 10));
+        Assert.assertEquals(10,
+                Util.oneOrEqual(10, 1));
     }
 
     @Test
