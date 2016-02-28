@@ -267,6 +267,8 @@ public class Exporter {
     private XMLStreamWriter getXmlStreamWriter(
             String fileName) {
         try {
+            //to avoid filename with forbidden symbols
+            fileName = Util.deleteForbiddenSymbols(fileName);
 
             // if for some XMLStreamWriter was run writeStartDocument,
             //run writeEndDocument and close it

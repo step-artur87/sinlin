@@ -37,4 +37,11 @@ public class Util {
             }
         }
     }
+
+    public static String deleteForbiddenSymbols(String string) {
+        if (string != null) {
+            return string.replaceAll("[\\-\\[\\]\\{\\}\\?\\'\\\"]", "");
+        }
+        return null;
+    }
 }
