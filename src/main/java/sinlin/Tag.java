@@ -204,7 +204,11 @@ public class Tag {
             sText = null;
         } else {
             if (s.trim().length() > 0) {
-                sText = sText.concat(s);
+                if (sText == null) {
+                    sText = s;
+                } else {
+                    sText = sText.concat(s);
+                }
             }
         }
         text = null;
