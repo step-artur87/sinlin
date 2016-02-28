@@ -33,13 +33,12 @@ public class StringFacadeBuilder {
 
     public static StringFacadeIF create(String string) {
         string = replaceAll(string);
-        if (!string.contains(StringFacadeIF.DELIM)) {
+        int test = SplitString.test(string);
+        if (test == 0) {
             return new FlatString(string);
-        } else if (SplitString.test(string)) {
-            return new SplitString(string);
+        } else {
+            return SplitString.create(string);
         }
-        string = string.replace(StringFacadeIF.DELIM, "");
-        return createVCEF(string);
     }
 
     public static StringFacadeIF createVCEF(String string) {

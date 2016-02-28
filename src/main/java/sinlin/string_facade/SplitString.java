@@ -42,8 +42,16 @@ public class SplitString extends StringFacadeAbstract
         }
     }
 
-    public static boolean test(String string) {
-        return string.split("\\$").length > string.split("\\\\\\$").length;
+    public static StringFacadeIF create(String string) {
+        SplitString splitString = new SplitString(string);
+        if (splitString.nodes.size() == 1) {
+            return splitString.nodes.get(0);
+        }
+        return splitString;
+    }
+
+    public static int test(String string) {
+        return string.split("\\$").length - string.split("\\\\\\$").length;
     }
 
     @Override
