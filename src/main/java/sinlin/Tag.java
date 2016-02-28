@@ -202,6 +202,7 @@ public class Tag {
     public void setText(String s) {
         if (s.trim().length() > 0) {
             sText = sText.concat(s);
+            text = null;
         }
     }
 
