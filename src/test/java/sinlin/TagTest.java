@@ -45,30 +45,39 @@ public class TagTest {
         tag.setTextConcat("s");
         Assert.assertEquals("s",
                 tag.getText().getName());
+        tag.setTextConcat(null);
         tag.setTextConcat("\ns\n");
         Assert.assertEquals("s",
                 tag.getText().getName());
+        tag.setTextConcat(null);
         tag.setTextConcat("\ts\t");
         Assert.assertEquals("s",
                 tag.getText().getName());
+        tag.setTextConcat(null);
         tag.setTextConcat(" s ");
         Assert.assertEquals("s",
                 tag.getText().getName());
+        tag.setTextConcat(null);
         tag.setTextConcat("\n\ts\t\n");
         Assert.assertEquals("s",
                 tag.getText().getName());
+        tag.setTextConcat(null);
         tag.setTextConcat("\ts\ts\t");
         Assert.assertEquals("s\ts",
                 tag.getText().getName());
+        tag.setTextConcat(null);
         tag.setTextConcat("\ns\ns\n");
         Assert.assertEquals("s\ns",
                 tag.getText().getName());
+        tag.setTextConcat(null);
         tag.setTextConcat("s");
         Assert.assertEquals("s",
                 tag.getText().getName());
+        tag.setTextConcat(null);
         tag.setTextConcat("\t\t");
         Assert.assertEquals(null,
                 tag.getText().getName());
+        tag.setTextConcat(null);
         tag.setTextConcat("\t\n\t\n");
         Assert.assertEquals(null,
                 tag.getText().getName());
