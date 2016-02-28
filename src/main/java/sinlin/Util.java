@@ -44,4 +44,12 @@ public class Util {
         }
         return null;
     }
+
+    public static void printErrorInPath() {
+        System.out.print("Error in path: ");
+        Exporter.getPath().forEach((s) -> {
+            System.out.print("<" + s.getNameWithAttr() + ">");
+        });
+        System.out.println();
+    }
 }

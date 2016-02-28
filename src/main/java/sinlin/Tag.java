@@ -100,7 +100,7 @@ public class Tag {
         n = Util.oneOrEqual(n, t);
 
         if (n < 0) {
-            printErrorInPath();
+            Util.printErrorInPath();
             System.out.println("In tag <"
                     + this.getNameWithAttr() + "> attributes have not same sizes:");
             conMap.forEach((s, sf) -> System.out.println("\t" + s + " = " + sf.getName() + " (" + sf.getSize() + ")"));
@@ -128,7 +128,7 @@ public class Tag {
         n = Util.oneOrEqual(n, a);
 
         if (n < 0) {
-            printErrorInPath();
+            Util.printErrorInPath();
             System.out.println("In tag <"
                     + this.getNameWithAttr()
                     + "> (" + this.attrSizes() + ") nodes have not same sizes:");
@@ -139,14 +139,6 @@ public class Tag {
         }
 
         return n;
-    }
-
-    private void printErrorInPath() {
-        System.out.print("Error in path: ");
-        Exporter.getPath().forEach((s) -> {
-            System.out.print("<" + s.getNameWithAttr() + ">");
-        });
-        System.out.println();
     }
 
     public void addNodeTag(Tag tag) {

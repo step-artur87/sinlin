@@ -42,6 +42,7 @@ public abstract class StringFacadeAbstract implements StringFacadeIF {
     }
 
     protected void handleException(Exception e) {
+        Util.printErrorInPath();
         System.out.println("In " + this.getClass().getSimpleName() + " \"" + this.getName() + "\" thrown exception:");
         System.out.println(e.toString());
         System.out.println("Exit.");
