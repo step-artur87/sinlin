@@ -41,7 +41,7 @@ public class TagTest {
 
 
     @Test
-    public void testsetTextConcat() throws Exception {
+    public void testSetTextConcat() throws Exception {
         tag.setTextConcat("s");
         Assert.assertEquals("s",
                 tag.getText().getName());
@@ -76,10 +76,22 @@ public class TagTest {
         tag.setTextConcat(null);
         tag.setTextConcat("\t\t");
         Assert.assertEquals(null,
-                tag.getText().getName());
+                tag.getText());
         tag.setTextConcat(null);
         tag.setTextConcat("\t\n\t\n");
         Assert.assertEquals(null,
+                tag.getText());
+        tag.setTextConcat(null);
+        tag.setTextConcat("");
+        tag.setTextConcat(null);
+        Assert.assertEquals(null,
+                tag.getText());
+        Assert.assertEquals(null,
+                tag.getText());
+        tag.setTextConcat(null);
+        tag.setTextConcat("a");
+        tag.setTextConcat("b");
+        Assert.assertEquals("ab",
                 tag.getText().getName());
     }
 
