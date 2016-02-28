@@ -32,8 +32,24 @@ public class VarString extends StringFacadeAbstract
     }
 
     public static boolean test(String string) {
+/*
+        For possible future releases, where can be cycle "[];[];[];[]"
         String s = string.replaceAll("\\[.*\\]", "");
         return s.split("\\,").length > s.split("\\\\\\,").length;
+*/
+        if (string.split("\\,").length > string.split("\\\\\\,").length) {
+            if ((string.split("\\[").length > string.split("\\\\\\[").length)
+                    || ((string.split("\\]").length > string.split("\\\\\\]").length))) {
+                System.out.println("Can not create list from \""
+                        + string
+                        + "\",\n" +
+                        "because lists not support inner preprocessed strings ([]). Exit.");
+                System.exit(1);
+            }
 
+            return true;
+        }
+        return false;
     }
+
 }
