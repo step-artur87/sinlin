@@ -10,25 +10,6 @@ import java.util.Map;
  */
 public interface StringFacadeIF {
     /**
-     * The delimiter used to divide parsed string
-     * in SplitedString to StringFacadeIFs and FlatStrings
-     */
-    public static final String DELIM = "$";
-
-    /**
-     * The delimiter used to divide parsed string
-     * in CycleString to initial term, common difference
-     * and integer bigger that all element of the progression
-     */
-    public static final String DELIM_CYCLE = ";";
-
-    /**
-     * The delimiter used to divide parsed string
-     * in VarString to subStringFacadeIFs
-     */
-    public static final String DELIM_VAR = ",";
-
-    /**
      * Returns the name of this StringFacadeIF.
      * The name is equal string, result of parsing which
      * is this StringFacadeIF.
