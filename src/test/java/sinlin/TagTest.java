@@ -1,5 +1,6 @@
 package sinlin;
 
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +42,36 @@ public class TagTest {
 
     @Test
     public void testSetText() throws Exception {
-
+        tag.setText("s");
+        Assert.assertEquals("s",
+                tag.getText().getName());
+        tag.setText("\ns\n");
+        Assert.assertEquals("s",
+                tag.getText().getName());
+        tag.setText("\ts\t");
+        Assert.assertEquals("s",
+                tag.getText().getName());
+        tag.setText(" s ");
+        Assert.assertEquals("s",
+                tag.getText().getName());
+        tag.setText("\n\ts\t\n");
+        Assert.assertEquals("s",
+                tag.getText().getName());
+        tag.setText("\ts\ts\t");
+        Assert.assertEquals("s\ts",
+                tag.getText().getName());
+        tag.setText("\ns\ns\n");
+        Assert.assertEquals("s\ns",
+                tag.getText().getName());
+        tag.setText("s");
+        Assert.assertEquals("s",
+                tag.getText().getName());
+        tag.setText("\t\t");
+        Assert.assertEquals(null,
+                tag.getText().getName());
+        tag.setText("\t\n\t\n");
+        Assert.assertEquals(null,
+                tag.getText().getName());
     }
 
     @Test
