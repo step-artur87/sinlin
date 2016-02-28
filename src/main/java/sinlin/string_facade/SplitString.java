@@ -50,8 +50,8 @@ public class SplitString extends StringFacadeAbstract
         return splitString;
     }
 
-    public static int test(String string) {
-        return string.split("\\$").length - string.split("\\\\\\$").length;
+    public static boolean test(String string) {
+        return string.split("\\$").length > string.split("\\\\\\$").length;
     }
 
     @Override

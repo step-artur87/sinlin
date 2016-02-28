@@ -33,8 +33,7 @@ public class StringFacadeBuilder {
 
     public static StringFacadeIF create(String string) {
         string = replaceAll(string);
-        int test = SplitString.test(string);
-        if (test == 0) {
+        if (SplitString.test(string)) {
             return new FlatString(string);
         } else {
             return SplitString.create(string);
