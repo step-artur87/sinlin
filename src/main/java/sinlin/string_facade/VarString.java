@@ -30,4 +30,10 @@ public class VarString extends StringFacadeAbstract
     public String getValue(Map<String, String> keyMap, int n) {
         return varString.get(n);
     }
+
+    public static boolean test(String string) {
+        String s = string.replaceAll("\\[.*\\]", "");
+        return s.split("\\,").length > s.split("\\\\\\,").length;
+
+    }
 }

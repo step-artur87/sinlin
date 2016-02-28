@@ -27,9 +27,9 @@ public class StringFacadeBuilder {
         if (Expr.test(clearedString)) {
             return new Expr(string);
         }
-//        if (VarString.test(clearedString)) {
-//            return new VarString(string);
-//        }
+        if (VarString.test(clearedString)) {
+            return new VarString(string);
+        }
         return new Fn(string);
     }
 
