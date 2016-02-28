@@ -1,6 +1,7 @@
 package sinlin;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,7 +34,8 @@ public class UtilTest {
 
     @Test
     public void testDeleteForbiddenSymbols() throws Exception {
-
+        Assert.assertTrue(
+                Util.deleteForbiddenSymbols("-[]{}?'\"").isEmpty());
     }
 
     @Test
