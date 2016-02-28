@@ -37,9 +37,8 @@ public class VarString extends StringFacadeAbstract
         String s = string.replaceAll("\\[.*\\]", "");
         return s.split("\\,").length > s.split("\\\\\\,").length;
 */
-        if (string.split("\\,").length > string.split("\\\\\\,").length) {
-            if ((string.split("\\[").length > string.split("\\\\\\[").length)
-                    || ((string.split("\\]").length > string.split("\\\\\\]").length))) {
+        if (string.contains(StringFacadeIF.DELIM_VAR)) {
+            if (string.contains("[") || string.contains("]")) {
                 System.out.println("Can not create list from \""
                         + string
                         + "\",\n" +

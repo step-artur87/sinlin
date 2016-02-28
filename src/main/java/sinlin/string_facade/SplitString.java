@@ -51,7 +51,7 @@ public class SplitString extends StringFacadeAbstract
     }
 
     public static boolean test(String string) {
-        return string.split("\\$").length > string.split("\\\\\\$").length;
+        return string.contains(StringFacadeIF.DELIM);
     }
 
     @Override

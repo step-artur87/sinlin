@@ -78,7 +78,7 @@ public class Expr extends StringFacadeAbstract
 
     public static boolean test(String string) {
         String s = string.replaceAll("\\[.*\\]", "");
-        return (s.matches(OPERATORS) || s.matches(FUNC));//todo avoid \+ and test
+        return (s.matches(OPERATORS) || s.matches(FUNC));
     }
 
     private static final String OPERATORS
