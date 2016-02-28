@@ -3,6 +3,7 @@
 *.ods
 *.svg
 !example/*.svg
+!src/test/resources/*
 1
 future
 helps
