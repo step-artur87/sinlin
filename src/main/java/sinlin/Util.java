@@ -1,7 +1,6 @@
 package sinlin;
 
 import java.util.OptionalInt;
-import java.util.StringTokenizer;
 import java.util.stream.IntStream;
 
 /**
@@ -65,29 +64,14 @@ public class Util {
     }
 
     public static String clearSquareBrackets(String s) {
-        int n = 0;
-        String result = "";
-        String s1;
-        StringTokenizer stringTokenizer
-                = new StringTokenizer(s, "[]", true);
-        while (stringTokenizer.hasMoreElements()) {
-            s1 = stringTokenizer.nextToken();
-            if (s1.equals("[")) {
-                n++;
-            } else if (s1.equals("]")) {
-                n--;
-                if (n < 0) {
-                    System.out.println("Error with [] in " + s);
-                    System.exit(1);
-                }
-            } else if (n == 0) {
-                result = result.concat(s1);
-            }
+        int begin = 0;
+        int end = s.length();//todo error when [qwe, qwe]
+        if (s.startsWith("[")) {
+            begin++;
         }
-        if (n > 0) {
-            System.out.println("Error with [] in " + s);
-            System.exit(1);
+        if (s.endsWith("]")) {
+            end--;
         }
-        return result;
+        return s.substring(begin, end);
     }
 }
