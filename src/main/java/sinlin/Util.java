@@ -1,6 +1,8 @@
 package sinlin;
 
+import java.util.ArrayList;
 import java.util.OptionalInt;
+import java.util.StringTokenizer;
 import java.util.stream.IntStream;
 
 /**
@@ -73,5 +75,45 @@ public class Util {
             end--;
         }
         return s.substring(begin, end);
+    }
+
+    public static ArrayList<String> splitSquareBrackets(String s) {
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        String s1;
+        StringBuilder buffer = new StringBuilder();
+        int level = 0;
+        StringTokenizer stringTokenizer = new StringTokenizer(s, "[]", true);
+        while (stringTokenizer.hasMoreElements()) {
+            s1 = stringTokenizer.nextToken();
+            switch (s1) {
+                case "[":
+                    level++;
+                    buffer.append(s1);
+                    break;
+                case "]":
+                    level--;
+                    buffer.append(s1);
+                    break;
+                default:
+                    if (level == 0) {
+                        if (buffer.length() > 0) {
+                            stringArrayList.add(buffer.toString());
+                            buffer = new StringBuilder();
+                        }
+                        stringArrayList.add(s1);
+                    } else if (level > 0) {
+                        buffer.append(s1);
+                    } else {
+                        System.out.println("Bad " + s + ". Exit.");
+                        System.exit(0);
+                    }
+                    break;
+            }
+        }
+        if (level != 0) {
+            System.out.println("Bad " + s + ". Exit.");
+            System.exit(0);
+        }
+        return stringArrayList;
     }
 }

@@ -88,4 +88,9 @@ public class UtilTest {
         Assert.assertEquals("", Util.clearSquareBrackets(""));
         Assert.assertEquals("", Util.clearSquareBrackets("[]"));
     }
+
+    @Test
+    public void testSplitSquareBrackets() throws Exception {
+        Util.splitSquareBrackets("qwe1[qwe2]qwe3");
+    }
 }
