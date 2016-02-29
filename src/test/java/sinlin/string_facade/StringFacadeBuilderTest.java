@@ -22,22 +22,7 @@ public class StringFacadeBuilderTest {
     }
 
     @Test
-    public void testCreate() throws Exception {
-
-    }
-
-    @Test
     public void testCreateVCEF() throws Exception {
-
-    }
-
-    @Test
-    public void testReplaceAll() throws Exception {
-
-    }
-
-    @Test
-    public void testClearSquareBrackets() throws Exception {
 
     }
 }
