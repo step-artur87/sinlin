@@ -1,6 +1,6 @@
 package sinlin.string_facade;
 
-import java.util.StringTokenizer;
+import sinlin.Util;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
  */
 public class StringFacadeBuilder {
     public static StringFacadeIF create(String string) {
-        string = replaceAll(string);
+        string = Util.replaceAll(string);
         if (SplitString.test(string)) {
             return new FlatString(string);
         } else {
@@ -19,7 +19,7 @@ public class StringFacadeBuilder {
     }
 
     public static StringFacadeIF createVCEF(String string) {
-        String clearedString = clearSquareBrackets(string);
+        String clearedString = Util.clearSquareBrackets(string);
 
         if (CycleString.test(clearedString)) {
             return new CycleString(string);
@@ -31,42 +31,5 @@ public class StringFacadeBuilder {
             return new VarString(string);
         }
         return new Fn(string);
-    }
-
-    public static String replaceAll(String string) {
-        string = string.replace(", ", ",")
-                .replace(" ,", ",")
-                .replace("/ ", "/")
-                .replace(" /", "/")
-                .replace("-> ", "->")
-                .replace(" ->", "->");
-        return string;
-    }
-
-    public static String clearSquareBrackets(String s) {
-        int n = 0;
-        String result = "";
-        String s1;
-        StringTokenizer stringTokenizer
-                = new StringTokenizer(s, "[]", true);
-        while (stringTokenizer.hasMoreElements()) {
-            s1 = stringTokenizer.nextToken();
-            if (s1.equals("[")) {
-                n++;
-            } else if (s1.equals("]")) {
-                n--;
-                if (n < 0) {
-                    System.out.println("Error with [] in " + s);
-                    System.exit(1);
-                }
-            } else if (n == 0) {
-                result = result.concat(s1);
-            }
-        }
-        if (n > 0) {
-            System.out.println("Error with [] in " + s);
-            System.exit(1);
-        }
-        return result;
     }
 }
