@@ -93,6 +93,10 @@ public class UtilTest {
     public void testSplitSquareBrackets() throws Exception {
         Assert.assertEquals("[qwe]",
                 Util.splitSquareBrackets("qwe").toString());
+        Assert.assertEquals("[qwe, [qwe]]",
+                Util.splitSquareBrackets("qwe[qwe]").toString());
+        Assert.assertEquals("[[qwe], qwe]",
+                Util.splitSquareBrackets("[qwe]qwe").toString());
         Assert.assertEquals("[qwe, [qwe1], qwe2]",
                 Util.splitSquareBrackets("qwe[qwe1]qwe2").toString());
         Assert.assertEquals("[qwe, [q[we]1], qwe2]",
