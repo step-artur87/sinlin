@@ -1,9 +1,9 @@
 *.html
 .idea
 *.ods
-*Test.java
 *.svg
 !example/*.svg
+!src/test/resources/*
 1
 future
 helps
