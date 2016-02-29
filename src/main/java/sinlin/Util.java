@@ -110,6 +110,10 @@ public class Util {
                     break;
             }
         }
+        if (buffer.length() > 0) {
+            stringArrayList.add(buffer.toString());
+            buffer = new StringBuilder();
+        }
         if (level != 0) {
             System.out.println("Bad " + s + ". Exit.");
             System.exit(0);
