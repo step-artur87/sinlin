@@ -12,9 +12,9 @@ public class StringFacadeBuilder {
     public static StringFacadeIF create(String string) {
         string = replaceAll(string);
         if (SplitString.test(string)) {
-            return new FlatString(string);
-        } else {
             return SplitString.create(string);
+        } else {
+            return new FlatString(string);
         }
     }
 
