@@ -80,4 +80,10 @@ public class UtilTest {
     public void testPrintErrorInPath() throws Exception {
 
     }
+
+    @Test
+    public void testClearSquareBrackets() throws Exception {
+        Assert.assertEquals("qwe", Util.clearSquareBrackets("qwe"));
+        Assert.assertEquals("qwe", Util.clearSquareBrackets("[qwe]"));
+    }
 }
