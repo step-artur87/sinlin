@@ -74,13 +74,13 @@ public class CycleStringTest {
     @Test
     public void testTestBrackets1() throws Exception {
         //CycleString.test(";]");
-        //Assert.fail();
+        //Assert.fail("Must be System.exit(1)");
     }
 
     @Test
     public void testTestBrackets2() throws Exception {
         //CycleString.test(";[");
-        //Assert.fail();
+        //Assert.fail("Must be System.exit(1)");
     }
 
     private String allCycle(CycleString cycleString) {
