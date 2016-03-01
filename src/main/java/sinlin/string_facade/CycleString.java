@@ -1,5 +1,7 @@
 package sinlin.string_facade;
 
+import sinlin.Util;
+
 import java.util.Map;
 
 /**
@@ -17,9 +19,9 @@ public class CycleString extends StringFacadeAbstract
 
     public CycleString(String string) {
         name = string;
-        String[] strings = string
-                .replace(" ", "")
-                .split(";");
+
+        String[] strings
+                = Util.replaceAll(string).split(";");
         try {
             if (strings.length == 3 || strings.length == 4) {
                 a = (strings[0].length() > 0)
