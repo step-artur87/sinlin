@@ -18,6 +18,7 @@ public abstract class StringFacadeAbstract implements StringFacadeIF {
 
     @Override
     public int getSize() {
+        StringBuffer stringBuffer = new StringBuffer();
         int n;
         if (nodes.isEmpty()) {
             return 1;
@@ -27,11 +28,17 @@ public abstract class StringFacadeAbstract implements StringFacadeIF {
                 .mapToInt(StringFacadeIF::getSize));
 
         if (n < 0) {
+            nodes.forEach((s) -> {
+                stringBuffer
+                        .append(s.getClass().getSimpleName())
+                        .append(" ")
+                        .append(s.getName())
+                        .append(" (")
+                        .append(s.getSize())
+                        .append(")\n");
+            });
             System.out.println("In " + this.getClass().getSimpleName() + " \""
-                    + this.name + "\" attributes have not same sizes:");
-            nodes.forEach((s) -> System.out.println(s.getClass().getSimpleName() + " " + s.getName() + " (" + s.getSize() + ")"));
-            System.out.println("Exit.");
-            System.exit(1);
+                    + this.name + "\" attributes have not same sizes:\n" + stringBuffer);
         }
 
         return n;
