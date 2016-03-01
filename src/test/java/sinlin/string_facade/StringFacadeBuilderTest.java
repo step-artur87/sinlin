@@ -43,12 +43,13 @@ public class StringFacadeBuilderTest {
 
         //expr
         testMap.put("[1, 2]*3", "[3, 6]");
-        //testMap.put("[-1, -2]*3", "[-3, -6]");
+        testMap.put("sqrt([4, 16])", "[2, 4]");
+        testMap.put("[-1, -2]*3", "[-3, -6]");
         //testMap.put("[1.1, 2.2]*3", "[3.3, 6.6]");
         testMap.put("[1;1;;2]*3", "[3, 6]");
         testMap.put("[-1;-1;;2]*3", "[-3, -6]");
 
-        //todo fixme I can do nothing
+        //todo fixme I do not know what to do
         //testMap.put("[1.1;1.1;;2]*3", "[3.3000000000000003, 6.6000000000000005]");
         //testMap.put("[100000000.1;100000000.1;;2]*3","[3.0000000029999995E8, 6.000000005999999E8]");
     }
