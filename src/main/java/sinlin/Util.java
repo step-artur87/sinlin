@@ -48,11 +48,13 @@ public class Util {
     }
 
     public static void printErrorInPath() {
-        System.out.print("Error in path: ");
-        Exporter.getPath().forEach((s) -> {
-            System.out.print("<" + s.getNameWithAttr() + ">");
-        });
-        System.out.println();
+        if (Exporter.getPath() != null) {
+            System.out.print("Error in path: ");
+            Exporter.getPath().forEach((s) -> {
+                System.out.print("<" + s.getNameWithAttr() + ">");
+            });
+            System.out.println();
+        }
     }
 
     public static String replaceAll(String string) {
