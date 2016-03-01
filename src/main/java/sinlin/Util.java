@@ -101,8 +101,7 @@ public class Util {
                     } else if (level > 0) {
                         buffer.append(s1);
                     } else {
-                        System.out.println("Bad " + s + ". Exit.");
-                        System.exit(0);
+                        printErrorAndExit("Bad " + s + "");
                     }
                     break;
             }
@@ -112,8 +111,7 @@ public class Util {
             buffer = new StringBuilder();
         }
         if (level != 0) {
-            System.out.println("Bad " + s + ". Exit.");
-            System.exit(0);
+            printErrorAndExit("Bad " + s + ". Exit.");
         }
         return stringArrayList;
     }

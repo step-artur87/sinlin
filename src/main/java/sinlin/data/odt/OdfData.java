@@ -3,6 +3,7 @@ package sinlin.data.odt;
 import org.jopendocument.dom.ODPackage;
 import org.jopendocument.dom.spreadsheet.Range;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
+import sinlin.Util;
 import sinlin.data.Data;
 
 import java.io.File;
@@ -67,14 +68,13 @@ public class OdfData implements Data {
             //if it has place on other
             range = spreadSheet.getRange(name);
             if (range == null) {
-                System.out.print("File "
+                Util.printErrorAndExit("File "
                         + odPackage.getFile().getName()
                         + " has not cell range with name "
                         + name
                         + "\n" +
                         "or (if you see ArrayIndexOutOfBoundsException) cell range has one cell\n" +
-                        "and can not be taken, because bug in odftoolkit. Exit.");
-                System.exit(1);
+                        "and can not be taken, because bug in odftoolkit");
             }
             int strartX = range.getStartPoint().x;
             int strartY = range.getStartPoint().y;

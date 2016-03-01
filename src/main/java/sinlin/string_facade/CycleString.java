@@ -101,12 +101,10 @@ public class CycleString extends StringFacadeAbstract
     public String getValue(Map<String, String> keyMap, int n) {
         String value;
         if (n > d || n < 0) {
-            System.out.println("Cycle "
+            Util.printErrorAndExit("Cycle "
                     + this.name
                     + " have not value with number "
-                    + n
-                    + ".Exit");
-            System.exit(1);
+                    + n);
         }
 
         value = Double.toString(a + b * n);
