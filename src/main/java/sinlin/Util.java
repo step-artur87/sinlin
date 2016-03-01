@@ -66,13 +66,10 @@ public class Util {
     public static String clearSquareBrackets(String s) {
         int begin = 0;
         int end = s.length();//todo error when [qwe, qwe]
-        if (s.startsWith("[")) {
-            begin++;
+        if (s.startsWith("[") && s.endsWith("]")) {
+            return s.substring(begin + 1, end - 1);
         }
-        if (s.endsWith("]")) {
-            end--;
-        }
-        return s.substring(begin, end);
+        return s;
     }
 
     public static ArrayList<String> splitSquareBrackets(String s) {
