@@ -139,6 +139,8 @@ public class CycleString extends StringFacadeAbstract
         String s = string.replaceAll("\\[.*\\]", "");
         return s.split("\\;").length > s.split("\\\\\\;").length;
         */
+        string = string.replaceAll("\\[.*\\]", "");//fixme it must be when [1;1;10]*3, but not 1;[1];10
+
         if (string.contains(StringFacadeIF.DELIM_CYCLE)) {
             if (string.contains("[") || string.contains("]")) {
                 System.out.println("Can not create cycle from \""
