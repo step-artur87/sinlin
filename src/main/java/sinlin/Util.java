@@ -57,11 +57,9 @@ public class Util {
 
     public static String replaceAll(String string) {
         string = string.replace(", ", ",")
-                .replace(" ,", ",")
-                .replace("/ ", "/")
-                .replace(" /", "/")
-                .replace("-> ", "->")
-                .replace(" ->", "->");
+                .replace(", ", ",")
+                .replace("; ", ";")
+                .replace(" ;", ";");
         return string;
     }
 
