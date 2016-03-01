@@ -87,7 +87,7 @@ public class Exporter {
             try {
                 int yn = System.in.read();
                 if (yn != yCharCode) {
-                    System.out.println("Writing canceled. Exit.");
+                    System.out.println("Writing canceled\n Exit");
                     System.exit(0);
                 }
             } catch (IOException e) {
@@ -188,8 +188,7 @@ public class Exporter {
                             xmlStreamWriter.writeAttribute(string,
                                     map.get(s).getValue(null, n));
                         } else {
-                            System.out.println("\"" + s + "\" has not pair. Exit");
-                            System.exit(1);
+                            Util.printErrorAndExit("\"" + s + "\" has not pair. Exit");
                         }
                     } else {
                         string = s.concat("...");
@@ -241,8 +240,7 @@ public class Exporter {
 
                 //print only exception name, not stackTrace (if catch this exception)
             } catch (XMLStreamException e) {
-                System.out.println(e.toString());
-                System.exit(1);
+                Util.handleException(e);
             }
         }
 
@@ -295,8 +293,7 @@ public class Exporter {
 
             last.writeStartDocument();
         } catch (XMLStreamException | FileNotFoundException e) {
-            System.out.println(e.toString());
-            System.exit(1);
+            Util.handleException(e);
         }
         return last;
     }

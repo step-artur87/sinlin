@@ -38,8 +38,7 @@ public class SaxParsing {
             SAXParserFactory.newInstance().
                     newSAXParser().parse(filename, defaultHandler);
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            System.out.println(e.toString());
-            System.exit(1);
+            Util.handleException(e);
         }
     }
 
