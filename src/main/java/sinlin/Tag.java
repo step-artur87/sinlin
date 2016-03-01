@@ -85,6 +85,7 @@ public class Tag {
      * @return size of attributesMapFn values.
      */
     public int attrSizes() {
+        StringBuffer stringBuffer = new StringBuffer();
         int n = 1;
         int t = 1;
 
@@ -100,21 +101,31 @@ public class Tag {
         n = Util.oneOrEqual(n, t);
 
         if (n < 0) {
-            Util.printErrorInPath();
-            System.out.println("In tag <"
-                    + this.getNameWithAttr() + "> attributes have not same sizes:");
-            conMap.forEach((s, sf) -> System.out.println("\t" + s + " = " + sf.getName() + " (" + sf.getSize() + ")"));
+            conMap.forEach((s, sf) -> {
+                stringBuffer
+                        .append("\t")
+                        .append(s)
+                        .append(" = ")
+                        .append(sf.getName())
+                        .append(" (")
+                        .append(sf.getSize())
+                        .append(")\n");
+            });
+
             if (this.getText() != null) {
-                System.out.println(getText().getName() + " (" + getText().getSize() + ")");
+                stringBuffer.append(getText().getName() + " (" + getText().getSize() + ")\n");
             }
-            System.out.println("Exit.");
-            System.exit(1);
+
+            Util.printErrorAndExit("In tag <"
+                    + this.getNameWithAttr() + "> attributes have not same sizes:"
+                    + stringBuffer);
         }
 
         return n;
     }
 
     public int nodeSizes() {
+        StringBuffer stringBuffer = new StringBuffer();
         int a = attrSizes();
         int n;
 
@@ -128,14 +139,18 @@ public class Tag {
         n = Util.oneOrEqual(n, a);
 
         if (n < 0) {
-            Util.printErrorInPath();
-            System.out.println("In tag <"
+            nodes.forEach((t) -> {
+                stringBuffer.append("\t<")
+                        .append(t.getNameWithAttr())
+                        .append("> (")
+                        .append(t.attrSizes())
+                        .append(")\n");
+            });
+
+            Util.printErrorAndExit("In tag <"
                     + this.getNameWithAttr()
-                    + "> (" + this.attrSizes() + ") nodes have not same sizes:");
-            nodes.forEach((t) -> System.out.println("\t<" + t.getNameWithAttr()
-                    + "> (" + t.attrSizes() + ")"));
-            System.out.println("Exit.");
-            System.exit(1);
+                    + "> (" + this.attrSizes() + ") nodes have not same sizes:"
+                    + stringBuffer);
         }
 
         return n;
