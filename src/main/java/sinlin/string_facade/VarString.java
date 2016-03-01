@@ -42,11 +42,10 @@ public class VarString extends StringFacadeAbstract
 
         if (string.contains(StringFacadeIF.DELIM_VAR)) {
             if (string.contains("[") || string.contains("]")) {
-                System.out.println("Can not create list from \""
+                printErrorAndExit("Can not create list from \""
                         + string
                         + "\",\n" +
                         "because lists not support inner preprocessed strings ([]). Exit.");
-                System.exit(1);
             }
 
             return true;
