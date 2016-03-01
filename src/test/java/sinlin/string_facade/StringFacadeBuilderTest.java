@@ -19,6 +19,7 @@ public class StringFacadeBuilderTest {
 
     @Before
     public void setUp() throws Exception {
+        //fs
         testMap.put("; ; 10; ", "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]");
         testMap.put("5; ; 10; ", "[5, 6, 7, 8, 9]");
         testMap.put("; 2; 10; ", "[0, 2, 4, 6, 8]");
@@ -31,8 +32,25 @@ public class StringFacadeBuilderTest {
         testMap.put("5; ; 10; 4", "[5, 6.25, 7.5, 8.75]");
         testMap.put("; 2; 10; 4", "[2, 4, 6, 8]");
         testMap.put("5; 2; 10; 4", "[5, 7, 9]");
-        testMap.put("5; 0; ; 4", "[5, 5, 5, 5]");
 
+        //vs
+        testMap.put("1, 1", "[1, 1]");
+        //testMap.put("1,", "[1, ]");
+        //testMap.put(",1", "[, 1]");
+        testMap.put("1, , 1", "[1, , 1]");
+        //testMap.put(" , ", "[ , ]");
+        //testMap.put(",", "[,]");
+
+        //expr
+        testMap.put("[1, 2]*3", "[3, 6]");
+        //testMap.put("[-1, -2]*3", "[-3, -6]");
+        //testMap.put("[1.1, 2.2]*3", "[3.3, 6.6]");
+        testMap.put("[1;1;;2]*3", "[3, 6]");
+        testMap.put("[-1;-1;;2]*3", "[-3, -6]");
+
+        //todo fixme I can do nothing
+        //testMap.put("[1.1;1.1;;2]*3", "[3.3000000000000003, 6.6000000000000005]");
+        //testMap.put("[100000000.1;100000000.1;;2]*3","[3.0000000029999995E8, 6.000000005999999E8]");
     }
 
     @After
@@ -43,6 +61,7 @@ public class StringFacadeBuilderTest {
     @Test
     public void testCreateVCEF() throws Exception {
         testMap.forEach((k, v) -> {
+            //System.out.println("\"" + k + "\"\t\"" + v + "\"");
             Assert.assertEquals("\"" + k + "\"\t\"" + v + "\"", v,
                     allCycle(StringFacadeBuilder.createVCEF(k)));
         });
