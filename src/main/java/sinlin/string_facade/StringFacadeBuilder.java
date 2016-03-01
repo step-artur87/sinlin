@@ -24,11 +24,11 @@ public class StringFacadeBuilder {
         if (CycleString.test(clearedString)) {
             return new CycleString(string);
         }
-        if (Expr.test(clearedString)) {
-            return new Expr(string);
-        }
         if (VarString.test(clearedString)) {
             return new VarString(string);
+        }
+        if (Expr.test(clearedString)) {
+            return new Expr(string);
         }
         return new Fn(string);
     }
