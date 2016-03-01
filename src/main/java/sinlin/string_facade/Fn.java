@@ -1,5 +1,6 @@
 package sinlin.string_facade;
 
+import sinlin.Util;
 import sinlin.data.Data;
 
 import java.util.Map;
@@ -21,7 +22,7 @@ public class Fn extends StringFacadeAbstract
     //can return 0
     public int getSize() {
         if (Fn.data == null) {
-            printErrorAndExit("Data of diapason \"" + name + "\" is unavailable. \n" +
+            Util.printErrorAndExit("Data of diapason \"" + name + "\" is unavailable. \n" +
                     "Use command-line argument \"-d\" to define .ods file " +
                     "with needed data.\n" +
                     "Exit");
@@ -32,14 +33,14 @@ public class Fn extends StringFacadeAbstract
 
     public String getValue(Map<String, String> keyMap, int n) {
         if (Fn.data == null) {
-            printErrorAndExit("Data of diapason \"" + name + "\" is unavailable. \n" +
+            Util.printErrorAndExit("Data of diapason \"" + name + "\" is unavailable. \n" +
                     "Use command-line argument \"-d\" to define .ods file " +
                     "with needed data.\n" +
                     "Exit");
         }
 
         if (result == null) {
-            printErrorAndExit("This fn is empty. Exit");
+            Util.printErrorAndExit("This fn is empty. Exit");
         }
 
         return Fn.data.getRow(result).get(n);

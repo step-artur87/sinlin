@@ -115,4 +115,11 @@ public class Util {
         }
         return stringArrayList;
     }
+
+    public static void printErrorAndExit(String string) {
+        printErrorInPath();
+        System.out.println(string);
+        System.out.println("Exit");
+        System.exit(1);
+    }
 }

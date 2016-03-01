@@ -38,7 +38,7 @@ public class CycleString extends StringFacadeAbstract
                             : null;
                 }
             } else {
-                printErrorAndExit("Cycle " + name
+                Util.printErrorAndExit("Cycle " + name
                         + " was not parsed. Exit");
             }
             //todo as for(;;)
@@ -47,12 +47,12 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (c == null && d == null) {
-            printErrorAndExit("Cycle " + name
+            Util.printErrorAndExit("Cycle " + name
                     + " has nor end element nor element count");
         }
 
         if (d != null && d == 0) {
-            printErrorAndExit("Cycle " + name
+            Util.printErrorAndExit("Cycle " + name
                     + " has zero count. Exit");
         }
 
@@ -76,7 +76,7 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (b == 0 && d == null) {
-            printErrorAndExit("Cycle " + name
+            Util.printErrorAndExit("Cycle " + name
                     + " has zero step and has no count. Exit");
         }
 
@@ -87,7 +87,7 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (d.isInfinite() || d.isNaN() || (d <= 0)) {
-            printErrorAndExit("Cycle " + name
+            Util.printErrorAndExit("Cycle " + name
                     + " count = " + d);
         }
     }
@@ -126,7 +126,7 @@ public class CycleString extends StringFacadeAbstract
 
         if (string.contains(StringFacadeIF.DELIM_CYCLE)) {
             if (string.contains("[") || string.contains("]")) {
-                printErrorAndExit("Can not create cycle from \""
+                Util.printErrorAndExit("Can not create cycle from \""
                         + string
                         + "\",\n" +
                         "because cycles not support inner preprocessed strings ([]). Exit.");
