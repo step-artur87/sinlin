@@ -46,8 +46,7 @@ public class Exporter {
             = null;//when getXmlStreamWriter(), for last (if exist)
     //writeEndDocument() an close()
 
-    private static ArrayList<Tag> path
-            = new ArrayList<>();//all parents of exported now tag
+    private static ArrayList<Tag> path;//all parents of exported now tag
 
     public void setLimit(int limit) {
         if (limit > 0) {
@@ -70,6 +69,8 @@ public class Exporter {
             Tag tag,
             String prefix,
             boolean toOutStream) {
+        //initialise path in begin of export
+        path = new ArrayList<>();
         XMLStreamWriter current;
         int n = tag.attrSizes();
         String extension = tag.getName();
@@ -134,6 +135,9 @@ public class Exporter {
                 }
             }
         }
+
+        //delete path in end of exort
+        path = null;
     }
 
     private void writeAllXml(
