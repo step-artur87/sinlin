@@ -20,7 +20,6 @@ public class VarString extends StringFacadeAbstract
         Collections.addAll(varString, strings);
     }
 
-    //can return 0
     @Override
     public int getSize() {
         return varString.size();

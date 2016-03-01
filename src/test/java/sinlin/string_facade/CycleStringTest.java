@@ -59,7 +59,8 @@ public class CycleStringTest {
                 allCycle(new CycleString("; 2; 10; 4")));
         Assert.assertEquals("[5, 7, 9]",
                 allCycle(new CycleString("5; 2; 10; 4")));
-
+        Assert.assertEquals("[5, 5, 5, 5]",
+                allCycle(new CycleString("5; 0; ; 4")));
     }
 
     @Test
