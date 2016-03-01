@@ -1,5 +1,6 @@
 package sinlin.string_facade;
 
+import sinlin.Exporter;
 import sinlin.Util;
 
 import java.util.ArrayList;
@@ -46,6 +47,13 @@ public abstract class StringFacadeAbstract implements StringFacadeIF {
         System.out.println("In " + this.getClass().getSimpleName() + " \"" + this.getName() + "\" thrown exception:");
         System.out.println(e.toString());
         System.out.println("Exit.");
+        System.exit(1);
+    }
+
+    protected static void printErrorAndExit(String string) {
+        System.out.println("Error in path: " + Exporter.getPath());
+        System.out.println(string);
+        System.out.println("Exit");
         System.exit(1);
     }
 }
