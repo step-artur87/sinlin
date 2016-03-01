@@ -38,11 +38,8 @@ public class CycleString extends StringFacadeAbstract
                             : null;
                 }
             } else {
-                System.out.println("Cycle "
-                        + name
-                        + " was not parsed. Exit"
-                );
-                System.exit(1);
+                printErrorAndExit("Cycle " + name
+                        + " was not parsed. Exit");
             }
             //todo as for(;;)
         } catch (NumberFormatException e) {
@@ -50,19 +47,13 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (c == null && d == null) {
-            System.out.println("Cycle "
-                    + name
-                    + " has nor end element nor element count. Exit"
-            );
-            System.exit(1);
+            printErrorAndExit("Cycle " + name
+                    + " has nor end element nor element count");
         }
 
         if (d != null && d == 0) {
-            System.out.println("Cycle "
-                    + name
-                    + " has zero count. Exit"
-            );
-            System.exit(1);
+            printErrorAndExit("Cycle " + name
+                    + " has zero count. Exit");
         }
 
         if (a == null) {
@@ -85,11 +76,8 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (b == 0 && d == null) {
-            System.out.println("Cycle "
-                    + name
-                    + " has zero step and has no count. Exit"
-            );
-            System.exit(1);
+            printErrorAndExit("Cycle " + name
+                    + " has zero step and has no count. Exit");
         }
 
         if (d == null) {
@@ -99,13 +87,8 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (d.isInfinite() || d.isNaN() || (d <= 0)) {
-            System.out.println("Cycle "
-                    + name
-                    + " count = " +
-                    d +
-                    ". Exit"
-            );
-            System.exit(1);
+            printErrorAndExit("Cycle " + name
+                    + " count = " + d);
         }
     }
 
@@ -143,11 +126,10 @@ public class CycleString extends StringFacadeAbstract
 
         if (string.contains(StringFacadeIF.DELIM_CYCLE)) {
             if (string.contains("[") || string.contains("]")) {
-                System.out.println("Can not create cycle from \""
+                printErrorAndExit("Can not create cycle from \""
                         + string
                         + "\",\n" +
                         "because cycles not support inner preprocessed strings ([]). Exit.");
-                System.exit(1);
             }
 
             return true;
