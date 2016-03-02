@@ -37,9 +37,12 @@ public class CycleString extends StringFacadeAbstract
                             ? Double.parseDouble(strings[3])
                             : null;
                 }
+            } else if (strings.length < 3) {
+                Util.printErrorAndExit("Cycle \"" + name
+                        + "\" was not parsed. Too little arguments");
             } else {
-                Util.printErrorAndExit("Cycle " + name
-                        + " was not parsed. Exit");
+                Util.printErrorAndExit("Cycle \"" + name
+                        + "\" was not parsed. Too mach arguments");
             }
             //todo as for(;;)
         } catch (NumberFormatException e) {
@@ -47,13 +50,13 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (c == null && d == null) {
-            Util.printErrorAndExit("Cycle " + name
-                    + " has nor end element nor element count");
+            Util.printErrorAndExit("Cycle \"" + name
+                    + "\" has nor end element nor element count");
         }
 
         if (d != null && d == 0) {
-            Util.printErrorAndExit("Cycle " + name
-                    + " has zero count. Exit");
+            Util.printErrorAndExit("Cycle \"" + name
+                    + "\" has zero count");
         }
 
         if (a == null) {
@@ -76,8 +79,8 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (b == 0 && d == null) {
-            Util.printErrorAndExit("Cycle " + name
-                    + " has zero step and has no count. Exit");
+            Util.printErrorAndExit("Cycle \"" + name
+                    + "\" has zero step and has no count");
         }
 
         if (d == null) {
@@ -87,8 +90,8 @@ public class CycleString extends StringFacadeAbstract
         }
 
         if (d.isInfinite() || d.isNaN() || (d <= 0)) {
-            Util.printErrorAndExit("Cycle " + name
-                    + " count = " + d);
+            Util.printErrorAndExit("Cycle \"" + name
+                    + "\" has count \"" + d + "\"");
         }
     }
 
@@ -101,9 +104,9 @@ public class CycleString extends StringFacadeAbstract
     public String getValue(Map<String, String> keyMap, int n) {
         String value;
         if (n > d || n < 0) {
-            Util.printErrorAndExit("Cycle "
-                    + this.name
-                    + " have not value with number "
+            Util.printErrorAndExit("Cycle \""
+                    + name
+                    + "\" have not value with number "
                     + n);
         }
 
