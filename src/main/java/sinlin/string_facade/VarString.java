@@ -45,7 +45,7 @@ public class VarString extends StringFacadeAbstract
                 Util.printErrorAndExit("Can not create list from \""
                         + string
                         + "\",\n" +
-                        "because lists not support inner preprocessed strings ([]). Exit.");
+                        "because lists not supports inner preprocessed strings ([])");
             }
 
             return true;

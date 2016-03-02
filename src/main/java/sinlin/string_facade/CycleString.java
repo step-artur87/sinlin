@@ -130,7 +130,7 @@ public class CycleString extends StringFacadeAbstract
                 Util.printErrorAndExit("Can not create cycle from \""
                         + string
                         + "\",\n" +
-                        "because cycles not support inner preprocessed strings ([]). Exit.");
+                        "because cycles not supports inner preprocessed strings ([])");
             }
 
             return true;
