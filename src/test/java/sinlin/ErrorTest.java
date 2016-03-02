@@ -50,6 +50,7 @@ public class ErrorTest {
         stringArrayList.add("1;1;1;-1;");
         stringArrayList.add("1;[1;1;1;");
         stringArrayList.add("a;b;c;d;");
+        stringArrayList.add("1;0;1;");
 
         //ExprTest
         stringArrayList.add("1+++1");
