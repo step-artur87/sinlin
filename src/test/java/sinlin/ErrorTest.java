@@ -3,6 +3,7 @@ package sinlin;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sinlin.string_facade.Expr;
 import sinlin.string_facade.StringFacadeBuilder;
 
 import java.util.ArrayList;
@@ -43,8 +44,15 @@ public class ErrorTest {
         stringArrayList.add("1;1");
         stringArrayList.add("1;1;1;1;1");
         stringArrayList.add("1;1;;");
-        stringArrayList.add("1;1;1;1;");
+        stringArrayList.add("1;1;1;0;");
+        stringArrayList.add("1;1;-1;;");
+        stringArrayList.add("1;;1;;");
+        stringArrayList.add("1;1;1;-1;");
+        stringArrayList.add("1;[1;1;1;");
+        stringArrayList.add("a;b;c;d;");
 
+        //ExprTest
+        stringArrayList.add("1+++1");
     }
 
     @After
@@ -60,8 +68,20 @@ public class ErrorTest {
                 System.out.println("Test for \"" + s + "\"");
                 StringFacadeBuilder.createVCEF(s);
             } catch (Exception e) {
+                System.out.println();
             }
         });
+
+        try {
+            //CycleStringTest
+            System.out.println("Test for \"" + "have not value" + "\"");
+            StringFacadeBuilder.createVCEF("1;1;10").getValue(null, 20);
+
+            //ExprTest
+            System.out.println("Test for \"" + "empty expr" + "\"");
+            System.out.println(new Expr("").getValue(null, 0));
+        } catch (Exception e) {
+        }
 
     }
 }
