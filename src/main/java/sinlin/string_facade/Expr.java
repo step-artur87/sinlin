@@ -47,6 +47,7 @@ public class Expr extends StringFacadeAbstract
             expression = (new ExpressionBuilder(exprString)
                     .variables(new HashSet<>(strings))).build();
         } catch (IllegalArgumentException e) {
+            //When expr name is ""
             handleException(e);
         }
     }
