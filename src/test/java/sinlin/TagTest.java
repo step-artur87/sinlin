@@ -60,55 +60,55 @@ public class TagTest {
 
     @Test
     public void testSetTextConcat() throws Exception {
-        tag.setTextConcat("s");
+        tag.setText("s");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setTextConcat(null);
-        tag.setTextConcat("\ns\n");
+        tag.setText(null);
+        tag.setText("\ns\n");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setTextConcat(null);
-        tag.setTextConcat("\ts\t");
+        tag.setText(null);
+        tag.setText("\ts\t");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setTextConcat(null);
-        tag.setTextConcat(" s ");
+        tag.setText(null);
+        tag.setText(" s ");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setTextConcat(null);
-        tag.setTextConcat("\n\ts\t\n");
+        tag.setText(null);
+        tag.setText("\n\ts\t\n");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setTextConcat(null);
-        tag.setTextConcat("\ts\ts\t");
+        tag.setText(null);
+        tag.setText("\ts\ts\t");
         Assert.assertEquals("s\ts",
                 tag.getText().getName());
-        tag.setTextConcat(null);
-        tag.setTextConcat("\ns\ns\n");
+        tag.setText(null);
+        tag.setText("\ns\ns\n");
         Assert.assertEquals("s\ns",
                 tag.getText().getName());
-        tag.setTextConcat(null);
-        tag.setTextConcat("s");
+        tag.setText(null);
+        tag.setText("s");
         Assert.assertEquals("s",
                 tag.getText().getName());
-        tag.setTextConcat(null);
-        tag.setTextConcat("\t\t");
+        tag.setText(null);
+        tag.setText("\t\t");
         Assert.assertEquals(null,
                 tag.getText());
-        tag.setTextConcat(null);
-        tag.setTextConcat("\t\n\t\n");
+        tag.setText(null);
+        tag.setText("\t\n\t\n");
         Assert.assertEquals(null,
                 tag.getText());
-        tag.setTextConcat(null);
-        tag.setTextConcat("");
-        tag.setTextConcat(null);
+        tag.setText(null);
+        tag.setText("");
+        tag.setText(null);
         Assert.assertEquals(null,
                 tag.getText());
         Assert.assertEquals(null,
                 tag.getText());
-        tag.setTextConcat(null);
-        tag.setTextConcat("a");
-        tag.setTextConcat("b");
+        tag.setText(null);
+        tag.setText("a");
+        tag.setText("b");
         Assert.assertEquals("ab",
                 tag.getText().getName());
     }
