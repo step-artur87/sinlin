@@ -118,15 +118,15 @@ public class Util {
 
     public static void printErrorAndExit(String string) {
         printErrorInPath();
-        System.out.println(string);
-        System.out.println("Exit");
+        System.err.println(string);
+        System.err.println("Exit");
         System.exit(1);
     }
 
     public static void handleException(Exception e) {
         Util.printErrorInPath();
-        System.out.println(e.toString());
-        System.out.println("Exit.");
+        System.err.println(e.toString());
+        System.err.println("Exit.");
         System.exit(1);
     }
 }
