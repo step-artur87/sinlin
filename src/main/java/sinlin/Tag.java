@@ -39,7 +39,6 @@ public class Tag {
     private static final String EXIST0 = "exist0";
     private static final String ONENODE = "onenode";
     private String name;
-    private String sText = "";
     private StringFacadeIF text = null;//text of xml tag
     private Map<String, StringFacadeIF> attributesMapFn
             = new HashMap<>();//<attribute_name, attribute_value>
@@ -214,21 +213,8 @@ public class Tag {
         return attributeNames;
     }
 
-    public void setTextConcat(String s) {
-        if (s == null) {
-            sText = "";
-            text = null;
-        } else {
-            s = s.trim();
-            if (s.length() > 0) {
-                if (sText.equals("")) {
-                    sText = s;
-                } else {
-                    sText = sText.concat(s);
-                }
-                text = null;
-            }
-        }
+    public void setText(String s) {
+        text = StringFacadeBuilder.create(s);
     }
 
     public boolean isEmpty() {
@@ -252,10 +238,6 @@ public class Tag {
     }
 
     public StringFacadeIF getText() {
-        if (text == null && sText.length() > 0) {
-            text = StringFacadeBuilder.create(sText);
-        }
-
         return text;
     }
 }

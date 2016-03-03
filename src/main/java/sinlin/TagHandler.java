@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Time: 8:17 PM
  */
 public class TagHandler extends DefaultHandler {
+    StringBuilder buffer;
     private ArrayDeque<Tag> arrayDeque
             = new ArrayDeque<>();//tag buffer for creating tag tree
     private Tag rootTag = null;
@@ -53,6 +54,7 @@ public class TagHandler extends DefaultHandler {
                              String qName,
                              Attributes attributes)
             throws SAXException {
+        buffer = new StringBuilder();
         Tag tag = new Tag(qName, attributes);
 
         //addNode
@@ -70,9 +72,17 @@ public class TagHandler extends DefaultHandler {
                            String localName,
                            String qName)
             throws SAXException {
+        if (buffer != null) {
+            String string = buffer.toString().trim();
+            if (string.length() > 0) {
+                arrayDeque.peek().setText(string);
+            }
+        }
+        buffer = null;
+
         if (arrayDeque.size() == 1) {
             rootTag = arrayDeque.peek();
-        }
+        }//exception otherwise
 
         //poll
         arrayDeque.poll();
@@ -83,6 +93,8 @@ public class TagHandler extends DefaultHandler {
                            int start,
                            int length)
             throws SAXException {
-        arrayDeque.peek().setTextConcat(new String(ch, start, length));
+        if (buffer != null) {
+            buffer.append(new String(ch, start, length));
+        }
     }
 }
