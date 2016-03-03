@@ -120,13 +120,13 @@ public class Util {
         printErrorInPath();
         System.out.println(string);
         System.out.println("Exit");
-        //System.exit(1);
+        System.exit(1);
     }
 
     public static void handleException(Exception e) {
         Util.printErrorInPath();
         System.out.println(e.toString());
         System.out.println("Exit.");
-        //System.exit(1);
+        System.exit(1);
     }
 }
