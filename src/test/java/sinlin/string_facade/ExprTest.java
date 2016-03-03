@@ -1,6 +1,7 @@
 package sinlin.string_facade;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -46,7 +47,7 @@ public class ExprTest {
 
     @Test
     public void testTest() throws Exception {
-
+        Assert.assertTrue(Expr.test("[1;1;10] * 100 - 20 * [1;1;10]"));
     }
 
     @Test
