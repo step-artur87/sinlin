@@ -19,15 +19,13 @@ public class StringFacadeBuilder {
     }
 
     public static StringFacadeIF createVCEF(String string) {
-        String clearedString = Util.clearSquareBrackets(string);
-
-        if (CycleString.test(clearedString)) {
+        if (CycleString.test(string)) {
             return new CycleString(string);
         }
-        if (VarString.test(clearedString)) {
+        if (VarString.test(string)) {
             return new VarString(string);
         }
-        if (Expr.test(clearedString)) {
+        if (Expr.test(string)) {
             return new Expr(string);
         }
         return new Fn(string);
