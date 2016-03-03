@@ -223,7 +223,7 @@ public class Main {
 
             //print only exception name, not stackTrace (if these exception)
         } catch (ParseException | NumberFormatException e) {
-            System.out.println(e.toString());
+            Util.handleException(e);
         }
     }
 }

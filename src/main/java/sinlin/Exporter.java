@@ -52,7 +52,7 @@ public class Exporter {
         if (limit > 0) {
             this.limit = limit;
         } else {
-            System.out.println("Limit (" + limit + ") must be > 0.");
+            Util.printErrorAndExit("Limit (" + limit + ") must be > 0.");
         }
     }
 
@@ -91,7 +91,7 @@ public class Exporter {
                     System.exit(0);
                 }
             } catch (IOException e) {
-                System.out.println(e.toString());
+                Util.handleException(e);
             }
         }
 
@@ -262,7 +262,7 @@ public class Exporter {
             //write "sinlin vx.x.x" in end of docement
             current.writeComment(Main.version);
         } catch (XMLStreamException e) {
-            System.out.println(e.toString());
+            Util.handleException(e);
         }
     }
 

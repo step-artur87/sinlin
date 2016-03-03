@@ -36,7 +36,7 @@ public abstract class StringFacadeAbstract implements StringFacadeIF {
                         .append(s.getSize())
                         .append(")\n");
             });
-            System.out.println("In " + this.getClass().getSimpleName() + " \""
+            Util.printErrorAndExit("In " + this.getClass().getSimpleName() + " \""
                     + this.name + "\" attributes have not same sizes:\n" + stringBuffer);
         }
 
