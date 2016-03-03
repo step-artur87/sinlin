@@ -2,6 +2,7 @@ package sinlin.string_facade;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import sinlin.Util;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -78,8 +79,12 @@ public class Expr extends StringFacadeAbstract
     }
 
     public static boolean test(String string) {
-        string = string.replaceAll("\\[.*\\]", "");
-        return (string.matches(OPERATORS) || string.matches(FUNC));
+        ArrayList<String> stringArrayList = Util.splitSquareBrackets(string);
+        return stringArrayList.stream()
+                .filter((s) ->
+                        !(s.contains("[") || s.contains("["))
+                                && (s.matches(OPERATORS) || s.matches(FUNC))).count() > 0;
+
     }
 
     private static final String OPERATORS
