@@ -125,19 +125,19 @@ public class Main {
             //if no argument, print help and exit
             if (commandLine.getOptions().length == 0) {
                 System.out.println(help);
-                System.exit(0);
+                //System.exit(0);
             }
 
             //print version and exit
             if (commandLine.hasOption("V")) {
                 System.out.println(versionWithLicense);
-                System.exit(0);
+                //System.exit(0);
             }
 
             //print help and exit
             if (commandLine.hasOption("h")) {
                 System.out.println(help);
-                System.exit(0);
+                //System.exit(0);
             }
 
             //set output stream to System.out
@@ -156,7 +156,7 @@ public class Main {
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
                 if (commandLine.hasOption("r")) {
                     ((OdfData) data).printRanges();
-                    System.exit(0);
+                    //System.exit(0);
                 }
             }
 
@@ -168,7 +168,7 @@ public class Main {
                     //no concat all with "\n" because Windows EOL diffs
                     System.out.println(stringFacadeIF.getValue(null, i));
                 }
-                System.exit(0);
+                //System.exit(0);
             }
 
             //if normal mode, do needed
@@ -215,7 +215,7 @@ public class Main {
                 exporter.writeAllXml(r, prefix, toOutStream);
                 if (!silent) System.out.println("After export time  = "
                         + ((System.currentTimeMillis() - t)) / 1000. + " s");
-                System.exit(0);
+                //System.exit(0);
             }
 
             //if undefined argument combination print help (end of main)
