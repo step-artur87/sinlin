@@ -43,7 +43,7 @@ Other bugs:
 */
 
 public class Main {
-    public static String version = "sinlin v0.2.0";
+    public static String version = "sinlin v0.3.0";
 
     public static void main(String[] args) {
         boolean toOutStream = false;//use System.out if true and file otherwise
