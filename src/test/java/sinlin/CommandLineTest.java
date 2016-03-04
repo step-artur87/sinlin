@@ -26,7 +26,7 @@ public class CommandLineTest {
         exporter = new Exporter();
         args = new ArrayList<>();
         args.add(new String[]{"-g $1;1;10"});
-        args.add(new String[]{"-i /home/art/Documents/sinlin/sinlin/src/test/resources/pathTest.svg"});
+        args.add(new String[]{"-i in.svg"});
         //fixme args.add(new String[]{"-p", "-d /home/art/Documents/sinlin/sinlin/src/test/resources/fn_test.ods"});
         //args.add(new String[]{"-V"});
         //args.add(new String[]{"-h"});
@@ -34,15 +34,10 @@ public class CommandLineTest {
 
     @After
     public void tearDown() throws Exception {
-        tagHandler = null;
-        exporter = null;
-        args = null;
     }
 
     @Test
     public void pathTest() throws Exception {
-        SaxParsing.parse(tagHandler,
-                "src/test/resources/textTest.svg");
         args.forEach((t) -> {
             System.out.println("\t" + Arrays.toString(t));
             Main.main(t);
