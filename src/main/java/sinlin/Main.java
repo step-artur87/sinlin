@@ -78,7 +78,7 @@ public class Main {
                 "--print\n\tExport to System.out. Option -o ignored\n" +
                 "\tTimes not prints.\n\n" +
                 "-m number\n" +
-                "\tExport only number of first exemplars for each tag if one has more.\n\n" +
+                "\tExport only [number] of first exemplars for each tag if one has more.\n\n" +
                 "-g\t" +
                 "\n\tGenerate data sequence from string." +
                 "\n\tSymbol \"$\" must be replaced by \"\\$\"." +
@@ -92,8 +92,7 @@ public class Main {
                 "-b" +
                 "\n\tDebug. Exports also sinlin attributes (exist, onenode, etc).\n\n" +
                 "BIGGEST KNOWN BUGS\n\n" +  //program has littler bugs
-                "1.From .ods files all data is taken only from first sheet.\n" +
-                "2.Error when get range with one cell from .ods files.\n" +
+                "1.Error when get range with one cell from .ods files.\n" +
                 "\nSee code at <https://github.com/step-artur87/sinlin> (Java, GPLv3),\n" +
                 "wiki at <https://github.com/step-artur87/sinlin/wiki> \n" +
                 "and binaries at <http://sourceforge.net/projects/sinlin/>.\n" +

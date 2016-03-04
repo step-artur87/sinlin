@@ -37,7 +37,7 @@ public class TextTest {
         Assert.assertEquals("text2", tagHandler.getRootTag().getNodes().pop().getText().getName());
         Assert.assertEquals("text3", tagHandler.getRootTag().getNodes().pop().getText().getName());
         Assert.assertEquals("text4", tagHandler.getRootTag().getNodes().pop().getText().getName());
-        Assert.assertEquals("te xt5", tagHandler.getRootTag().getNodes().pop().getText().getName());//fixme
+        Assert.assertEquals("te xt5", tagHandler.getRootTag().getNodes().pop().getText().getName());
         //works, but Idea replace in textTest.svg te\nxt6 by te xt6
         //Assert.assertEquals("te\txt6", tagHandler.getRootTag().getNodes().pop().getText().getName());//fixme
         //(not fixme) Assert.assertEquals("te \n\txt7", tagHandler.getRootTag().getNodes().pop().getText().getName());//fixme

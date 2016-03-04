@@ -72,8 +72,8 @@ public class OdfData implements Data {
                         + " has not cell range with name "
                         + name
                         + "\n" +
-                        "or (if you see ArrayIndexOutOfBoundsException) cell range has one cell\n" +
-                        "and can not be taken, because bug in odftoolkit");
+                        "or cell range has one cell\n" +
+                        "and can not be taken, because bug");
             }
             int strartX = range.getStartPoint().x;
             int strartY = range.getStartPoint().y;
